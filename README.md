@@ -5,7 +5,7 @@
 * 调用AI(√):	阿里云API Key: sk-5a913fba27ec4346a28d8cd0c5bde8da
 * AI的限制
 * 如何选择AI平台（需求）
-* 调整音高和播放速度的python库
+* 调整音高和播放速度的python库(√)
 
 ## 2.想法
 
@@ -14,7 +14,7 @@
 
 ## 3.框架
 
-* 图形化：pysimplegui / pyqt / kivy / wxpython
+* 图形化：pysimplegui / pyqt / kivy / wxpython / pywebview
 
 ## 4.整体构思
 

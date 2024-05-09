@@ -14,7 +14,7 @@
 
 ## 3.框架
 
-* 图形化：pysimplegui / pyqt / kivy / wxpython / pywebview
+* 图形化：pyqt / pydub / librosa
 
 ## 4.整体构思
 

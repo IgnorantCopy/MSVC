@@ -4,6 +4,8 @@ import dashscope
 
 dashscope.api_key = 'sk-5a913fba27ec4346a28d8cd0c5bde8da'
 
+prompt = 'You are a professional musician.'
+
 '''
 第一行 “x/4” 的格式表示拍号，其中 x 为 3 或 4，例如：“3/4”
 第二行为一个整数，表示一共的拍子数 n 
@@ -46,7 +48,7 @@ C_1
 # 改音符表达方式
 
 def call_with_messages(question):
-    messages = [{'role': 'system', 'content': prompt },
+    messages = [{'role': 'system', 'content': prompt},
                 {'role': 'user', 'content': question}]
 
     response = dashscope.Generation.call(

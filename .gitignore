@@ -160,8 +160,4 @@ cython_debug/
 #.idea/
 
 # Customize
-<<<<<<< HEAD
-/test/*.exe
-=======
 test/*.exe
->>>>>>> makaiheng

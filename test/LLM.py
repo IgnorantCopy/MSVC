@@ -4,9 +4,11 @@ import dashscope
 
 dashscope.api_key = 'sk-5a913fba27ec4346a28d8cd0c5bde8da'
 
+prompt = 'You are a professional musician.'
+
 
 def call_with_messages(question):
-    messages = [{'role': 'system', 'content': 'You are a professional musician.'},
+    messages = [{'role': 'system', 'content': prompt},
                 {'role': 'user', 'content': question}]
 
     response = dashscope.Generation.call(

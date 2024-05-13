@@ -20,6 +20,14 @@ null = am.silent(duration=100)
 
 piano = Piano(null, song.key, song.tempo, song.bar, song.len)
 
+class Piano(Song):
+    def __init__(self, track, key, tempo, bar, len):
+        super().__init__(track * (len * ((600 // int(tempo)) + 1)), key, tempo, bar, len)
+
+null = am.silent(duration=100)
+
+piano = Piano(null, song.key, song.tempo, song.bar, song.len)
+
 Score = []
 
 for line in file:
@@ -43,6 +51,7 @@ for note in Score:
     y, sr = lr.load('../audio/piano/do.WAV')
     notelen = lr.get_duration(path = '../audio/piano/do.WAV')
     # 处理音调
+    # print(notelen)
     # print(notelen)
     pitch = 0
     if note.pitch[0] == "C":
@@ -80,6 +89,7 @@ for note in Score:
     sound = am.from_wav('../data/cache/audio/t.WAV')
     piano.track = piano.track.overlay(sound, position)
 
+piano.track.export('../data/cache/audio/track_piano.WAV', format='WAV')
 piano.track.export('../data/cache/audio/track_piano.WAV', format='WAV')
 file.close()
 

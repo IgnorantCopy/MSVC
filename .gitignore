@@ -161,3 +161,6 @@ cython_debug/
 
 # Customize
 test/*.exe
+
+src/*.exe
+data/cache/*

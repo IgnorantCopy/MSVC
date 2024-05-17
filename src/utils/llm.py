@@ -24,26 +24,5 @@ def call_with_messages(question):
         )
 
 
-def text_to_drum(text):
-    lines = text.split('\n')
-    signature = lines[0]
-    speed = lines[1]
-    song = []
-    for i in range(2, len(lines)):
-        line = lines[i]
-        notes = line.split(' ')
-        for note in notes:
-            if note[0] == 'A':
-                song.append(common.snare)
-            elif note[0] == 'B':
-                song.append(common.tom1)
-            elif note[0] == 'C':
-                song.append(common.tom2)
-            elif note[0] == 'D':
-                song.append(common.tom3)
-
-    print(lines)
-
-
 if __name__ == '__main__':
-    text_to_drum(call_with_messages("请写一个摇滚风格的鼓谱。"))
+    print(call_with_messages("请写一个摇滚风格的鼓谱。"))

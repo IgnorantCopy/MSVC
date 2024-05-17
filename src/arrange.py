@@ -1,14 +1,46 @@
 from pydub import AudioSegment as am
 class Song:
-    track = am.empty()
-    key = 0
-    tempo = 60
-    bar = 4
+
     def __init__(self, track, key, tempo, bar, len):
-        self.track = track
+        self.track = track * (len * ((600 // int(tempo)) + 1))
         self.key = key
         self.tempo = tempo
         self.bar = bar
         self.len = len
 
-song = Song(am.empty(), 0, 90, 4, 16)
+file = open("../data/cache/text/song.txt", "r")
+null = am.silent(duration=100)
+key = 0
+tempo = 60
+bar = 4
+len = 16
+
+for line in file:
+    if line.startswith("key:"):
+        key = int(line.split(":")[1])
+    elif line.startswith("tempo:"):
+        tempo = int(line.split(":")[1])
+    elif line.startswith("bar:"):
+        bar = int(line.split(":")[1])
+    elif line.startswith("len:"):
+        len = int(line.split(":")[1])
+    elif line.startswith("req:"):
+        song = Song(track = null, key = key, tempo = tempo, bar = bar, len = len)
+        for req in line.split():
+            if req == "piano":
+                import piano
+                track_piano = am.from_wav("../data/cache/audio/track_piano.WAV")
+                song.track = song.track.overlay(track_piano)
+            elif req == "guitar":
+                import guitar
+                track_guitar = am.from_wav("../data/cache/audio/track_guitar.wav")
+                song.track.overlay(track_guitar)
+            elif req == "drums":
+                import drums
+                track_drums = am.from_wav("../data/cache/audio/track_drums.wav")
+                song.track.overlay(track_drums)
+            elif req == "lyric":
+                import lyric
+
+song.track.export("../data/cache/audio/arranged.WAV", format="WAV")
+file.close()

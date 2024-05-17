@@ -22,7 +22,8 @@ piano = Piano(null, song.key, song.tempo, song.bar, song.len)
 
 class Piano(Song):
     def __init__(self, track, key, tempo, bar, len):
-        super().__init__(track * (len * ((600 // int(tempo)) + 1)), key, tempo, bar, len)
+        super().__init__(track, key, tempo, bar, len)
+    
 
 null = am.silent(duration=100)
 
@@ -89,7 +90,6 @@ for note in Score:
     sound = am.from_wav('../data/cache/audio/t.WAV')
     piano.track = piano.track.overlay(sound, position)
 
-piano.track.export('../data/cache/audio/track_piano.WAV', format='WAV')
 piano.track.export('../data/cache/audio/track_piano.WAV', format='WAV')
 file.close()
 

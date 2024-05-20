@@ -7,7 +7,7 @@ from arrange import *
 file = open("../data/cache/text/guitar.txt", "r")
 
 class Chord:
-    def __init__(self, type, root, position):
+    def __init__(self, root, type, position):
         self.type = type
         self.root = root
         self.position = position
@@ -33,4 +33,29 @@ for line in file:
         Score.append(tmpchord)
 
 for chord in Score:
-    pass
+
+    pitch = 0
+    if chord.root == "C":
+        pitch = 0
+    elif chord.chord == "D":
+        pitch = 2
+    elif chord.chord == "E":
+        pitch = 4
+    elif chord.chord == "F":
+        pitch = 5
+    elif chord.chord == "G":
+        pitch = 7
+    elif chord.chord == "A":
+        pitch = 9
+    elif chord.chord == "B":
+        pitch = 11
+    pitch += song.key
+
+    y, sr = lr.load(f'../audio/piano/{chord.type}.WAV')
+    y1 = lr.effects.pitch_shift(y, sr=sr, n_steps = pitch)
+
+    position = (chord.position - 1) * 60 / guitar.tempo * 1000
+
+    sf.write('../data/cache/audio/t.WAV', y1, sr)
+    sound = am.from_wav('../data/cache/audio/t.WAV')
+    guitar.track = guitar.track.overlay(sound, position)

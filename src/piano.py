@@ -15,7 +15,6 @@ class Note:
 class Piano(Song):
     def __init__(self, track, key, tempo, bar, len):
         super().__init__(track, key, tempo, bar, len)
-    
 
 null = am.silent(duration=100)
 

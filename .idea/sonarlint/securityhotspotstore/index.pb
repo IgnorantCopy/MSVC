@@ -30,3 +30,7 @@ L
 src/piano.py,b\6\b6ea3d42292b72f3f0e9f40c3f36a640a653c03d
 ;
 src/drum.py,d\0\d0f34b68bb94766fdcd444db2ae69c78d278a25b
+H
+example/ComeTogether.txt,2\1\21f4575094e5ab76729ca18dfad950a69c089a5b
+=
+src/lyrics.py,3\a\3ae0b5bd8bc9922a3dffc6cae085a48af4bd16d8

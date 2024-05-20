@@ -1,13 +1,12 @@
 # For prerequisites running the following sample, visit https://help.aliyun.com/document_detail/611472.html
 from http import HTTPStatus
 import dashscope
-import common
 
 dashscope.api_key = 'sk-5a913fba27ec4346a28d8cd0c5bde8da'
 
 
-def call_with_messages(question):
-    messages = [{'role': 'system', 'content': common.prompt_drum},
+def call_with_messages(prompt, question):
+    messages = [{'role': 'system', 'content': prompt},
                 {'role': 'user', 'content': question}]
 
     response = dashscope.Generation.call(
@@ -22,7 +21,3 @@ def call_with_messages(question):
             response.request_id, response.status_code,
             response.code, response.message
         )
-
-
-if __name__ == '__main__':
-    print(call_with_messages("请写一个摇滚风格的鼓谱。"))

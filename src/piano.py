@@ -16,7 +16,7 @@ class Note:
 
 class Piano(Song):
     def __init__(self, track, key, tempo, bar, len):
-        super().__init__(track * (len * ((600 // int(tempo)) + 1)), key, tempo, bar, len)
+        super().__init__(track * 1, key, tempo, bar, len)
 
 
 null = am.silent(duration=100)
@@ -34,7 +34,7 @@ for line in file:
             tmp.append(line[:index])
             line = line[index + 1:]
 
-        tmpNote = Note(tmp[0], int(tmp[1]), float(tmp[2]))
+        tmpNote = Note(tmp[0], int(tmp[1]), float(tmp[2]) + 0.2)
         Score.append(tmpNote)
 
 # Score[i] : 第 i 个音符
@@ -46,7 +46,8 @@ for note in Score:
     y, sr = lr.load('../audio/piano/do.WAV')
     note_len = lr.get_duration(path='../audio/piano/do.WAV')
     # 处理音调
-    # print(note_len)
+    # print(notelen)
+    # print(notelen)
     pitch = 0
     if note.pitch[0] == "C":
         pitch = 0
@@ -63,13 +64,15 @@ for note in Score:
     elif note.pitch[0] == "B":
         pitch = 11
 
-    pitch += 12 * int(note.pitch[1])
-    pitch += Song.key
-    y1 = lr.effects.pitch_shift(y, sr=sr, n_steps=pitch)
+    pitch += 12 * (int(note.pitch[1]) - 1)
+    pitch += song.key
+    y1 = lr.effects.pitch_shift(y, sr=sr, n_steps = pitch)
 
     # 处理时长
-    rate = 1 / note.duration * 60 / int(piano.tempo) * note_len
-    y2 = lr.effects.time_stretch(y1, rate=rate)
+    # rate = 60.0 / float(piano.tempo) * note.duration
+    # # print(rate)
+    # y2 = lr.effects.time_stretch(y1, rate = notelen / rate)
+    y2 = y1
 
     # 处理位置
     position = (note.position - 1) * 60 / piano.tempo * 1000
@@ -83,3 +86,4 @@ for note in Score:
 
 piano.track.export('../data/cache/audio/track_piano.WAV', format='WAV')
 file.close()
+print("Piano arrangement Done!")

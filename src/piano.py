@@ -66,7 +66,7 @@ for note in Score:
 
     pitch += 12 * (int(note.pitch[1]) - 1)
     pitch += song.key
-    y1 = lr.effects.pitch_shift(y, sr=sr, n_steps = pitch)
+    y1 = lr.effects.pitch_shift(y, sr=sr, n_steps=pitch)
 
     # 处理时长
     # rate = 60.0 / float(piano.tempo) * note.duration

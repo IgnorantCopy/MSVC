@@ -1,4 +1,5 @@
 from pydub import AudioSegment as am
+from utils import common
 
 
 class Song:
@@ -10,12 +11,14 @@ class Song:
         self.bar = bar
         self.len = len
 
+
 file = open("../data/cache/text/song.txt", "r")
 null = am.silent(duration=100)
 key = 0
 tempo = 60
 bar = 4
 len = 16
+song = Song(track=null, key=key, tempo=tempo, bar=bar, len=len)
 
 for line in file:
     if line.startswith("key:"):
@@ -27,22 +30,15 @@ for line in file:
     elif line.startswith("len:"):
         len = int(line.split(":")[1])
     elif line.startswith("req:"):
-        song = Song(track = null, key = key, tempo = tempo, bar = bar, len = len)
         for req in line.split():
             if req == "piano":
-                import piano
-                track_piano = am.from_wav("../data/cache/audio/track_piano.WAV")
-                song.track = song.track.overlay(track_piano)
+                pass
             elif req == "guitar":
-                import guitar
-                track_guitar = am.from_wav("../data/cache/audio/track_guitar.wav")
-                song.track.overlay(track_guitar)
-            elif req == "drums":
-                import drums
-                track_drums = am.from_wav("../data/cache/audio/track_drums.wav")
-                song.track.overlay(track_drums)
-            elif req == "lyric":
-                import lyric
+                pass
+            elif req == "drum":
+                pass
+            elif req == "lyrics":
+                pass
 
 song.track.export("../data/cache/audio/arranged.WAV", format="WAV")
 file.close()

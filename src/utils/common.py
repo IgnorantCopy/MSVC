@@ -1,4 +1,10 @@
 from pydub import AudioSegment as am
+import re
+from http import HTTPStatus
+import dashscope
+
+dashscope.api_key = 'sk-5a913fba27ec4346a28d8cd0c5bde8da'
+
 
 prompt_drum = '''
 你是一位专业的爵士鼓手，能够写出各种风格的鼓谱。接下来的回答请用我给定的格式写出一段鼓谱。
@@ -133,29 +139,60 @@ Refrain
 
 '''
 
-# 军鼓
-snare = am.from_wav("../audio/drum/snare.WAV")
-snare_side = am.from_wav("../audio/drum/snare_side.WAV")
-# 嗵鼓
-tom1 = am.from_wav("../audio/drum/tom1.WAV")
-tom2 = am.from_wav("../audio/drum/tom2.WAV")
-tom3 = am.from_wav("../audio/drum/tom3.WAV")
-# 落地嗵鼓
-ground = am.from_wav("../audio/drum/ground.WAV")
-# 踩镲
-hihi_close = am.from_wav("../audio/drum/hihi_close.WAV")
-hihi_open = am.from_wav("../audio/drum/hihi_open.WAV")
-# 叮叮
-ding = am.from_wav("../audio/drum/ding.WAV")
-dang = am.from_wav("../audio/drum/dang.WAV")
-# 吊镲
-cymbal1 = am.from_wav("../audio/drum/cymbal1.WAV")
-cymbal2 = am.from_wav("../audio/drum/cymbal2.WAV")
 
-drum_list = [snare, snare_side, tom1, tom2, tom3, ground, hihi_close, hihi_open, ding, dang, cymbal1, cymbal2]
+def call_with_messages(prompt, question):
+    messages = [{'role': 'system', 'content': prompt},
+                {'role': 'user', 'content': question}]
+
+    response = dashscope.Generation.call(
+        dashscope.Generation.Models.qwen_turbo,
+        messages=messages,
+        result_format='message',  # set the result to be "message" format.
+    )
+    if response.status_code == HTTPStatus.OK:
+        return response.output.choices[0].message.content
+    else:
+        return 'Request id: %s, Status code: %s, error code: %s, error message: %s' % (
+            response.request_id, response.status_code,
+            response.code, response.message
+        )
 
 
 def read_text(filename):
     with open(filename, "r", encoding="utf-8") as f:
         text = f.read()
     return text
+
+
+def llm_to_text(question, instrument, max_len):
+    origin = call_with_messages(prompt_drum, question)
+    text_list = origin.split('\n')
+    result = []
+    count = 0
+    for line in text_list:
+        test = line.split(' ')[0]
+        if re.match(r'[A-Z]_\d+', test):
+            result.append(line)
+            count += 1
+            if count >= max_len:
+                break
+    filename = '../data/cache/text/{}_text.txt'.format(instrument)
+    with open(filename, 'w') as f:
+        for line in result:
+            f.write(line + '\n')
+    return filename
+
+
+def modify_text(filename, text_dict):
+    with open(filename, "r", encoding="utf-8") as f:
+        old_text = f.read()
+    new_text = old_text.split('\n')
+    for k, v in text_dict.items():
+        if 0 <= k < len(new_text):
+            new_text[k] = v
+    result = ''
+    with open(filename, "w", encoding="utf-8") as f:
+        for line in new_text:
+            f.write(line + '\n')
+            result += line + '\n'
+    return result

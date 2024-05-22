@@ -34,3 +34,7 @@ H
 example/ComeTogether.txt,2\1\21f4575094e5ab76729ca18dfad950a69c089a5b
 =
 src/lyrics.py,3\a\3ae0b5bd8bc9922a3dffc6cae085a48af4bd16d8
+C
+src/utils/config.py,0\6\06c67e74ff306d89486c0cb0d4ed9d540c735658
+E
+data/users/users.json,f\a\fad873ea5dfdceea4fbb1ecf0e567f7c3341cb4b

@@ -37,9 +37,9 @@ for line in file:
                 import guitar
                 track_guitar = am.from_wav("../data/cache/audio/track_guitar.wav")
                 song.track.overlay(track_guitar)
-            elif req == "drums":
-                import drums
-                track_drums = am.from_wav("../data/cache/audio/track_drums.wav")
+            elif req == "drum":
+                import drum
+                track_drums = am.from_wav("../data/cache/audio/track_drum.wav")
                 song.track.overlay(track_drums)
             elif req == "lyric":
                 import lyric

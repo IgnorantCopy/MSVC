@@ -32,13 +32,19 @@ for line in file:
     elif line.startswith("req:"):
         for req in line.split():
             if req == "piano":
-                pass
+                import piano
+                track_piano = am.from_wav("../data/cache/audio/track_piano.WAV")
+                song.track = song.track.overlay(track_piano)
             elif req == "guitar":
-                pass
+                import guitar
+                track_guitar = am.from_wav("../data/cache/audio/track_guitar.wav")
+                song.track.overlay(track_guitar)
             elif req == "drum":
-                pass
-            elif req == "lyrics":
-                pass
+                import drum
+                track_drums = am.from_wav("../data/cache/audio/track_drum.wav")
+                song.track.overlay(track_drums)
+            elif req == "lyric":
+                import lyric
 
 song.track.export("../data/cache/audio/arranged.WAV", format="WAV")
 file.close()

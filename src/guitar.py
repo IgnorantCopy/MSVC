@@ -8,10 +8,11 @@ file = open("../data/cache/text/guitar.txt", "r")
 
 
 class Chord:
-    def __init__(self, type, root, position):
+    def __init__(self, root, type, position):
         self.type = type
         self.root = root
         self.position = position
+# 这里的position代表的是小节号。
 
 
 class Guitar(Song):
@@ -28,12 +29,43 @@ Score = []
 for line in file:
     while line.find(" ") != -1:
         tmp = []
-        for i in range(3):
-            index = line.find(" ")
-            tmp.append(line[:index])
-            line = line[index + 1:]
-        tmpchord = Chord(tmp[0], tmp[1], tmp[2])
-        Score.append(tmpchord)
+        index = line.find(" ")
+        tmp.append(line[0])
+        if index == 1:
+            tmp.append("M")
+        else:
+            tmp.append(line[1:index])
+        tmp.append(line[index+1:])
+        tmp_chord = Chord(tmp[0], tmp[1], int(tmp[2]))
+        Score.append(tmp_chord)
 
 for chord in Score:
-    pass
+    pitch = 0
+    if chord.root == "C":
+        pitch = 0
+    elif chord.root == "D":
+        pitch = 2
+    elif chord.root == "E":
+        pitch = 4
+    elif chord.root == "F":
+        pitch = 5
+    elif chord.root == "G":
+        pitch = 7
+    elif chord.root == "A":
+        pitch = 9
+    elif chord.root == "B":
+        pitch = 11
+    pitch += song.key
+
+    y, sr = lr.load(f'../audio/piano/{chord.type}.WAV')
+    y1 = lr.effects.pitch_shift(y, sr=sr, n_steps = pitch)
+
+    position = (chord.position - 1) * 60 * bar / guitar.tempo * 1000
+
+    sf.write('../data/cache/audio/t.WAV', y1, sr)
+    sound = am.from_wav('../data/cache/audio/t.WAV')
+    guitar.track = guitar.track.overlay(sound, position)
+
+guitar.track.export('../data/cache/audio/track_guitar.WAV', format='WAV')
+file.close()
+print("Guitar arrangement Done!")

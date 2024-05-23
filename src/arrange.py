@@ -43,8 +43,8 @@ for line in file:
                 import drum
                 track_drums = am.from_wav("../data/cache/audio/track_drum.wav")
                 song.track.overlay(track_drums)
-            elif req == "lyric":
-                import lyric
+            elif req == "lyrics":
+                import lyrics
 
 song.track.export("../data/cache/audio/arranged.WAV", format="WAV")
 file.close()

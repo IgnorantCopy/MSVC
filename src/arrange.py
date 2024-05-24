@@ -4,6 +4,7 @@ import piano
 import guitar
 import drum
 import lyrics
+
 class Song:
     def __init__(self, track, key, tempo, bar, len):
         self.track = track * (len * ((600 // int(tempo)) + 1))
@@ -20,15 +21,15 @@ def arrange(req, question, key, tempo, bar, len):
     null = am.silent(duration=100)
     song = Song(track=null, key=key, tempo=tempo, bar=bar, len=len)
     if req == "piano":
-        text_to_piano(song.key, song.tempo, song.bar, song.len)
+        piano.text_to_piano(song.key, song.tempo, song.bar, song.len)
         track_piano = am.from_wav("../data/cache/audio/track_piano.WAV")
         song.track = song.track.overlay(track_piano)
     elif req == "guitar":
-        text_to_guitar(song.key, song.tempo, song.bar, song.len)
+        guitar.text_to_guitar(song.key, song.tempo, song.bar, song.len)
         track_guitar = am.from_wav("../data/cache/audio/track_guitar.wav")
         song.track.overlay(track_guitar)
     elif req == "drum":
-        text_to_drum(song.key, song.tempo, song.bar, song.len)
+        drum.text_to_drum(song.key, song.tempo, song.bar, song.len)
         track_drums = am.from_wav("../data/cache/audio/track_drum.wav")
         song.track.overlay(track_drums)
     elif req == "lyrics":

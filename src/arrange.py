@@ -1,11 +1,5 @@
 from pydub import AudioSegment as am
 from utils import common
-from drum import *
-from guitar import *
-from piano import *
-from lyrics import *
-from utils import common
-
 class Song:
     def __init__(self, track, key, tempo, bar, len):
         self.track = track * (len * ((600 // int(tempo)) + 1))

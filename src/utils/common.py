@@ -242,8 +242,8 @@ def llm_to_text(question, instrument, max_len):
     prompt = ''
     rules = {
         'guitar': r'[a-zA-Z0-9]',
-        'piano': r'^[1-7][ib]\s\d+',
-        'drum': r'[A-Z]_\d+',
+        'piano': r'^[1-7]',
+        'drum': r'\d+',
         'lyrics': r''
     }
     if instrument == 'guitar':
@@ -257,6 +257,8 @@ def llm_to_text(question, instrument, max_len):
         filename = '../data/cache/text/{}_text.txt'.format(instrument)
         filename.write(call_with_messages(prompt_lyrics, question))
         return filename
+    else:
+        return 'Invalid instrument'
     origin = call_with_messages(prompt, question)
     text_list = origin.split('\n')
     result = []

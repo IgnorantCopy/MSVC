@@ -71,3 +71,61 @@ def text_to_guitar(key, tempo, bar, len):
 
     guitar.track.export('../data/cache/audio/track_guitar.WAV', format='WAV')
     print("Guitar arrangement Done!")
+
+def text_to_coordinate(line):
+    tmp = []
+    index = line.find(" ")
+    r = line[0]
+    pitch = 0
+    if r == "C":
+        pitch = 0
+    elif r == "D":
+        pitch = 1
+    elif r == "E":
+        pitch = 2
+    elif r == "F":
+        pitch = 3
+    elif r == "G":
+        pitch = 4
+    elif r == "A":
+        pitch = 5
+    elif r == "B":
+        pitch = 6
+    tmp.append(pitch)
+
+    tmp.append(int(line[index+1:]))
+
+    if index == 1:
+        tmp.append("M")
+    else:
+        tmp.append(line[1:index])
+    return tmp
+# 这里的line代表的是一行音符
+# tmp[0]代表纵轴（CDEFGAB 对应 0123456）
+# tmp[1]代表横轴（位置，单位是小节）
+# tmp[2]代表类型（M, m, dim7, sus2, sus4, 目前这些应该够了）
+
+def coordinate_to_text(chord):
+    line = ''
+    tnum = chord[0]
+    if tnum == "0":
+        pitch = 'C'
+    elif tnum == "1":
+        pitch = 'D'
+    elif tnum == "2":
+        pitch = 'E'
+    elif tnum == "3":
+        pitch = 'F'
+    elif tnum == "4":
+        pitch = 'G'
+    elif tnum == "5":
+        pitch = 'A'
+    elif tnum == "6":
+        pitch = 'B'
+    line += pitch
+    if chord[2] == "M":
+        line +=''
+    else:
+        line += str(chord[2])
+    line += ' ' + str(chord[1])
+    return line

@@ -90,3 +90,40 @@ def text_to_piano(key, tempo, bar, len):
 
     piano.track.export('../data/cache/audio/track_piano.WAV', format='WAV')
     print("Piano arrangement Done!")
+
+def text_to_coordinate(line):
+    tmp = []
+    pitch = 12
+    index = line.find(" ")
+    pitch += int(line[0]) - 1
+    if index != 1:
+        if line[1] == "i":
+            pitch += 8
+        elif line[1] == "b":
+            pitch -= 8
+
+    tmp.append(pitch)
+    line = line[index + 1:]
+    index = line.find(" ")
+    tmp.append(int(line[:index]))
+    line = line[index + 1:]
+    index = line.find(" ")
+    tmp.append(line[:index])
+    return tmp
+
+# tmp[0] 代表纵坐标（{C0~B0,C1~B1,C2~B2}对应{0~7,8~15,16~23}）
+# tmp[1] 代表横坐标（位置，按拍划分）
+# tmp[2] 代表属性（ll, l, s, ss）
+
+def coordinate_to_text(coordinate):
+    tmp = ""
+    p1 = coordinate[0] % 8 + 1
+    tmp += str(p1)
+    if coordinate[0] // 8 == 0:
+        tmp += "b"
+    elif coordinate[0] // 8 == 2:
+        tmp += "i"
+    tmp += " "
+    tmp += str(coordinate[1]) + " "
+    tmp += coordinate[2]
+    return tmp

@@ -84,7 +84,7 @@ prompt_drum = '''
 你是一位专业的爵士鼓手，能够写出各种风格的鼓谱。接下来的回答请用我给定的格式写出一段鼓谱。
 ----------------
 格式为：
-每行代表一个四分音符的时间的演奏：
+每行开头为行号，从零开始编号，每行代表一个四分音符的时间的演奏：
 请用大写字母'A'表示军鼓，大写字母'B'表示中高音嗵鼓，大写字母'C'表示中低音嗵鼓，大写字母'D'表示落地嗵鼓，大写字母'E'表示闭音踩镲，
 大写字母'F'表示开音踩镲，大写字母'G'表示低音大鼓，大写字母'H'表示高音吊镲，大写字母'I'表示中音吊镲，大写字母'J'表示叮叮镲边，
 大写字母'K'表示叮叮镲尖，大写字母'L'表示鼓边，大写字母'O'表示休止符。
@@ -95,39 +95,39 @@ prompt_drum = '''
 
 ----------------
 例如：
-I_11 G_11
-I_11 A_1
-I_11 G_1
-I_11 A_1
-I_1010 A_0100 G_1011
-I_1 G_0100 A_1011
-F_1000 A_0110 B_0001
-A_1000 B_0100 C_0010 D_0001
-I_11 G_11
-I_11 A_1
-I_11 G_1
-I_11 A_1
-I_1010 A_0100 G_1011
-I_1 G_0100 A_1011
-F_1000 A_0100 C_0011
-A_1000 G_0100 D_0011
-I_11 G_11
-I_11 A_1
-I_11 G_1
-I_11 A_1
-A_111100 G_000011
-A_11000000 B_00110000 C_00001100 G_00000011
-C_1100 D_0011
-A_1100 D_0011
-I_11 G_11
-I_11 A_1
-I_11 G_1
-I_11 A_1
-F_1 A_011100 B_000011
-C_1100 G_0011
-C_11
-D_11
-H_1 G_1
+0 I_11 G_11
+1 I_11 A_1
+2 I_11 G_1
+3 I_11 A_1
+4 I_1010 A_0100 G_1011
+5 I_1 G_0100 A_1011
+6 F_1000 A_0110 B_0001
+7 A_1000 B_0100 C_0010 D_0001
+8 I_11 G_11
+9 I_11 A_1
+10 I_11 G_1
+11 I_11 A_1
+12 I_1010 A_0100 G_1011
+13 I_1 G_0100 A_1011
+14 F_1000 A_0100 C_0011
+15 A_1000 G_0100 D_0011
+16 I_11 G_11
+17 I_11 A_1
+18 I_11 G_1
+19 I_11 A_1
+20 A_111100 G_000011
+21 A_11000000 B_00110000 C_00001100 G_00000011
+22 C_1100 D_0011
+23 A_1100 D_0011
+24 I_11 G_11
+25 I_11 A_1
+26 I_11 G_1
+27 I_11 A_1
+28 F_1 A_011100 B_000011
+29 C_1100 G_0011
+30 C_11
+31 D_11
+32 H_1 G_1
 
 
 请注意，这些例子仅供参考，你可以创作出更加复杂、长度更长的鼓谱。
@@ -239,13 +239,33 @@ def read_text(filename):
 
 
 def llm_to_text(question, instrument, max_len):
-    origin = call_with_messages(prompt_drum, question)
+    prompt = ''
+    rules = {
+        'guitar': r'[a-zA-Z0-9]',
+        'piano': r'^[1-7]',
+        'drum': r'\d+',
+        'lyrics': r''
+    }
+    if instrument == 'guitar':
+        max_len /= 4
+        prompt = prompt_guitar
+    elif instrument == 'piano':
+        prompt = prompt_piano
+    elif instrument == 'drum':
+        prompt = prompt_drum
+    elif instrument == 'lyrics':
+        filename = '../data/cache/text/{}_text.txt'.format(instrument)
+        filename.write(call_with_messages(prompt_lyrics, question))
+        return filename
+    else:
+        return 'Invalid instrument'
+    origin = call_with_messages(prompt, question)
     text_list = origin.split('\n')
     result = []
     count = 0
     for line in text_list:
         test = line.split(' ')[0]
-        if re.match(r'[A-Z]_\d+', test):
+        if re.match(rules[instrument], test):
             result.append(line)
             count += 1
             if count >= max_len:
@@ -263,7 +283,7 @@ def modify_text(filename, text_dict):
     new_text = old_text.split('\n')
     for k, v in text_dict.items():
         if 0 <= k < len(new_text):
-            new_text[k] = v
+            new_text[k] = str(k) + ' ' + v
     result = ''
     with open(filename, "w", encoding="utf-8") as f:
         for line in new_text:

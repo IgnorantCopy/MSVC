@@ -74,7 +74,7 @@ def text_to_drum(text, speed):
                     continue
                 elif times[k] == '1':
                     song = song.overlay(drum_list[index], position=(i + k / len(times)) * duration + deviation)
-    return song
+    song.export('../data/cache/audio/track_drum.WAV', format='WAV')
 
 
 def text_to_coordinate(text):

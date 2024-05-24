@@ -239,13 +239,33 @@ def read_text(filename):
 
 
 def llm_to_text(question, instrument, max_len):
-    origin = call_with_messages(prompt_drum, question)
+    prompt = ''
+    rules = {
+        'guitar': r'[a-zA-Z0-9]',
+        'piano': r'^[1-7]',
+        'drum': r'\d+',
+        'lyrics': r''
+    }
+    if instrument == 'guitar':
+        max_len /= 4
+        prompt = prompt_guitar
+    elif instrument == 'piano':
+        prompt = prompt_piano
+    elif instrument == 'drum':
+        prompt = prompt_drum
+    elif instrument == 'lyrics':
+        filename = '../data/cache/text/{}_text.txt'.format(instrument)
+        filename.write(call_with_messages(prompt_lyrics, question))
+        return filename
+    else:
+        return 'Invalid instrument'
+    origin = call_with_messages(prompt, question)
     text_list = origin.split('\n')
     result = []
     count = 0
     for line in text_list:
         test = line.split(' ')[0]
-        if re.match(r'\d+', test):
+        if re.match(rules[instrument], test):
             result.append(line)
             count += 1
             if count >= max_len:

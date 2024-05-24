@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="beginning_fonts">
+    <file>fonts/HYPixel9pxU-2.ttf</file>
+  </qresource>
+</RCC>

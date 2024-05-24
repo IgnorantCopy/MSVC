@@ -1,6 +1,5 @@
 <RCC>
   <qresource prefix="beginning_background">
-    <file>author.png</file>
-    <file>beginning_background.jpg</file>
+    <file>images/beginning_background.jpg</file>
   </qresource>
 </RCC>

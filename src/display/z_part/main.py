@@ -1,15 +1,23 @@
 from Ui_beginning import Ui_MainWindow
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow,QComboBox,QPushButton,QVBoxLayout,QInputDialog
+import beginning_fonts_rc
+from PyQt5.QtWidgets import QApplication, QMainWindow,QComboBox,QVBoxLayout,QInputDialog
 from PyQt5.QtCore import QTimer,QDateTime
+from PyQt5.QtGui import QFont,QFontDatabase
 
 class MyBeginning(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(MyBeginning, self).__init__(parent)
         self.setupUi(self)
         self.statusShowTime()
-        
+
+        fontDb = QFontDatabase()
+        fontID = fontDb.addApplicationFont(":beginning_fonts/fonts/HYPixel9pxU-2.ttf")
+        fontFamilies = fontDb.applicationFontFamilies(fontID)
+
         self.combo = QComboBox(self)
+        font = QFont('HYPixel 9px',13)
+        self.combo.setFont(font)
         self.combo.addItem('用户1')
         self.add_user.clicked.connect(self.addItem)
         layout = QVBoxLayout()
@@ -18,6 +26,7 @@ class MyBeginning(QMainWindow, Ui_MainWindow):
         self.setLayout(layout)
 
     def addItem(self):
+        
         text, ok = QInputDialog.getText(self, '添加用户', '请输入新的用户名：')
         if ok:
             self.combo.addItem(text)

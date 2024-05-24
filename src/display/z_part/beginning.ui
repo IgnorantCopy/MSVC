@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1060</width>
+    <height>861</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,31 +19,31 @@
      <rect>
       <x>1</x>
       <y>-6</y>
-      <width>801</width>
-      <height>581</height>
+      <width>1000</width>
+      <height>800</height>
      </rect>
     </property>
     <property name="mouseTracking">
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/beginning_background/beginning_background.jpg);</string>
+     <string notr="true">background-image: url(:/beginning_background/images/beginning_background.jpg);</string>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="clock">
     <property name="geometry">
      <rect>
-      <x>540</x>
-      <y>520</y>
+      <x>740</x>
+      <y>760</y>
       <width>261</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);</string>
+     <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
     <property name="text">
      <string>TextLabel</string>
@@ -52,14 +52,19 @@
    <widget class="QLabel" name="author">
     <property name="geometry">
      <rect>
-      <x>530</x>
-      <y>480</y>
+      <x>730</x>
+      <y>720</y>
       <width>271</width>
       <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>HYPixel 9px</family>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);</string>
+     <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
     <property name="text">
      <string>制作人：马楷恒，张嘉杰，刘杨，朱善哲</string>
@@ -76,10 +81,8 @@
     </property>
     <property name="font">
      <font>
-      <family>Agency FB</family>
-      <pointsize>12</pointsize>
-      <weight>50</weight>
-      <bold>false</bold>
+      <family>HYPixel 9px</family>
+      <pointsize>13</pointsize>
      </font>
     </property>
     <property name="text">
@@ -95,19 +98,16 @@
    <widget class="QPushButton" name="enter">
     <property name="geometry">
      <rect>
-      <x>540</x>
-      <y>390</y>
+      <x>740</x>
+      <y>630</y>
       <width>261</width>
       <height>91</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>华文楷体</family>
-      <pointsize>40</pointsize>
-      <weight>75</weight>
-      <italic>false</italic>
-      <bold>true</bold>
+      <family>HYPixel 9px</family>
+      <pointsize>41</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -129,7 +129,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1060</width>
      <height>26</height>
     </rect>
    </property>

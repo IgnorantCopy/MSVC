@@ -1,5 +1,9 @@
 from pydub import AudioSegment as am
 from utils import common
+import piano
+import guitar
+import drum
+import lyrics
 
 
 class Song:
@@ -32,19 +36,16 @@ for line in file:
     elif line.startswith("req:"):
         for req in line.split():
             if req == "piano":
-                import piano
                 track_piano = am.from_wav("../data/cache/audio/track_piano.WAV")
                 song.track = song.track.overlay(track_piano)
             elif req == "guitar":
-                import guitar
                 track_guitar = am.from_wav("../data/cache/audio/track_guitar.wav")
                 song.track.overlay(track_guitar)
             elif req == "drum":
-                import drum
                 track_drums = am.from_wav("../data/cache/audio/track_drum.wav")
                 song.track.overlay(track_drums)
             elif req == "lyric":
-                import lyric
+                pass
 
 song.track.export("../data/cache/audio/arranged.WAV", format="WAV")
 file.close()

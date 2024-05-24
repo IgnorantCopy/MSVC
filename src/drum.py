@@ -77,13 +77,23 @@ def text_to_drum(text, speed):
     return song
 
 
+def text_to_coordinate(text):
+    line = text.split(' ')
+    x = int(line[0])
+    y_list = []
+    for i in range(len(line) - 1):
+        y_list.append(get_note(line[i + 1][0]))
+    return [x, y_list]
+
+
 if __name__ == '__main__':
-    genre = "爵士"
-    path = common.llm_to_text("请写一个{}风格的鼓谱。".format(genre), "drum", 20)
-    text = common.read_text(path)
-    print(text)
-    text_dict = {0: "A_1111", 1: "A_1111", 2: "A_1111", 3: "A_1111"}
-    text = common.modify_text(path, text_dict)
-    print(text)
-    song = text_to_drum(text, 120)
-    save.save_music("Ignorant", song, "jazz", "drum")
+    # genre = "爵士"
+    # path = common.llm_to_text("请写一个{}风格的鼓谱。".format(genre), "drum", 20)
+    # text = common.read_text(path)
+    # print(text)
+    # text_dict = {0: "A_1111", 1: "A_1111", 2: "A_1111", 3: "A_1111"}
+    # text = common.modify_text(path, text_dict)
+    # print(text)
+    # song = text_to_drum(text, 120)
+    # save.save_music("Ignorant", song, "jazz", "drum")
+    print(text_to_coordinate("26 D_11 G_1"))

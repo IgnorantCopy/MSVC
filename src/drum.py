@@ -74,7 +74,7 @@ def text_to_drum(text, speed):
                     continue
                 elif times[k] == '1':
                     song = song.overlay(drum_list[index], position=(i + k / len(times)) * duration + deviation)
-    return song
+    song.export('../data/cache/audio/track_drum.WAV', format='WAV')
 
 
 if __name__ == '__main__':
@@ -85,5 +85,5 @@ if __name__ == '__main__':
     text_dict = {0: "A_1111", 1: "A_1111", 2: "A_1111", 3: "A_1111"}
     text = common.modify_text(path, text_dict)
     print(text)
-    song = text_to_drum(text, 120)
-    save.save_music("Ignorant", song, "jazz", "drum")
+    text_to_drum(text, 120)
+    

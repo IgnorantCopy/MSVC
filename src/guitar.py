@@ -2,9 +2,8 @@ from pydub import AudioSegment as am
 import librosa as lr
 import soundfile as sf
 import random
-from arrange import *
 
-file = open("../data/cache/text/guitar.txt", "r")
+file = open("../data/cache/text/track_guitar.txt", "r")
 
 
 class Chord:
@@ -15,57 +14,60 @@ class Chord:
 # 这里的position代表的是小节号。
 
 
-class Guitar(Song):
+class Guitar():
     def __init__(self, track, key, tempo, bar, len):
-        super().__init__(track, key, tempo, bar, len)
+        self.track = track * (len * ((600 // int(tempo)) + 1))
+        self.key = key
+        self.tempo = tempo
+        self.bar = bar
+        self.len = len
 
 
 null = am.silent(duration=100)
 
-guitar = Guitar(null, song.key, song.tempo, song.bar, song.len)
+def text_to_guitar(key, tempo, bar, len):
+    
+    guitar = Guitar(null, key, tempo, bar, len)
+    Score = []
+    for line in file:
+        while line.find(" ") != -1:
+            tmp = []
+            index = line.find(" ")
+            tmp.append(line[0])
+            if index == 1:
+                tmp.append("M")
+            else:
+                tmp.append(line[1:index])
+            tmp.append(line[index+1:])
+            tmp_chord = Chord(tmp[0], tmp[1], int(tmp[2]))
+            Score.append(tmp_chord)
 
-Score = []
-
-for line in file:
-    while line.find(" ") != -1:
-        tmp = []
-        index = line.find(" ")
-        tmp.append(line[0])
-        if index == 1:
-            tmp.append("M")
-        else:
-            tmp.append(line[1:index])
-        tmp.append(line[index+1:])
-        tmp_chord = Chord(tmp[0], tmp[1], int(tmp[2]))
-        Score.append(tmp_chord)
-
-for chord in Score:
-    pitch = 0
-    if chord.root == "C":
+    for chord in Score:
         pitch = 0
-    elif chord.root == "D":
-        pitch = 2
-    elif chord.root == "E":
-        pitch = 4
-    elif chord.root == "F":
-        pitch = 5
-    elif chord.root == "G":
-        pitch = 7
-    elif chord.root == "A":
-        pitch = 9
-    elif chord.root == "B":
-        pitch = 11
-    pitch += song.key
+        if chord.root == "C":
+            pitch = 0
+        elif chord.root == "D":
+            pitch = 2
+        elif chord.root == "E":
+            pitch = 4
+        elif chord.root == "F":
+            pitch = 5
+        elif chord.root == "G":
+            pitch = 7
+        elif chord.root == "A":
+            pitch = 9
+        elif chord.root == "B":
+            pitch = 11
+        pitch += key
 
-    y, sr = lr.load(f'../audio/piano/{chord.type}.WAV')
-    y1 = lr.effects.pitch_shift(y, sr=sr, n_steps = pitch)
+        y, sr = lr.load(f'../audio/piano/{chord.type}.WAV')
+        y1 = lr.effects.pitch_shift(y, sr=sr, n_steps = pitch)
 
-    position = (chord.position - 1) * 60 * bar / guitar.tempo * 1000
+        position = (chord.position - 1) * 60 * bar / guitar.tempo * 1000
 
-    sf.write('../data/cache/audio/t.WAV', y1, sr)
-    sound = am.from_wav('../data/cache/audio/t.WAV')
-    guitar.track = guitar.track.overlay(sound, position)
+        sf.write('../data/cache/audio/t.WAV', y1, sr)
+        sound = am.from_wav('../data/cache/audio/t.WAV')
+        guitar.track = guitar.track.overlay(sound, position)
 
-guitar.track.export('../data/cache/audio/track_guitar.WAV', format='WAV')
-file.close()
-print("Guitar arrangement Done!")
+    guitar.track.export('../data/cache/audio/track_guitar.WAV', format='WAV')
+    print("Guitar arrangement Done!")

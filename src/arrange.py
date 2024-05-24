@@ -44,5 +44,5 @@ if __name__ == "__main__":
     bar = 4
     len = 16
     req_list = ["piano", "guitar", "drum", "lyrics"]
-    question = "What is the song about?"
+    question = "请写一首儿歌。"
     arrange(question, req_list, key, tempo, bar, len)

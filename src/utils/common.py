@@ -43,9 +43,9 @@ prompt_piano = '''
 你是一位专业的键盘手，能够弹出各种风格的钢琴演奏片段。接下来的回答请用我给定的格式写出一段钢琴谱。
 注意，你写的曲子只能是C调的。
 
----注意，你只能使用C0-B2的音高。
----注意，你只能使用C0-B2的音高。
----注意，你只能使用C0-B2的音高。
+---注意，你只能使用1b~7i的音高。
+---注意，你只能使用1b~7i的音高。
+---注意，你只能使用1b~7i的音高。
 
 ----------------
 格式为：
@@ -249,7 +249,8 @@ def read_text(filename):
     return text
 
 
-def llm_to_text(question, instrument, max_len):
+def llm_to_text(genre, instrument, max_len):
+    question = '请给我一段{}风格的{}谱，最多{}行。'.format(genre, instrument, max_len)
     prompt = ''
     rules = {
         'guitar': r'^[CDEFGAB]',

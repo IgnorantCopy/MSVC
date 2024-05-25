@@ -50,29 +50,34 @@ def text_to_piano(key, tempo, bar, llen):
         # 处理时长
         dur=note.duration
         # y, sr = lr.load(f'../audio/piano/do.WAV')
-        if len(note.pitch) == 2 and note.pitch[1] == "i":
-            y, sr = lr.load(f'../audio/piano/doi_{dur}.WAV')
+        pitch = 0
+
+        if len(note.pitch) == 2:
+            if note.pitch[1] == "i":
+                y, sr = lr.load(f'../audio/piano/doi_{dur}.WAV')
+            else:
+                y, sr = lr.load(f'../audio/piano/do_{dur}.WAV')
+                pitch -= 12
         else:
             y, sr = lr.load(f'../audio/piano/do_{dur}.WAV')
 
         # 处理音调
         # print(notelen)
         # print(notelen)
-        pitch = 0
         if note.pitch[0] == "1":
-            pitch = 0
+            pitch += 0
         elif note.pitch[0] == "2":
-            pitch = 2
+            pitch += 2
         elif note.pitch[0] == "3":
-            pitch = 4
+            pitch += 4
         elif note.pitch[0] == "4":
-            pitch = 5
+            pitch += 5
         elif note.pitch[0] == "5":
-            pitch = 7
+            pitch += 7
         elif note.pitch[0] == "6":
-            pitch = 9
+            pitch += 9
         elif note.pitch[0] == "7":
-            pitch = 11
+            pitch += 11
 
         pitch += key
         y1 = lr.effects.pitch_shift(y, sr=sr, n_steps=pitch)

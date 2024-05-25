@@ -87,14 +87,20 @@ def text_to_coordinate(text):
     return [x, y_list]
 
 
+def text_to_array(text):
+    lines = text.split('\n')
+    array = []
+    for line in lines:
+        if len(line) != 0:
+            array.append(text_to_coordinate(line)[1])
+    return array
+
+
 if __name__ == '__main__':
-    # genre = "爵士"
-    # path = common.llm_to_text("请写一个{}风格的鼓谱。".format(genre), "drum", 20)
-    # text = common.read_text(path)
-    # print(text)
-    # text_dict = {0: "A_1111", 1: "A_1111", 2: "A_1111", 3: "A_1111"}
-    # text = common.modify_text(path, text_dict)
-    # print(text)
-    # song = text_to_drum(text, 120)
-    # save.save_music("Ignorant", song, "jazz", "drum")
-    print(text_to_coordinate("26 D_11 G_1"))
+    genre = "爵士"
+    path = common.llm_to_text("请写一个{}风格的鼓谱。".format(genre), "drum", 20)
+    text_dict = {0: "A_1111", 1: "A_1111", 2: "A_1111", 3: "A_1111"}
+    text = common.modify_text(path, text_dict)
+    print(text)
+    text_to_drum(text, 120)
+    print(text_to_array(text))

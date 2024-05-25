@@ -1,2 +1,7 @@
 
-Gpython:S1080")Either remove or fill this block of code.(ã‘Û¾8Ş¤ÅÓú1
+Kpython:S1172"-Remove the unused function parameter "tempo".(ìàÃ8Úî ıú1
+Ipython:S1172"+Remove the unused function parameter "key".(ìàÃ8Şî ıú1
+Ipython:S1172"+Remove the unused function parameter "bar".(ìàÃ8İî ıú1
+Tpython:S1172"0Remove the unused function parameter "question".(óº•üÿÿÿÿÿ8Şî ıú1
+ppython:S930 "MRemove 2 unexpected arguments; 'text_to_drum' expects 2 positional arguments.(äñŠıÿÿÿÿ8äî ıú1
+Gpython:S108$")Either remove or fill this block of code.(ã‘Û¾8Ş¤ÅÓú1

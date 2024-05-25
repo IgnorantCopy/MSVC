@@ -15,7 +15,7 @@ class Chord:
 # 这里的position代表的是小节号。
 
 
-class Guitar():
+class Guitar:
     def __init__(self, track, key, tempo, bar, len):
         self.track = track * (len * ((600 // int(tempo)) + 1))
         self.key = key
@@ -26,8 +26,8 @@ class Guitar():
 
 null = am.silent(duration=100)
 
+
 def text_to_guitar(key, tempo, bar, len):
-    
     guitar = Guitar(null, key, tempo, bar, len)
     Score = []
     for line in file:
@@ -61,6 +61,7 @@ def text_to_guitar(key, tempo, bar, len):
     guitar.track.export('../data/cache/audio/track_guitar.WAV', format='WAV')
     print("Guitar arrangement Done!")
 
+
 def text_to_coordinate(line):
     tmp = []
     index = line.find(" ")
@@ -75,11 +76,13 @@ def text_to_coordinate(line):
 # tmp[1]代表横轴（位置，单位是小节）
 # tmp[2]代表类型（一个string，由于和弦很多，我想给用户开放自定义输入）
 
+
 def coordinate_to_text(chord):
     line = ''
     line += str(chord[2])
     line += ' ' + str(chord[1])
     return line
+
 
 if __name__ == '__main__':
     common.llm_to_text("请写一首流行风格的曲子", "guitar", 1000)

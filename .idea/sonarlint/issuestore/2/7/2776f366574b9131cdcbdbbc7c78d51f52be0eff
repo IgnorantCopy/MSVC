@@ -1,2 +1,3 @@
 
-‘python:S2208"GImport only needed names or import the module and then use its members.(£ï…Ïøÿÿÿÿ8Â·Š„ú1J$fba752bb-c2eb-42ff-8c02-628fcfc90324
+tpython:S117 "VRename this local variable "Score" to match the regular expression ^[_a-z][a-z0-9_]*$.(¤æÑƒ8é­Øû1
+dpython:S34573"EAdd replacement fields or use a normal string instead of an f-string.(êÜÇ¡8ì­Øû1

@@ -3,8 +3,6 @@ import librosa as lr
 import soundfile as sf
 import random
 
-file = open("../data/cache/text/track_piano.txt", "r")
-
 
 class Note:
     def __init__(self, pitch, position, duration):
@@ -25,8 +23,10 @@ class Piano():
 null = am.silent(duration=100)
 
 
-def text_to_piano(key, tempo, bar, len):
-    piano = Piano(null, key, tempo, bar, len)
+def text_to_piano(key, tempo, bar, llen):
+    tempo *= 4
+    file = open("../data/cache/text/piano_text.txt", "r")
+    piano = Piano(null, key, tempo, bar, llen)
     Score = []
     for line in file:
         while line.find(" ") != -1:
@@ -37,7 +37,7 @@ def text_to_piano(key, tempo, bar, len):
                 tmp.append(line[:index])
                 line = line[index + 1:]
 
-            tmpNote = Note(tmp[0], int(tmp[1]), tmp[2])
+            tmpNote = Note(str(tmp[0]), int(tmp[1]), tmp[2])
             Score.append(tmpNote)
 
     # Score[i] : 第 i 个音符
@@ -49,8 +49,11 @@ def text_to_piano(key, tempo, bar, len):
 
         # 处理时长
         dur=note.duration
-        y, sr = lr.load(f'../audio/piano/do.WAV')
-        # y, sr = lr.load(f'../audio/piano/do{dur}.WAV')
+        # y, sr = lr.load(f'../audio/piano/do.WAV')
+        if len(note.pitch) == 2 and note.pitch[1] == "i":
+            y, sr = lr.load(f'../audio/piano/doi_{dur}.WAV')
+        else:
+            y, sr = lr.load(f'../audio/piano/do_{dur}.WAV')
 
         # 处理音调
         # print(notelen)
@@ -70,16 +73,12 @@ def text_to_piano(key, tempo, bar, len):
             pitch = 9
         elif note.pitch[0] == "7":
             pitch = 11
-        if(len(note.pitch) == 2):
-            if note.pitch[1] == "i":
-                pitch += 12
-            elif note.pitch[1] == "b":
-                pitch -= 12
+
         pitch += key
         y1 = lr.effects.pitch_shift(y, sr=sr, n_steps=pitch)
 
         # 处理位置
-        position = (note.position - 1) * 60 / piano.tempo * 1000
+        position = (note.position - 1) * 60000 / piano.tempo
 
         # 保存音频
         sf.write('../data/cache/audio/t.WAV', y1, sr)

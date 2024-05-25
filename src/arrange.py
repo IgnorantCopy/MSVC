@@ -45,4 +45,5 @@ if __name__ == "__main__":
     len = 16
     req_list = ["piano", "guitar", "drum", "lyrics"]
     question = "请写一首儿歌。"
+    compose(question, req_list, key, tempo, bar, len)
     arrange(question, req_list, key, tempo, bar, len)

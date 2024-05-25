@@ -77,6 +77,10 @@ prompt_piano = '''
 1i 33 ll
 
 ----------------
+注意，总行数不能少于80行！
+注意，总行数不能少于80行！
+注意，总行数不能少于80行！
+----------------
 接下来，请准备开始创作钢琴谱：
 '''
 
@@ -253,6 +257,7 @@ def llm_to_text(question, instrument, max_len):
         prompt = prompt_guitar
     elif instrument == 'piano':
         prompt = prompt_piano
+        max_len *= 4
     elif instrument == 'drum':
         prompt = prompt_drum
     elif instrument == 'lyrics':

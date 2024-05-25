@@ -11,24 +11,26 @@ class Chord:
         self.type = type
         self.root = root
         self.position = position
+
+
 # 这里的position代表的是小节号。
 
 
-class Guitar():
-    def __init__(self, track, key, tempo, bar, len):
-        self.track = track * (len * ((600 // int(tempo)) + 1))
+class Guitar:
+    def __init__(self, track, key, tempo, bar, llen):
+        self.track = track * (llen * ((600 // int(tempo)) + 1))
         self.key = key
         self.tempo = tempo
         self.bar = bar
-        self.len = len
+        self.len = llen
 
 
 null = am.silent(duration=100)
 
+
 def text_to_guitar(key, tempo, bar, len):
-    
     guitar = Guitar(null, key, tempo, bar, len)
-    Score = []
+    score = []
     for line in file:
         while line.find(" ") != -1:
             tmp = []
@@ -38,11 +40,11 @@ def text_to_guitar(key, tempo, bar, len):
                 tmp.append("M")
             else:
                 tmp.append(line[1:index])
-            tmp.append(line[index+1:])
+            tmp.append(line[index + 1:])
             tmp_chord = Chord(tmp[0], tmp[1], int(tmp[2]))
-            Score.append(tmp_chord)
+            score.append(tmp_chord)
 
-    for chord in Score:
+    for chord in score:
         pitch = 0
         if chord.root == "C":
             pitch = 0
@@ -61,7 +63,7 @@ def text_to_guitar(key, tempo, bar, len):
         pitch += key
 
         y, sr = lr.load(f'../audio/piano/{chord.type}.WAV')
-        y1 = lr.effects.pitch_shift(y, sr=sr, n_steps = pitch)
+        y1 = lr.effects.pitch_shift(y, sr=sr, n_steps=pitch)
 
         position = (chord.position - 1) * 60 * bar / guitar.tempo * 1000
 
@@ -71,6 +73,7 @@ def text_to_guitar(key, tempo, bar, len):
 
     guitar.track.export('../data/cache/audio/track_guitar.WAV', format='WAV')
     print("Guitar arrangement Done!")
+
 
 def text_to_coordinate(line):
     tmp = []
@@ -93,13 +96,15 @@ def text_to_coordinate(line):
         pitch = 6
     tmp.append(pitch)
 
-    tmp.append(int(line[index+1:]))
+    tmp.append(int(line[index + 1:]))
 
     if index == 1:
         tmp.append("M")
     else:
         tmp.append(line[1:index])
     return tmp
+
+
 # 这里的line代表的是一行音符
 # tmp[0]代表纵轴（CDEFGAB 对应 0123456）
 # tmp[1]代表横轴（位置，单位是小节）
@@ -124,7 +129,7 @@ def coordinate_to_text(chord):
         pitch = 'B'
     line += pitch
     if chord[2] == "M":
-        line +=''
+        line += ''
     else:
         line += str(chord[2])
     line += ' ' + str(chord[1])

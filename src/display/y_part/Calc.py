@@ -9,7 +9,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form_calc(object):
+class Calc_Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(600, 400)
@@ -24,7 +24,7 @@ class Ui_Form_calc(object):
         self.widget = QtWidgets.QWidget(parent=Form)
         self.widget.setGeometry(QtCore.QRect(40, 20, 531, 281))
         self.widget.setObjectName("widget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.widget)
+        self.verticalLayout = QtWidgets.QVBoxLayout(Form)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -43,12 +43,25 @@ class Ui_Form_calc(object):
         self.lineEdit_first_num.setObjectName("lineEdit_first_num")
         self.horizontalLayout.addWidget(self.lineEdit_first_num)
 
+        self.hbox = QtWidgets.QHBoxLayout()
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.hbox.addItem(spacerItem1)
+
         self.pushButton_menu = QtWidgets.QPushButton(parent=self.widget)
         font = QtGui.QFont()
         font.setPointSize(17)
         self.pushButton_menu.setFont(font)
         self.pushButton_menu.setObjectName("pushButton_menu")
-        self.verticalLayout.addWidget(self.pushButton_menu)
+        self.hbox.addWidget(self.pushButton_menu)
+
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.hbox.addItem(spacerItem2)
+
+        self.hbox.setStretch(0, 1)
+        self.hbox.setStretch(1, 1)
+        self.hbox.setStretch(2, 1)
+
+        self.verticalLayout.addLayout(self.hbox)
 
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
@@ -99,6 +112,7 @@ class Ui_Form_calc(object):
         self.pushButton_Divi.clicked.connect(self.divide)
         self.horizontalLayout_3.addWidget(self.pushButton_Divi)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
+        self.verticalLayout.setContentsMargins(200, 0, 200, 0)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -148,7 +162,7 @@ if __name__ == "__main__":
     QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)  # 使尺寸一致
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
-    ui = Ui_Form_calc()
+    ui = Calc_Ui_Form()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec())

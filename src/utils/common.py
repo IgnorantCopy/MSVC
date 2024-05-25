@@ -213,6 +213,7 @@ Refrain
 
 '''
 
+prompt_default = '你是一个音乐知识专家。'
 
 def call_with_messages(prompt, question):
     messages = [{'role': 'system', 'content': prompt},

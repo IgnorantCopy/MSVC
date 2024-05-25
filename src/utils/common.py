@@ -14,7 +14,10 @@ prompt_guitar = '''
 每行代表一个小节的和弦，由两部分组成：
 第一部分代表和弦，表示为 '字母+类型' 的形式，字母代表音高，类型代表和弦类型。
 如：C7代表C的大七和弦，F代表F的大三和弦，Am代表A小三和弦，Em7代表E的小七和弦，Asus2代表A的挂二和弦，Fsus4代表F的挂四和弦。
+注意，出上述列出的和弦外不要使用其他更复杂的和弦。
 第二部分仅需标注小节编号。
+
+
 例如：
 C 1
 C7 2
@@ -25,7 +28,11 @@ Em 6
 Am 7
 G 8
 
-请注意，这些例子仅供参考，你可以创作出更加复杂、长度更长的谱。
+而且，不管我提出的要求是什么，你只需要给出和弦谱。
+
+注意，除和弦谱外不要加入任何描述！
+注意，除和弦谱外不要加入任何描述！
+注意，除和弦谱外不要加入任何描述！
 
 ----------------
 接下来，请准备开始创作吉他谱：
@@ -247,13 +254,13 @@ def read_text(filename):
 def llm_to_text(question, instrument, max_len):
     prompt = ''
     rules = {
-        'guitar': r'[a-zA-Z0-9]',
+        'guitar': r'^[CDEFGAB]',
         'piano': r'^[1-7]',
         'drum': r'\d+',
         'lyrics': r''
     }
     if instrument == 'guitar':
-        max_len /= 4
+        max_len /= 2
         prompt = prompt_guitar
     elif instrument == 'piano':
         prompt = prompt_piano
@@ -261,8 +268,9 @@ def llm_to_text(question, instrument, max_len):
     elif instrument == 'drum':
         prompt = prompt_drum
     elif instrument == 'lyrics':
-        filename = '../data/cache/text/{}_text.txt'.format(instrument)
-        filename.write(call_with_messages(prompt_lyrics, question))
+        filepath = '../data/cache/text/lyrics_text.txt'
+        with open(filepath, 'w', encoding = 'utf-8') as filename:
+            filename.write(call_with_messages(prompt_lyrics, question))
         return filename
     else:
         return 'Invalid instrument'
@@ -278,7 +286,7 @@ def llm_to_text(question, instrument, max_len):
             if count >= max_len:
                 break
     filename = '../data/cache/text/{}_text.txt'.format(instrument)
-    with open(filename, 'w') as f:
+    with open(filename, 'w', encoding='utf-8') as f:
         for line in result:
             f.write(line + '\n')
     return filename

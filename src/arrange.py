@@ -29,7 +29,8 @@ def arrange(req, question, key, tempo, bar, len):
         track_guitar = am.from_wav("../data/cache/audio/track_guitar.wav")
         song.track.overlay(track_guitar)
     elif req == "drum":
-        drum.text_to_drum(song.key, song.tempo, song.bar, song.len)
+        f = common.read_text("../data/cache/text/drum_text.txt")
+        drum.text_to_drum(f, song.tempo)
         track_drums = am.from_wav("../data/cache/audio/track_drum.wav")
         song.track.overlay(track_drums)
     elif req == "lyrics":
@@ -45,5 +46,6 @@ if __name__ == "__main__":
     len = 16
     req_list = ["piano", "guitar", "drum", "lyrics"]
     question = "请写一首儿歌。"
-    compose(question, req_list, key, tempo, bar, len)
-    arrange(question, req_list, key, tempo, bar, len)
+    for req in req_list:
+        compose(req, question, key, tempo, bar, len)
+        arrange(req, question, key, tempo, bar, len)

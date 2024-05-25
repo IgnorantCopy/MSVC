@@ -1,2 +1,3 @@
 
-™python:S3776"TRefactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.(ÇÛÙŒ8ì¹ßıú1J$c4af46fe-b618-4f30-986d-49c08a6dcfd5
+tpython:S117 "VRename this local variable "Score" to match the regular expression ^[_a-z][a-z0-9_]*$.(¤æÑƒ8é­Øû1
+dpython:S34573"EAdd replacement fields or use a normal string instead of an f-string.(êÜÇ¡8ì­Øû1

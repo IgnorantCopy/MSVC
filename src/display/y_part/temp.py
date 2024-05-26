@@ -3,9 +3,9 @@
         self.style_set()
 
         # some variables
-        self.user_text = ""
-        self.AI_text = "AI：你好，有什么问题?\n\n"
-        self.textBrowser_AIanswer.setPlainText(self.AI_text)
+        ai_text = "AI：你好，有什么问题?\n\n"
+        self.textBrowser_AIanswer.setPlainText(ai_text)
+        self.ai_worker = AIWorker("")
         # set textedit default text
         self.textEdit_user.setPlaceholderText("请输入你的问题：")
         # set comboBox's items
@@ -26,7 +26,7 @@
 
     def style_set(self):
         # 设置字体
-        font_size = 18
+        font_size = 30
         for item in [self.pushButton_menu, self.pushButton_help, self.pushButton_close, self.pushButton_usersend,
                      self.pushButton_userdel]:
             item.setStyleSheet(f"font-size: {font_size}px")
@@ -34,15 +34,14 @@
                      self.label_result, self.label_result_container]:
             item.setStyleSheet(f"font-size: {font_size}px")
         for item in [self.spinBox_speed, self.spinBox_section, self.comboBox_style]:
-            item.setStyleSheet(f"font-size: {font_size}px")
+            item.setStyleSheet(f"color: #1de9b6; font-size: {font_size}px")
+        font_size = 22
         for item in [self.textEdit_user, self.textBrowser_AIanswer]:
             item.setStyleSheet(f"font-size: {font_size}px")
-        font_size = 35
+        font_size = 45
         self.pushButton_create.setStyleSheet(f"font-size: {font_size}px")
-        # 设置颜色
-        self.spinBox_speed.setStyleSheet("color:#1de9b6")
-        self.comboBox_style.setStyleSheet("color:#1de9b6")
-        self.spinBox_section.setStyleSheet("color:#1de9b6")
+        # 设置大小
+        self.pushButton_create.setMinimumHeight(70)
 
 
     def create_sender(self):
@@ -53,35 +52,45 @@
         self.label_result_container.setText(f"要求：速度为{self.speed},风格为{self.style},小节为{self.section}")
 
 
-def AI_user_send(self):
-    self.user_text = self.textEdit_user.toPlainText()
-    if self.user_text != "":
-        self.textBrowser_AIanswer.append("你：" + self.user_text + "\n\n")
-        self.textEdit_user.clear()
-        self.AI_answer()
+    def AI_user_send(self):
+        user_text = self.textEdit_user.toPlainText()
+        if user_text != "":
+            self.pushButton_usersend.setEnabled(False)
+            self.textBrowser_AIanswer.append("你：" + user_text + "\n\n")
+            self.textEdit_user.clear()
+            self.ai_worker.user_text = user_text
+            self.ai_worker.sinEnd.connect(self.AI_answer)
+            self.ai_worker.start()
 
 
-def AI_answer(self):
-    self.AI_text = "AI："
-    if self.user_text == "你好":
-        self.AI_text += "我很好，谢谢。"
-    else:
-        self.AI_text += "我不懂。"
-    self.AI_text += "\n\n"
-    self.textBrowser_AIanswer.append(self.AI_text)
+    def AI_answer(self, ai_text):
+        final_text = "AI：" + ai_text
+        final_text += "\n\n"
+        self.textBrowser_AIanswer.append(final_text)
+        self.pushButton_usersend.setEnabled(True)
+
+
+class AIWorker(QtCore.QThread, QtCore.QObject):  # 自定义信号，执行run()函数时，从线程发射此信号
+    sinEnd = QtCore.pyqtSignal(str)
+
+    def __init__(self, user_text, parent=None):
+        QtCore.QThread.__init__(self, parent)
+        QtCore.QObject.__init__(self, parent)
+        self.user_text = user_text
+
+    def run(self):
+        ai_text = common.call_with_messages(common.prompt_default, self.user_text)
+        self.sinEnd.emit(ai_text)
 
 
 if __name__ == "__main__":
-    import sys
-
     QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)  # 使尺寸一致
     QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps)
     QtGui.QGuiApplication.setHighDpiScaleFactorRoundingPolicy(QtCore.Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
     app = QtWidgets.QApplication(sys.argv)
-    dpi = app.primaryScreen().logicalDotsPerInch()
+    apply_stylesheet(app, theme="dark_teal.xml")  # 设置样式表
     Form = QtWidgets.QWidget()
     ui = Drum_Ui_Form()
     ui.setupUi(Form)
-    apply_stylesheet(app, theme="dark_teal.xml")  # 设置样式表
     Form.show()
     sys.exit(app.exec_())

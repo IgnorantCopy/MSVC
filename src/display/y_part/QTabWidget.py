@@ -41,6 +41,7 @@ if __name__ == "__main__":
     QtGui.QGuiApplication.setHighDpiScaleFactorRoundingPolicy(QtCore.Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
     app = QApplication(sys.argv)
     window = Window()
+    # apply_stylesheet(app, theme="light_teal.xml", invert_secondary=True)  # 设置样式表
     apply_stylesheet(app, theme="dark_teal.xml")  # 设置样式表
     window.show()
     sys.exit(app.exec())

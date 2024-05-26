@@ -9,8 +9,6 @@
 
 
 import sys
-import time
-import os
 from PyQt5 import QtCore, QtGui, QtWidgets
 from qt_material import apply_stylesheet
 from src.utils import common
@@ -20,7 +18,7 @@ class Drum_Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(1200, 800)
-        Form.setMinimumSize(QtCore.QSize(1200, 800))
+        Form.setMinimumSize(QtCore.QSize(0, 0))
         Form.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout(Form)
         self.horizontalLayout_5.setSpacing(1)
@@ -192,17 +190,9 @@ class Drum_Ui_Form(object):
         self.label_result.setFont(font)
         self.label_result.setObjectName("label_result")
         self.hbox_result.addWidget(self.label_result)
-        self.label_result_container = QtWidgets.QLabel(Form)
-        self.label_result_container.setMinimumSize(QtCore.QSize(500, 270))
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(24)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_result_container.setFont(font)
-        self.label_result_container.setText("")
-        self.label_result_container.setObjectName("label_result_container")
-        self.hbox_result.addWidget(self.label_result_container)
+        self.graphicsview_result = QtWidgets.QGraphicsView(Form)
+        self.graphicsview_result.setObjectName("graphicsview_result")
+        self.hbox_result.addWidget(self.graphicsview_result)
         self.hbox_result.setStretch(0, 1)
         self.hbox_result.setStretch(1, 10)
         self.verticalLayout.addLayout(self.hbox_result)
@@ -304,7 +294,10 @@ class Drum_Ui_Form(object):
         # some variables
         ai_text = "AI：你好，有什么问题?\n\n"
         self.textBrowser_AIanswer.setPlainText(ai_text)
-        self.ai_worker = AIWorker("")
+        self.ai_answer = AIAnswer("")
+        self.image_path = "../image/"
+        # self.scene = QtWidgets.QGraphicsScene(0, 0, 730, 340)
+        self.scene = QtWidgets.QGraphicsScene(0, 0, 1460, 680)
         # set textedit default text
         self.textEdit_user.setPlaceholderText("请输入你的问题：")
         # set comboBox's items
@@ -313,7 +306,8 @@ class Drum_Ui_Form(object):
         self.comboBox_style.addItem("爵士")
         self.comboBox_style.addItem("金属")
         self.comboBox_style.addItem("前卫")
-        # end
+        # set GraphicsView
+        self.graphics_set()
         # 连接到方法
         self.pushButton_create.clicked.connect(self.create_sender)
 
@@ -329,7 +323,7 @@ class Drum_Ui_Form(object):
                      self.pushButton_userdel]:
             item.setStyleSheet(f"font-size: {font_size}px")
         for item in [self.label_style, self.label_speed, self.label_section, self.label_ATtitle, self.label,
-                     self.label_result, self.label_result_container]:
+                     self.label_result]:
             item.setStyleSheet(f"font-size: {font_size}px")
         for item in [self.spinBox_speed, self.spinBox_section, self.comboBox_style]:
             item.setStyleSheet(f"color: #1de9b6; font-size: {font_size}px")
@@ -341,12 +335,89 @@ class Drum_Ui_Form(object):
         # 设置大小
         self.pushButton_create.setMinimumHeight(70)
 
-    def create_sender(self):
-        self.speed = self.spinBox_speed.value()
-        self.style = self.comboBox_style.currentText()
-        self.section = self.spinBox_section.value()
+    def graphics_set(self):
+        self.graphicsview_result.setMinimumSize(732, 344)
+        self.graphicsview_result.setScene(self.scene)
+        self.graphicsview_result.setSceneRect(0, 0, 1460, 680)
+        # 设置一些参数
+        self.section_size = (140, 25)
+        self.instrument_icon_size = (35, 35)
+        self.vblock = 20
+        self.blockbehicon = 50
+        self.instrument_y = 50
+        self.section_block = 5
+        self.instrument_num = 12
+        self.block_true_name = "block_true.png"
+        self.block_false_name = "block_false.png"
+        # 设置背景
+        self.graphicsview_result.setBackgroundBrush(QtCore.Qt.GlobalColor.black)
 
-        self.label_result_container.setText(f"要求：速度为{self.speed},风格为{self.style},小节为{self.section}")
+    def create_sender(self):
+        self.pushButton_create.setEnabled(False)
+        # self.AI_create_result1()
+        self.AI_create_result([{0: "11010", 1: "01010", 5: "11000"}, {0: "110", 2: "010", 3: "111"}, {-1: "0010", 0: "1001", 1: "100"}])
+
+    def AI_create_result(self, music):
+        def set_block(ti, tj, tlen, tj_str):
+            if tj_str == "":
+                for k in range(tlen):
+                    tj_str += "0"
+            each_len = int(self.section_size[0] / tlen)
+            for m in range(tlen):
+                if tj_str[m] == '0':
+                    timg_reader = QtGui.QImageReader(f"{self.image_path}{self.block_false_name}")
+                else:
+                    timg_reader = QtGui.QImageReader(f"{self.image_path}{self.block_true_name}")
+                timg_reader.setScaledSize(QtCore.QSize(each_len, self.section_size[1]))
+                timg_reader = timg_reader.read()
+                titem = QtWidgets.QGraphicsPixmapItem(QtGui.QPixmap(timg_reader))
+                self.scene.addItem(titem)
+                titem.setPos(self.instrument_icon_size[0] + self.blockbehicon + each_len * m + (self.section_size[0] + self.section_block) * ti,
+                            self.instrument_y + int((self.instrument_icon_size[1] - self.section_size[1]) / 2) + (
+                                        self.instrument_icon_size[1] + self.vblock) * tj)
+
+        # if self.scene.li
+        instrument_names = ['A', 'B', 'A', 'B', 'A', 'A', 'B', 'B', 'A', 'B', 'B', 'A']
+
+        i = 0
+        for name in instrument_names:
+            img_reader = QtGui.QImageReader(f"{self.image_path}{name}")
+            img_reader.setScaledSize(QtCore.QSize(self.instrument_icon_size[0], self.instrument_icon_size[1]))
+            img_reader = img_reader.read()
+            instrument_item = QtWidgets.QGraphicsPixmapItem(QtGui.QPixmap(img_reader))
+            self.scene.addItem(instrument_item)
+            instrument_item.setPos(0, self.instrument_y + i * (self.instrument_icon_size[1] + self.vblock))
+            i += 1
+
+        i = 0
+        for section in music:
+            max_len = 0
+            if -1 in section:
+                j_len = len(section[-1])
+                if j_len == 0:
+                    j_len = 4
+                for j in range(self.instrument_num):
+                    set_block(i, j, j_len, "")
+            else:
+                left_instructions = []
+                for j in range(self.instrument_num):
+                    if j in section:
+                        j_str = section[j]
+                        j_len = len(j_str)
+                        if j_len > max_len:
+                            max_len = j_len
+                        set_block(i, j, j_len, j_str)
+
+                    else:
+                        left_instructions += [j]
+
+                for j in left_instructions:
+                    set_block(i, j, max_len, "")
+
+            i += 1
+
+        self.pushButton_create.setEnabled(True)
+
 
     def AI_user_send(self):
         user_text = self.textEdit_user.toPlainText()
@@ -354,9 +425,9 @@ class Drum_Ui_Form(object):
             self.pushButton_usersend.setEnabled(False)
             self.textBrowser_AIanswer.append("你：" + user_text + "\n\n")
             self.textEdit_user.clear()
-            self.ai_worker.user_text = user_text
-            self.ai_worker.sinEnd.connect(self.AI_answer)
-            self.ai_worker.start()
+            self.ai_answer.user_text = user_text
+            self.ai_answer.sinEnd.connect(self.AI_answer)
+            self.ai_answer.start()
 
     def AI_answer(self, ai_text):
         final_text = "AI：" + ai_text
@@ -365,7 +436,7 @@ class Drum_Ui_Form(object):
         self.pushButton_usersend.setEnabled(True)
 
 
-class AIWorker(QtCore.QThread, QtCore.QObject):  # 自定义信号，执行run()函数时，从线程发射此信号
+class AIAnswer(QtCore.QThread, QtCore.QObject):  # 自定义信号，执行run()函数时，从线程发射此信号
     sinEnd = QtCore.pyqtSignal(str)
 
     def __init__(self, user_text, parent=None):
@@ -376,6 +447,18 @@ class AIWorker(QtCore.QThread, QtCore.QObject):  # 自定义信号，执行run()
     def run(self):
         ai_text = common.call_with_messages(common.prompt_default, self.user_text)
         self.sinEnd.emit(ai_text)
+
+
+class AICreator(QtCore.QThread, QtCore.QObject):
+    sinEnd = QtCore.pyqtSignal(list)
+
+    def __init__(self, require, parent=None):
+        QtCore.QThread.__init__(self, parent)
+        QtCore.QObject.__init__(self, parent)
+        self.require = require
+
+    def run(self):
+        pass
 
 
 if __name__ == "__main__":

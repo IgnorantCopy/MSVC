@@ -349,16 +349,23 @@ class Drum_Ui_Form(object):
         self.instrument_num = 12
         self.block_true_name = "block_true.png"
         self.block_false_name = "block_false.png"
+
+        self.choose = 0
         # 设置背景
         self.graphicsview_result.setBackgroundBrush(QtCore.Qt.GlobalColor.black)
 
     def create_sender(self):
         self.pushButton_create.setEnabled(False)
-        # self.AI_create_result1()
-        self.AI_create_result([{0: "11010", 1: "01010", 5: "11000"}, {0: "110", 2: "010", 3: "111"}, {-1: "0010", 0: "1001", 1: "100"}])
+        self.scene.clear()
+        musiclists = [[{0: "11010", 1: "01010", 5: "11000"}, {0: "110", 2: "010", 3: "111"}, {-1: "0010", 0: "1001", 1: "100"}], [{0: "11010", 1: "01010", 5: "11000"}, {0: "110", 2: "010", 3: "111"}]]
+
+        self.AI_create_result(musiclists[self.choose])
+        self.choose = (self.choose + 1) % 2
 
     def AI_create_result(self, music):
         def set_block(ti, tj, tlen, tj_str):
+            if tlen == 0:
+                tlen = 4
             if tj_str == "":
                 for k in range(tlen):
                     tj_str += "0"
@@ -376,7 +383,7 @@ class Drum_Ui_Form(object):
                             self.instrument_y + int((self.instrument_icon_size[1] - self.section_size[1]) / 2) + (
                                         self.instrument_icon_size[1] + self.vblock) * tj)
 
-        # if self.scene.li
+
         instrument_names = ['A', 'B', 'A', 'B', 'A', 'A', 'B', 'B', 'A', 'B', 'B', 'A']
 
         i = 0
@@ -394,8 +401,6 @@ class Drum_Ui_Form(object):
             max_len = 0
             if -1 in section:
                 j_len = len(section[-1])
-                if j_len == 0:
-                    j_len = 4
                 for j in range(self.instrument_num):
                     set_block(i, j, j_len, "")
             else:

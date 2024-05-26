@@ -24,7 +24,7 @@ null = am.silent(duration=100)
 
 
 def text_to_piano(key, tempo, bar, llen):
-    tempo *= 4
+    # tempo *= 4
     file = open("../data/cache/text/piano_text.txt", "r")
     piano = Piano(null, key, tempo, bar, llen)
     Score = []

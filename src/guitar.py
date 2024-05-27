@@ -19,7 +19,7 @@ class Guitar:
         self.tempo = tempo
         self.bar = bar
         self.len = len
-        self.track = track * int(len * (60 / tempo) + 2)
+        self.track = track * int(len * (60 / tempo) + 3)
 
 
 
@@ -38,8 +38,6 @@ def text_to_guitar(key, tempo, bar, llen):
         tmp.append(line[index+1:])
         tmp_chord = Chord(tmp[0], int(tmp[1]))
         Score.append(tmp_chord)
-        if int(tmp[1]) > guitar.len:
-            break
 
     for chord in Score:
         # print(chord.type, chord.position,'\n')
@@ -55,7 +53,10 @@ def text_to_guitar(key, tempo, bar, llen):
         y1 = lr.effects.pitch_shift(y, sr=sr, n_steps = pitch)
 
         position = (chord.position - 1) * 60000 / guitar.tempo * bar + deviation
-
+        
+        if position >= len(guitar.track) - 2000:
+            break
+        
         sf.write('../data/cache/audio/t.WAV', y1, sr)
         sound = am.from_wav('../data/cache/audio/t.WAV')
         guitar.track = guitar.track.overlay(sound, position)
@@ -86,5 +87,5 @@ def coordinate_to_text(chord):
 
 
 if __name__ == '__main__':
-    # common.llm_to_text("请写一首流行风格的曲子", "guitar", 20)
-    text_to_guitar(0, 90, 4, 20)
+    common.llm_to_text("请写一首流行风格的曲子", "guitar", 48)
+    text_to_guitar(0, 90, 4, 48)

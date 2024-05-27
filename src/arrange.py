@@ -5,16 +5,16 @@ import guitar
 import drum
 import lyrics
 
-null = am.silent(duration=100)
+null = am.silent(duration=1000)
 
 
 class Song:
     def __init__(self, track, key, tempo, bar, len):
-        self.track = track * (len * ((600 // int(tempo)) + 1))
         self.key = key
         self.tempo = tempo
         self.bar = bar
         self.len = len
+        self.track = track * int(len * (60 / tempo) + 3)
 
 
 def compose(song, req, question, key, tempo, bar, len):
@@ -43,7 +43,7 @@ def arrange(song, req, question, key, tempo, bar, len):
 
 if __name__ == "__main__":
     key = 3
-    tempo = 70
+    tempo = 80
     bar = 4
     len = 48
     req_list = ["piano", "drum", "guitar"]

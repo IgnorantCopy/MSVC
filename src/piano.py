@@ -17,7 +17,7 @@ class Piano():
         self.tempo = tempo
         self.bar = bar
         self.len = len
-        self.track = track * int(len * (60 / tempo) + 2)
+        self.track = track * int(len * (60 / tempo) + 3)
 
 
 null = am.silent(duration=1000)
@@ -87,7 +87,8 @@ def text_to_piano(key, tempo, bar, llen):
 
             # 处理位置
             position = (note.position - 1 + i * piano.len / repete) * 60000 / piano.tempo + deviation
-
+            if position >= len(piano.track) - 2000:
+                break
             # 保存音频
             sf.write('../data/cache/audio/t.WAV', y1, sr)
 

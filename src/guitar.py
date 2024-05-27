@@ -19,16 +19,15 @@ class Guitar:
         self.tempo = tempo
         self.bar = bar
         self.len = len
-        self.track = track * int(len * (60 / tempo) + 3)
+        self.track = am.silent(duration = 60000 / tempo * len + 3000)
 
 
 
 
 def text_to_guitar(key, tempo, bar, llen):
     deviation = 500
-    null = am.silent(duration=1000)
     file = open("../data/cache/text/guitar_text.txt", "r")
-    guitar = Guitar(null, key, tempo, bar, llen)
+    guitar = Guitar(None, key, tempo, bar, llen)
     # print(len(guitar.track))
     Score = []
     for line in file:
@@ -54,7 +53,7 @@ def text_to_guitar(key, tempo, bar, llen):
 
         position = (chord.position - 1) * 60000 / guitar.tempo * bar + deviation
         
-        if position >= len(guitar.track) - 2000:
+        if position > len(guitar.track) - 2900:
             break
         
         sf.write('../data/cache/audio/t.WAV', y1, sr)

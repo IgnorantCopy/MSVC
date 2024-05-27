@@ -17,19 +17,17 @@ class Piano():
         self.tempo = tempo
         self.bar = bar
         self.len = len
-        self.track = track * int(len * (60 / tempo) + 3)
-
-
-null = am.silent(duration=1000)
+        self.track = am.silent(duration = 60000 / tempo * len + 3000)
 
 
 def text_to_piano(key, tempo, bar, llen):
     deviation = 500
+    maxpos = 0
     repete = 2
     tempo *= repete
     llen *= repete
     file = open("../data/cache/text/piano_text.txt", "r")
-    piano = Piano(null, key, tempo, bar, llen)
+    piano = Piano(None, key, tempo, bar, llen)
     Score = []
     for line in file:
         while line.find(" ") != -1:
@@ -41,13 +39,14 @@ def text_to_piano(key, tempo, bar, llen):
                 line = line[index + 1:]
 
             tmpNote = Note(str(tmp[0]), int(tmp[1]), tmp[2])
+            if int(tmp[1]) > maxpos:
+                maxpos = int(tmp[1])
             Score.append(tmpNote)
-
     # Score[i] : 第 i 个音符
     # tmp[0] : 音调
     # tmp[1] : 位置
     # tmp[2] : 持续时间
-    for i in range(repete):
+    for i in range(repete * 2):
         for note in Score:
 
             # 处理时长
@@ -86,8 +85,8 @@ def text_to_piano(key, tempo, bar, llen):
             y1 = lr.effects.pitch_shift(y, sr=sr, n_steps=pitch)
 
             # 处理位置
-            position = (note.position - 1 + i * piano.len / repete) * 60000 / piano.tempo + deviation
-            if position >= len(piano.track) - 2000:
+            position = (note.position - 1 + i * (maxpos + (maxpos&1))) * 60000 / piano.tempo + deviation
+            if position > len(piano.track) - 2900:
                 break
             # 保存音频
             sf.write('../data/cache/audio/t.WAV', y1, sr)

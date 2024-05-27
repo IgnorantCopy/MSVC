@@ -406,11 +406,13 @@ class Drum_Ui_Form(object):
         self.ai_creater.section = self.spinBox_section.value()
         self.ai_creater.speed = self.spinBox_speed.value()
 
-        # musiclists = [[{0: "11010", 1: "01010", 5: "11000"}, {0: "110", 2: "010", 3: "111"},
-        #                {-1: "0010", 0: "1001", 1: "100"}, {-1: "00"}, {-1: "00000000"}],
-        #               [{0: "11010", 1: "01010", 5: "11000"}, {0: "110", 2: "010", 3: "111"}]]
+        musiclists = [[{0: "11010", 1: "01010", 5: "11000"}, {0: "110", 2: "010", 3: "111"},
+                       {-1: "0010", 0: "1001", 1: "100"}, {-1: "00"}, {-1: "00000000"}],
+                      [{0: "11010", 1: "01010", 5: "11000"}, {0: "110", 2: "010", 3: "111"}]]
+
         # self.AI_create_result(musiclists[self.choose])
         # self.choose = (self.choose + 1) % 3
+
         self.ai_creater.sinEnd.connect(self.AI_create_result)
         self.ai_creater.start()
 

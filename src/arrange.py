@@ -5,14 +5,17 @@ import guitar
 import drum
 import lyrics
 
-null = am.silent(duration=100)
+null = am.silent(duration=1000)
+
+
 class Song:
     def __init__(self, track, key, tempo, bar, len):
-        self.track = track * (len * ((600 // int(tempo)) + 1))
         self.key = key
         self.tempo = tempo
         self.bar = bar
         self.len = len
+        self.track = track * int(len * (60 / tempo) + 3)
+
 
 def compose(song, req, question, key, tempo, bar, len):
     return common.llm_to_text(question, req, len)
@@ -37,15 +40,16 @@ def arrange(song, req, question, key, tempo, bar, len):
 
     song.track.export("../data/cache/audio/arranged.WAV", format="WAV")
 
+
 if __name__ == "__main__":
-    key = 0
-    tempo = 120
+    key = 3
+    tempo = 80
     bar = 4
-    len = 16
-    req_list = ["piano", "drum"]
-    genre = "爵士"
+    len = 48
+    req_list = ["piano", "drum", "guitar"]
+    genre = "流行"
     song = Song(null, key, tempo, bar, len)
-    # 每次用arrange函数都要重新生成一个Song对象
+    # 每次用arrange函数都要重新生成一个Song对象————这是错误的！！！
     for req in req_list:
-        compose(song, req, genre, key, tempo, bar, len)
+        # compose(song, req, genre, key, tempo, bar, len)
         arrange(song, req, genre, key, tempo, bar, len)

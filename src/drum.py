@@ -81,10 +81,12 @@ def text_to_drum(text, speed):
 def text_to_coordinate(text):
     line = text.split(' ')
     x = int(line[0])
-    y_list = []
+    y_dict = {}
     for i in range(len(line) - 1):
-        y_list.append(get_note(line[i + 1][0]))
-    return [x, y_list]
+        key = get_note(line[i + 1][0])
+        value = line[i + 1][2:]
+        y_dict[key] = value
+    return [x, y_dict]
 
 
 def text_to_array(text):

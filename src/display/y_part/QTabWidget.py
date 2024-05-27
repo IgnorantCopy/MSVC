@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QApplication, QWidget, QTabWidget
 from PyQt5.QtGui import QIcon, QPixmap, QFont
 from PyQt5 import QtCore, QtGui
-from drum4UI_rc import Drum_Ui_Form
+from drumUI_rc import Drum_Ui_Form, DrumWidget
 from Calc import Calc_Ui_Form
 from frametest_rc import Frametest_Ui_Form
 from qt_material import apply_stylesheet
@@ -19,10 +19,10 @@ class Window(QTabWidget):
 
         self.setTabPosition(QTabWidget.TabPosition.North)
 
-        self.DrumWidget = QWidget()
+        self.drumWidget = DrumWidget()
         self.DrumUi = Drum_Ui_Form()
-        self.DrumUi.setupUi(self.DrumWidget)
-        self.addTab(self.DrumWidget, "Drum")
+        self.DrumUi.setupUi(self.drumWidget)
+        self.addTab(self.drumWidget, "Drum")
 
         self.CalcWidget = QWidget()
         self.CalcUi = Calc_Ui_Form()

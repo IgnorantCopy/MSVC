@@ -5,6 +5,7 @@ import guitar
 import drum
 import lyrics
 
+
 class Song:
     def __init__(self, track, key, tempo, bar, len):
         self.track = track * (len * ((600 // int(tempo)) + 1))
@@ -12,6 +13,7 @@ class Song:
         self.tempo = tempo
         self.bar = bar
         self.len = len
+
 
 def compose(req, question, key, tempo, bar, len):
     return common.llm_to_text(question, req, len)

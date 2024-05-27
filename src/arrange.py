@@ -40,14 +40,14 @@ def arrange(song, req):
 
 
 if __name__ == "__main__":
-    key = 6
+    key = -3
     tempo = 90
     bar = 4
-    len = 65
+    len = 49
     req_list = ["piano", "drum", "guitar"]
     genre = "流行"
     song = Song(None, key, tempo, bar, len)
     # 每次用arrange函数都要重新生成一个Song对象————这是错误的！！！
     for req in req_list:
-        # compose(req, genre, len)
+        compose(req, genre, len)
         arrange(song, req)

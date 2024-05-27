@@ -6,6 +6,8 @@ import drum
 import lyrics
 
 null = am.silent(duration=100)
+
+
 class Song:
     def __init__(self, track, key, tempo, bar, len):
         self.track = track * (len * ((600 // int(tempo)) + 1))
@@ -13,6 +15,7 @@ class Song:
         self.tempo = tempo
         self.bar = bar
         self.len = len
+
 
 def compose(song, req, question, key, tempo, bar, len):
     return common.llm_to_text(question, req, len)
@@ -36,6 +39,7 @@ def arrange(song, req, question, key, tempo, bar, len):
         pass
 
     song.track.export("../data/cache/audio/arranged.WAV", format="WAV")
+
 
 if __name__ == "__main__":
     key = 3

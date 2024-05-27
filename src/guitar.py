@@ -25,6 +25,7 @@ class Guitar:
 
 
 def text_to_guitar(key, tempo, bar, llen):
+    deviation = 500
     null = am.silent(duration=1000)
     file = open("../data/cache/text/guitar_text.txt", "r")
     guitar = Guitar(null, key, tempo, bar, llen)
@@ -53,7 +54,7 @@ def text_to_guitar(key, tempo, bar, llen):
 
         y1 = lr.effects.pitch_shift(y, sr=sr, n_steps = pitch)
 
-        position = (chord.position - 1) * 60000 / guitar.tempo * bar
+        position = (chord.position - 1) * 60000 / guitar.tempo * bar + deviation
 
         sf.write('../data/cache/audio/t.WAV', y1, sr)
         sound = am.from_wav('../data/cache/audio/t.WAV')

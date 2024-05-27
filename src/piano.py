@@ -24,6 +24,7 @@ null = am.silent(duration=1000)
 
 
 def text_to_piano(key, tempo, bar, llen):
+    deviation = 500
     repete = 2
     tempo *= repete
     llen *= repete
@@ -85,7 +86,7 @@ def text_to_piano(key, tempo, bar, llen):
             y1 = lr.effects.pitch_shift(y, sr=sr, n_steps=pitch)
 
             # 处理位置
-            position = (note.position - 1) * 60000 / piano.tempo + i * 60000 / piano.tempo * piano.len / repete
+            position = (note.position - 1 + i * piano.len / repete) * 60000 / piano.tempo + deviation
 
             # 保存音频
             sf.write('../data/cache/audio/t.WAV', y1, sr)

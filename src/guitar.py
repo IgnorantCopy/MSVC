@@ -15,17 +15,17 @@ class Chord:
 
 class Guitar:
     def __init__(self, track, key, tempo, bar, len):
-        self.track = track * (len * ((600 // int(tempo)) + 1))
         self.key = key
         self.tempo = tempo
         self.bar = bar
         self.len = len
+        self.track = track * int(len * (60 / tempo) + 2)
 
 
 
 
 def text_to_guitar(key, tempo, bar, llen):
-    null = am.silent(duration=100)
+    null = am.silent(duration=1000)
     file = open("../data/cache/text/guitar_text.txt", "r")
     guitar = Guitar(null, key, tempo, bar, llen)
     # print(len(guitar.track))
@@ -37,6 +37,8 @@ def text_to_guitar(key, tempo, bar, llen):
         tmp.append(line[index+1:])
         tmp_chord = Chord(tmp[0], int(tmp[1]))
         Score.append(tmp_chord)
+        if int(tmp[1]) > guitar.len:
+            break
 
     for chord in Score:
         # print(chord.type, chord.position,'\n')

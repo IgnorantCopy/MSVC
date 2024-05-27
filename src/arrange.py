@@ -38,12 +38,12 @@ def arrange(song, req, question, key, tempo, bar, len):
     song.track.export("../data/cache/audio/arranged.WAV", format="WAV")
 
 if __name__ == "__main__":
-    key = 0
+    key = 3
     tempo = 120
     bar = 4
-    len = 32
+    len = 24
     req_list = ["piano", "drum", "guitar"]
-    genre = "爵士"
+    genre = "流行"
     song = Song(null, key, tempo, bar, len)
     # 每次用arrange函数都要重新生成一个Song对象
     for req in req_list:

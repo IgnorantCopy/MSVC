@@ -578,7 +578,7 @@ class AICreator(QtCore.QThread, QtCore.QObject):
         path = common.llm_to_text(self.genre, self.instrument, self.section)
         text = common.read_text(path)
         drum.text_to_drum(text, self.speed)
-        musicLists = drum.text_to_coordinate(text)
+        musicLists = drum.text_to_array(text)
         self.sinEnd.emit(musicLists)
 
 

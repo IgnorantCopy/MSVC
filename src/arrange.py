@@ -41,8 +41,8 @@ if __name__ == "__main__":
     key = 0
     tempo = 120
     bar = 4
-    len = 16
-    req_list = ["piano", "drum"]
+    len = 32
+    req_list = ["piano", "drum", "guitar"]
     genre = "爵士"
     song = Song(null, key, tempo, bar, len)
     # 每次用arrange函数都要重新生成一个Song对象

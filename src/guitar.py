@@ -5,8 +5,6 @@ import random
 import os
 from utils import common
 
-file = open("../data/cache/text/track_guitar.txt", "r")
-
 
 class Chord:
     def __init__(self, type, position):
@@ -24,35 +22,36 @@ class Guitar:
         self.len = len
 
 
-null = am.silent(duration=100)
 
 
-def text_to_guitar(key, tempo, bar, len):
-    guitar = Guitar(null, key, tempo, bar, len)
+def text_to_guitar(key, tempo, bar, llen):
+    null = am.silent(duration=100)
+    file = open("../data/cache/text/guitar_text.txt", "r")
+    guitar = Guitar(null, key, tempo, bar, llen)
+    # print(len(guitar.track))
     Score = []
     for line in file:
-        while line.find(" ") != -1:
-            tmp = []
-            index = line.find(" ")
-            tmp.append(line[:index])
-            tmp.append(line[index+1:])
-            tmp_chord = Chord(tmp[0], int(tmp[1]))
-            Score.append(tmp_chord)
+        tmp = []
+        index = line.find(" ")
+        tmp.append(line[:index])
+        tmp.append(line[index+1:])
+        tmp_chord = Chord(tmp[0], int(tmp[1]))
+        Score.append(tmp_chord)
 
     for chord in Score:
-        pitch = 0
-        pitch += key
+        # print(chord.type, chord.position,'\n')
+        pitch = key
 
-        if os.path.exists(f'../audio/guitar/{chord.type}.WAV'):
+        if os.path.exists(f'../audio/guitar/{chord.type}.wav'):
             y, sr = lr.load(f'../audio/guitar/{chord.type}.WAV')
-        elif os.path.exists(f'../audio/guitar/{str(chord.type[0])}.WAV'):
+        elif os.path.exists(f'../audio/guitar/{str(chord.type[0])}.wav'):
             y, sr = lr.load(f'../audio/guitar/{str(chord.type[0])}.wav')
         else:
-            y, sr = lr.load(f'../audio/guitar/none.WAV')
+            y, sr = lr.load(f'../audio/guitar/none.wav')
 
         y1 = lr.effects.pitch_shift(y, sr=sr, n_steps = pitch)
 
-        position = (chord.position - 1) * 60 * bar / guitar.tempo * 1000
+        position = (chord.position - 1) * 60000 / guitar.tempo * bar
 
         sf.write('../data/cache/audio/t.WAV', y1, sr)
         sound = am.from_wav('../data/cache/audio/t.WAV')
@@ -67,7 +66,6 @@ def text_to_coordinate(line):
     index = line.find(" ")
     tmp.append(0)
     tmp.append(int(line[index+1:]))
-
     tmp.append(line[:index])
     return tmp
 
@@ -85,5 +83,5 @@ def coordinate_to_text(chord):
 
 
 if __name__ == '__main__':
-    common.llm_to_text("请写一首流行风格的曲子", "guitar", 1000)
-    text_to_guitar(0, 90, 4, 0)
+    # common.llm_to_text("请写一首流行风格的曲子", "guitar", 20)
+    text_to_guitar(0, 90, 4, 20)

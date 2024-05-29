@@ -46,7 +46,7 @@ def text_to_piano(key, tempo, bar, llen):
     # tmp[0] : 音调
     # tmp[1] : 位置
     # tmp[2] : 持续时间
-    for i in range(repete * 2):
+    for i in range(repete * 4):
         for note in Score:
 
             # 处理时长
@@ -118,7 +118,7 @@ def text_to_coordinate(line):
     tmp.append(line[:index])
     return tmp
 
-# tmp[0] 代表纵坐标（{C0~B0,C1~B1,C2~B2}对应{0~7,8~15,16~23}）
+# tmp[0] 代表纵坐标（{C0~B0,C1~B1,C2~B2}对应{0~6,7~13,14~20}）
 # tmp[1] 代表横坐标（位置，按拍划分）
 # tmp[2] 代表属性（ll, l, s, ss）
 
@@ -132,7 +132,7 @@ def coordinate_to_text(coordinate):
         tmp += "i"
     tmp += " "
     tmp += str(coordinate[1]) + " "
-    tmp += coordinate[2]
+    tmp += coordinate[2] + '\n'
     return tmp
 
 if __name__ == '__main__':

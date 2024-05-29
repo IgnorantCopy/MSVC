@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from QTabWidget import Window
-from drum4UI_rc import Drum_Ui_Form
+from drumUI_rc import Drum_Ui_Form
 
 
 class Ui_MainWindow(object):

@@ -1,9 +1,8 @@
 from PyQt5.QtWidgets import QApplication, QWidget, QTabWidget
 from PyQt5.QtGui import QIcon, QPixmap, QFont
 from PyQt5 import QtCore, QtGui
-from drumUI_rc import Drum_Ui_Form, DrumWidget
+from drumUI_rc import Drum_Ui_Form, MusicWidget
 from Calc import Calc_Ui_Form
-from frametest_rc import Frametest_Ui_Form
 from qt_material import apply_stylesheet
 import sys
 
@@ -19,7 +18,7 @@ class Window(QTabWidget):
 
         self.setTabPosition(QTabWidget.TabPosition.North)
 
-        self.drumWidget = DrumWidget()
+        self.drumWidget = MusicWidget()
         self.DrumUi = Drum_Ui_Form()
         self.DrumUi.setupUi(self.drumWidget)
         self.addTab(self.drumWidget, "Drum")
@@ -28,11 +27,6 @@ class Window(QTabWidget):
         self.CalcUi = Calc_Ui_Form()
         self.CalcUi.setupUi(self.CalcWidget)
         self.addTab(self.CalcWidget, "Calc")
-
-        self.FrametestWidget = QWidget()
-        self.FrametestUi = Frametest_Ui_Form()
-        self.FrametestUi.setupUi(self.FrametestWidget)
-        self.addTab(self.FrametestWidget, "Frametest")
 
 
 if __name__ == "__main__":

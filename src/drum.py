@@ -1,5 +1,5 @@
-from utils import common
-from utils import save
+from src.utils import common
+from src.utils import save
 from pydub import AudioSegment as am
 
 # 军鼓
@@ -51,6 +51,34 @@ def get_note(note):
         return 1
     return -1
 
+def get_index(index):
+    if index == 0:
+        return 'A'
+    elif index == 2:
+        return 'B'
+    elif index == 3:
+        return 'C'
+    elif index == 4:
+        return 'D'
+    elif index == 6:
+        return 'E'
+    elif index == 7:
+        return 'F'
+    elif index == 5:
+        return 'G'
+    elif index == 10:
+        return 'H'
+    elif index == 11:
+        return 'I'
+    elif index == 8:
+        return 'J'
+    elif index == 9:
+        return 'K'
+    elif index == 1:
+        return 'L'
+    else:
+        return 'O'
+
 
 def text_to_drum(text, speed):
     lines = text.split('\n')
@@ -98,11 +126,26 @@ def text_to_array(text):
     return array
 
 
+def modify_text(filename, text_dict):
+    with open(filename, "r", encoding="utf-8") as f:
+        old_text = f.read()
+    new_text = old_text.split('\n')
+    for k, v in text_dict.items():
+        if 0 <= k < len(new_text):
+            new_text[k] = str(k) + ' ' + v
+    result = ''
+    with open(filename, "w", encoding="utf-8") as f:
+        for line in new_text:
+            f.write(line + '\n')
+            result += line + '\n'
+    return result
+
+
 if __name__ == '__main__':
     genre = "爵士"
     path = common.llm_to_text("请写一个{}风格的鼓谱。".format(genre), "drum", 20)
     text_dict = {0: "A_1111", 1: "A_1111", 2: "A_1111", 3: "A_1111"}
-    text = common.modify_text(path, text_dict)
+    text = modify_text(path, text_dict)
     print(text)
     text_to_drum(text, 120)
     print(text_to_array(text))

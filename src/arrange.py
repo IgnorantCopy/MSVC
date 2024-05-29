@@ -62,7 +62,7 @@ def arrange(song, req):
 
 if __name__ == "__main__":
     key = 3
-    tempo = 90
+    tempo = 110
     bar = 4
     len = 49
     req_list = ["piano", "guitar", "drum", "lyrics"]

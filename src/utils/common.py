@@ -311,18 +311,3 @@ def llm_to_text(genre, instrument, max_len):
         for line in result:
             f.write(line + '\n')
     return filename
-
-
-def modify_text(filename, text_dict):
-    with open(filename, "r", encoding="utf-8") as f:
-        old_text = f.read()
-    new_text = old_text.split('\n')
-    for k, v in text_dict.items():
-        if 0 <= k < len(new_text):
-            new_text[k] = str(k) + ' ' + v
-    result = ''
-    with open(filename, "w", encoding="utf-8") as f:
-        for line in new_text:
-            f.write(line + '\n')
-            result += line + '\n'
-    return result

@@ -98,11 +98,26 @@ def text_to_array(text):
     return array
 
 
+def modify_text(filename, text_dict):
+    with open(filename, "r", encoding="utf-8") as f:
+        old_text = f.read()
+    new_text = old_text.split('\n')
+    for k, v in text_dict.items():
+        if 0 <= k < len(new_text):
+            new_text[k] = str(k) + ' ' + v
+    result = ''
+    with open(filename, "w", encoding="utf-8") as f:
+        for line in new_text:
+            f.write(line + '\n')
+            result += line + '\n'
+    return result
+
+
 if __name__ == '__main__':
     genre = "爵士"
     path = common.llm_to_text("请写一个{}风格的鼓谱。".format(genre), "drum", 20)
-    text_dict = {0: "A_1111", 1: "A_1111", 2: "A_1111", 3: "A_1111"}
-    text = common.modify_text(path, text_dict)
+    text_dict = {0: "A_1111 B_1101", 1: "A_1111", 2: "A_1111", 3: "A_1111"}
+    text = modify_text(path, text_dict)
     print(text)
     text_to_drum(text, 120)
     print(text_to_array(text))

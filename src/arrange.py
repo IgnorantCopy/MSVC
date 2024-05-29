@@ -31,7 +31,7 @@ def arrange(song, req):
         f = common.read_text("../data/cache/text/drum_text.txt")
         drum.text_to_drum(f, song.tempo)
         track_drums = am.from_wav("../data/cache/audio/track_drum.wav")
-        track_drums -= 6
+        track_drums -= 8
         song.track = song.track.overlay(track_drums)
     elif req == "lyrics":
         pass
@@ -40,7 +40,7 @@ def arrange(song, req):
 
 
 if __name__ == "__main__":
-    key = -3
+    key = 3
     tempo = 90
     bar = 4
     len = 49

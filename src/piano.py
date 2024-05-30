@@ -126,14 +126,14 @@ def text_to_piano(key, tempo, bar, llen):
 
 def text_to_coordinate(line):
     tmp = []
-    pitch = 8
+    pitch = 7
     index = line.find(" ")
     pitch += int(line[0]) - 1
     if index != 1:
         if line[1] == "i":
-            pitch += 8
+            pitch += 7
         elif line[1] == "b":
-            pitch -= 8
+            pitch -= 7
 
     tmp.append(pitch)
     line = line[index + 1:]

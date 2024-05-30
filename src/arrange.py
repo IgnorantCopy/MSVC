@@ -1,9 +1,9 @@
 from pydub import AudioSegment as am
-from utils import common
-import piano
-import guitar
-import drum
-import lyrics
+from src.utils import common
+from src import piano
+from src import guitar
+from src import drum
+from src import lyrics
 
 class Song:
     def __init__(self, track, key, tempo, bar, len):

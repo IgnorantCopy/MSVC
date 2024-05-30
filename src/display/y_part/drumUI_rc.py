@@ -633,7 +633,6 @@ if __name__ == "__main__":
     QtGui.QGuiApplication.setHighDpiScaleFactorRoundingPolicy(QtCore.Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
     app = QtWidgets.QApplication(sys.argv)
     apply_stylesheet(app, theme="dark_teal.xml")  # 设置样式表
-    # app.setStyleSheet("") # 重设样式表
     Form = MusicWidget()
     ui = Drum_Ui_Form()
     ui.setupUi(Form)

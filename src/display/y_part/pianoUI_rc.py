@@ -11,9 +11,7 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia
 from qt_material import apply_stylesheet
-from MyClass import MusicWidget, AIAnswer, AICreator, MyGraphicsView, PianoGraphicsPixmapItem, PianoGraphicsItemGroup
-from src.utils import common
-from src import drum
+from MyClass import MusicWidget, AIAnswer, AICreator, MyGraphicsView, PianoGraphicsPixmapItem, PianoGraphicsItemGroup, PianoAICreator
 
 
 class Piano_Ui_Form(object):
@@ -165,13 +163,13 @@ class Piano_Ui_Form(object):
         self.label_mode.setFont(font)
         self.label_mode.setObjectName("label_mode")
         self.hbox_choose.addWidget(self.label_mode)
-        self.comboBox_mode = QtWidgets.QComboBox(Form)
+        self.spinBox_mode = QtWidgets.QSpinBox(Form)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(24)
-        self.comboBox_mode.setFont(font)
-        self.comboBox_mode.setObjectName("comboBox_mode")
-        self.hbox_choose.addWidget(self.comboBox_mode)
+        self.spinBox_mode.setFont(font)
+        self.spinBox_mode.setObjectName("spinBox_mode")
+        self.hbox_choose.addWidget(self.spinBox_mode)
         spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.hbox_choose.addItem(spacerItem8)
         self.hbox_choose.setStretch(1, 5)
@@ -343,28 +341,26 @@ class Piano_Ui_Form(object):
         ai_text = "AI：你好，有什么问题?\n\n"
         self.textBrowser_AIanswer.setPlainText(ai_text)
         self.ai_answer = AIAnswer("")
-        self.ai_creater = AICreator("流行", "drum", 50, 90)
+        self.ai_creater = PianoAICreator("流行", "piano", 50, 90, 0)
+        self.text_path = "../data/cache/text/"
+        self.audio_path = "../data/cache/audio/"
+        self.ai_creater.text_path = self.text_path
         self.image_path = "display/image/"
         # set textedit default text
         self.textEdit_user.setPlaceholderText("请输入你的问题：")
         # set spinbox
-        self.spinBox_speed.setMinimum(50)
-        self.spinBox_speed.setMaximum(240)
-        self.spinBox_section.setMinimum(20)
-        self.spinBox_section.setMaximum(80)
+        self.spinBox_speed.setMinimum(70)
+        self.spinBox_speed.setMaximum(120)
+        self.spinBox_section.setMinimum(17)
+        self.spinBox_section.setMaximum(61)
+        self.spinBox_mode.setMinimum(-7)
+        self.spinBox_mode.setMaximum(7)
         # set comboBox's items
         self.comboBox_style.addItem("流行")
         self.comboBox_style.addItem("摇滚")
         self.comboBox_style.addItem("爵士")
         self.comboBox_style.addItem("金属")
         self.comboBox_style.addItem("前卫")
-        self.comboBox_mode.addItem("A")
-        self.comboBox_mode.addItem("B")
-        self.comboBox_mode.addItem("C")
-        self.comboBox_mode.addItem("D")
-        self.comboBox_mode.addItem("E")
-        self.comboBox_mode.addItem("F")
-        self.comboBox_mode.addItem("G")
         # set GraphicsView
         self.graphics_set()
         # 连接到方法
@@ -386,7 +382,7 @@ class Piano_Ui_Form(object):
         for item in [self.label_style, self.label_speed, self.label_section, self.label_ATtitle, self.label,
                      self.label_result, self.label_mode]:
             item.setStyleSheet(f"font-size: {font_size}px")
-        for item in [self.spinBox_speed, self.spinBox_section, self.comboBox_style, self.comboBox_mode]:
+        for item in [self.spinBox_speed, self.spinBox_section, self.comboBox_style, self.spinBox_mode]:
             item.setStyleSheet(f"color: #1de9b6; font-size: {font_size}px")
         font_size = 22
         for item in [self.textEdit_user, self.textBrowser_AIanswer]:
@@ -422,9 +418,9 @@ class Piano_Ui_Form(object):
         self.drum_speed = 90
         self.player = QtMultimedia.QMediaPlayer()
 
-        self.mode_names = ['snare', 'tom1', 'tom2', 'tom3', 'hihi_close', 'hihi_open', 'ground', 'cymbal1',
-                           'cymbal2', 'ding', 'dang', 'snare_side', 'snare', 'tom1', 'tom2', 'tom3', 'hihi_close',
-                           'hihi_open', 'ground', 'cymbal1', 'cymbal2', 'ding', 'dang', 'snare_side']
+        self.mode_names = ["1_0", "2_0", "3_0", "4_0", "5_0", "6_0", "7_0",
+                           "1_1", "2_1", "3_1", "4_1", "5_1", "6_1", "7_1",
+                           "1_2", "2_2", "3_2", "4_2", "5_2", "6_2", "7_2",]
 
         self.choose = 0
         # 设置背景
@@ -441,28 +437,29 @@ class Piano_Ui_Form(object):
         self.section_lens = []
         self.drum_speed = self.spinBox_speed.value()
 
-        # self.ai_creater.genre = f"请写一个{self.comboBox_style.currentText()}风格的鼓谱。"
-        # self.ai_creater.instrument = "drum"
-        # self.ai_creater.section = self.spinBox_section.value()
-        # self.ai_creater.speed = self.spinBox_speed.value()
+        self.ai_creater.len = self.spinBox_section.value()
+        self.ai_creater.genre = self.comboBox_style.currentText()
+        self.ai_creater.key = self.spinBox_mode.value()
+        self.ai_creater.speed = self.spinBox_speed.value()
 
-        music_lists = []
-        music_lists += [[[10, 0, "ll"], [11, 1, "s"], [12, 2, "l"], [15, 3, "l"], [12, 4, "ss"], [11, 5, "s"], [12, 6, "l"], [15, 7, "l"]]]
-        music_lists += [[[10, 0, "ll"], [11, 1, "s"], [12, 2, "l"], [15, 3, "l"], [12, 4, "ss"], [14, 5, "s"], [11, 6, "s"], [12, 7, "l"]]]
+        # music_lists = []
+        # music_lists += [[[10, 1, "ll"], [11, 2, "s"], [12, 3, "l"], [15, 4, "l"], [12, 5, "ss"], [11, 6, "s"], [12, 7, "l"], [15, 8, "l"]]]
+        # music_lists += [[[10, 1, "ll"], [11, 2, "s"], [12, 3, "l"], [15, 4, "l"], [12, 5, "ss"], [14, 6, "s"], [11, 7, "s"], [12, 8, "l"]]]
 
-        music = self.create_array(music_lists[self.choose])
-        self.AI_create_result(music)
-        self.choose = (self.choose + 1) % 2
+        # music = self.create_array(music_lists[self.choose])
+        # self.AI_create_result(music)
+        # self.choose = (self.choose + 1) % 2
 
-        # self.ai_creater.sinEnd.connect(self.AI_create_result)
-        # self.ai_creater.start()
+        self.ai_creater.sinEnd.connect(self.AI_create_result)
+        self.ai_creater.start()
     # end
 
-    def AI_create_result(self, music):
+    def AI_create_result(self, tmpc):
+        music = self.create_array(tmpc)
         self.music = music
         self.graphicsview_result.setSceneRect(0, 0, self.instrument_icon_size[0] + self.spaceBetween +
                                               (self.section_size[0] + self.section_space) * len(music) + self.right_space,
-                                              self.instrument_y + (self.instrument_icon_size[1] + self.instrument_vspace) * 24 + self.down_space)
+                                              self.instrument_y + (self.instrument_icon_size[1] + self.instrument_vspace) * 21 + self.down_space)
 
         self.graphicsview_result.centerOn(360, 200)
 
@@ -493,21 +490,25 @@ class Piano_Ui_Form(object):
     def create_array(self, music):
         max_len = 0
         for each in music:
-            if each[1] > max_len:
-                max_len = each[1]
+            if each[1] - 1 > max_len:
+                max_len = each[1] - 1
+        if max_len % 4 == 0:
+            max_len = max_len // 4
+        else:
+            max_len = max_len // 4 + 1
         result = []
         for i in range(max_len):
             lines = []
-            for j in range(24):
+            for j in range(21):
                 line = []
                 for k in range(4):
                     line += [[0, ""]]
                 lines += [line]
             result += [lines]
         for each in music:
-            x = each[1] // 4
+            x = (each[1] - 1) // 4
             y = each[0]
-            z = each[1] % 4
+            z = (each[1] - 1) % 4
             result[x][y][z][0] = 1
             result[x][y][z][1] = each[2]
         return result
@@ -640,14 +641,14 @@ class Piano_Ui_Form(object):
         # text = drum.modify_text("../data/cache/text/drum_text.txt", self.modify_dict)
         #
         # drum.text_to_drum(text, self.drum_speed)
-        pass
+        self.player.stop()
+        audio = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(""))
     # end
 
     def play_event(self):
-        # audio = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile("../data/cache/audio/track_drum.WAV"))
-        # self.player.setMedia(audio)
-        # self.player.play()
-        pass
+        audio = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(f"{self.audio_path}track_drum.WAV"))
+        self.player.setMedia(audio)
+        self.player.play()
     # end
 
     def rightMenuAdd(self, style=""):

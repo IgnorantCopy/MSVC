@@ -100,7 +100,7 @@ def text_to_piano(key, tempo, bar, llen):
 
 def text_to_coordinate(line):
     tmp = []
-    pitch = 12
+    pitch = 8
     index = line.find(" ")
     pitch += int(line[0]) - 1
     if index != 1:
@@ -114,9 +114,9 @@ def text_to_coordinate(line):
     index = line.find(" ")
     tmp.append(int(line[:index]))
     line = line[index + 1:]
-    index = line.find(" ")
-    tmp.append(line[:index])
+    tmp.append(line)
     return tmp
+
 
 # tmp[0] 代表纵坐标（{C0~B0,C1~B1,C2~B2}对应{0~6,7~13,14~20}）
 # tmp[1] 代表横坐标（位置，按拍划分）

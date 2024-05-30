@@ -3,7 +3,7 @@ import librosa as lr
 import soundfile as sf
 import random
 import os
-from utils import common
+from src.utils import common
 
 
 class Chord:

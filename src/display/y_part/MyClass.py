@@ -1,6 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from src.utils import common
 from src import drum
+from src import arrange
+from src import piano
 
 
 class MusicWidget(QtWidgets.QWidget):
@@ -49,6 +51,38 @@ class AICreator(QtCore.QThread, QtCore.QObject):
         drum.text_to_drum(text, self.speed)
         musicLists = drum.text_to_array(text)
         self.sinEnd.emit(musicLists)
+
+
+class PianoAICreator(QtCore.QThread, QtCore.QObject):
+    sinEnd = QtCore.pyqtSignal(list)
+
+    def __init__(self, genre, instrument, len, speed, key, parent=None):
+        QtCore.QThread.__init__(self, parent)
+        QtCore.QObject.__init__(self, parent)
+        self.genre = genre
+        self.instrument = instrument
+        self.len = len
+        self.speed = speed
+        self.key = key
+        self.text_path = ""
+
+    def run(self):
+        song = arrange.Song(None, self.key, self.speed, 4, self.len)
+        arrange.compose("piano", self.genre, self.len)
+        arrange.arrange(song, "piano")
+        tmpc = self.get_tmps()
+        print(tmpc)
+        self.sinEnd.emit(tmpc)
+
+    def get_tmps(self):
+        tmpc = []
+        file = open(f"{self.text_path}piano_text.txt", "r")
+        text = file.read()
+        for line in text.split("\n"):
+            if line != "":
+                tmpc += [piano.text_to_coordinate(line)]
+        file.close()
+        return tmpc
 
 
 class DrumGraphicsPixmapItem(QtWidgets.QGraphicsPixmapItem):

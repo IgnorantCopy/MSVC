@@ -19,6 +19,32 @@ class Piano():
         self.len = len
         self.track = am.silent(duration = 60000 / tempo * len + 3000)
 
+def change():
+    file = "../data/cache/text/piano_text.txt"
+    f = open(file, "r", encoding="utf-8")
+    newf = ""
+    num = 0
+    for line in f:
+        index = line.find(" ")
+        if(index == -1):
+            continue
+        num += 1
+        lline = line[index+1:]
+        iindex = lline.find(" ")
+        if(iindex == -1):
+            continue
+        tmp = lline[:iindex]
+        if(tmp.isdigit() == False):
+            continue
+        while(int(tmp) > num):
+            newf += "\n"
+            num += 1
+        newf += line
+    
+    f.close()
+    f = open(file, "w", encoding="utf-8")
+    f.write(newf)
+    f.close()
 
 def text_to_piano(key, tempo, bar, llen):
     deviation = 500
@@ -100,14 +126,14 @@ def text_to_piano(key, tempo, bar, llen):
 
 def text_to_coordinate(line):
     tmp = []
-    pitch = 8
+    pitch = 7
     index = line.find(" ")
     pitch += int(line[0]) - 1
     if index != 1:
         if line[1] == "i":
-            pitch += 8
+            pitch += 7
         elif line[1] == "b":
-            pitch -= 8
+            pitch -= 7
 
     tmp.append(pitch)
     line = line[index + 1:]

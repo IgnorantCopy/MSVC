@@ -36,6 +36,8 @@ def compose(req, question, len):
         while(check_guitar() == False):
             print("Error")
             file = common.llm_to_text(question, req, len)
+    if(req == "piano"):
+        piano.change()
     return file
 
 

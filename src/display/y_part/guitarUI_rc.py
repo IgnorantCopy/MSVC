@@ -11,10 +11,10 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia
 from qt_material import apply_stylesheet
-from src.display.y_part.MyClass import MusicWidget, AIAnswer, AICreator, MyGraphicsView, PianoGraphicsPixmapItem, PianoGraphicsItemGroup, PianoAICreator
+from src.display.y_part.MyClass import MusicWidget, AIAnswer, GuitarAICreator, MyGraphicsView, GuitarGraphicsItemGroup
 
 
-class Piano_Ui_Form(object):
+class Guitar_Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(1200, 800)
@@ -341,7 +341,7 @@ class Piano_Ui_Form(object):
         ai_text = "AI：你好，有什么问题?\n\n"
         self.textBrowser_AIanswer.setPlainText(ai_text)
         self.ai_answer = AIAnswer("")
-        self.ai_creater = PianoAICreator("流行", "piano", 50, 90, 0)
+        self.ai_creater = GuitarAICreator("流行", "piano", 50, 90, 0)
         self.text_path = "../data/cache/text/"
         self.audio_path = "../data/cache/audio/"
         self.ai_creater.text_path = self.text_path
@@ -369,6 +369,7 @@ class Piano_Ui_Form(object):
         self.pushButton_userdel.clicked.connect(self.textEdit_user.clear)
         self.pushButton_close.clicked.connect(QtWidgets.QApplication.quit)
         self.pushButton_play.clicked.connect(self.play_event)
+        self.pushButton_enter.clicked.connect(self.enter_event)
 
         Form.Key_event.connect(self.viewKeyEvent)
     # end
@@ -399,7 +400,10 @@ class Piano_Ui_Form(object):
         self.graphicsview_result.setScene(self.scene)
         self.graphicsview_result.setSceneRect(0, 0, 1460, 680)
         # 设置一些参数
-        self.section_size = (140, 25)
+        # self.dialog = QtWidgets.QDialog()
+        # self.attribute_ui = AttributeUi()
+        # self.attribute_ui.setupUi(self.dialog)
+        self.section_size = (320, 25)
         self.instrument_icon_size = (35, 35)
         self.instrument_vspace = 20
         self.spaceBetween = 50
@@ -418,9 +422,7 @@ class Piano_Ui_Form(object):
         self.drum_speed = 90
         self.player = QtMultimedia.QMediaPlayer()
 
-        self.mode_names = ["1_0", "2_0", "3_0", "4_0", "5_0", "6_0", "7_0",
-                           "1_1", "2_1", "3_1", "4_1", "5_1", "6_1", "7_1",
-                           "1_2", "2_2", "3_2", "4_2", "5_2", "6_2", "7_2",]
+        self.mode_names = ["1_0"]
 
         self.choose = 0
         # 设置背景
@@ -442,16 +444,15 @@ class Piano_Ui_Form(object):
         self.ai_creater.key = self.spinBox_mode.value()
         self.ai_creater.speed = self.spinBox_speed.value()
 
-        # music_lists = []
-        # music_lists += [[[10, 1, "ll"], [11, 2, "s"], [12, 3, "l"], [15, 4, "l"], [12, 5, "ss"], [11, 6, "s"], [12, 7, "l"], [15, 8, "l"]]]
-        # music_lists += [[[10, 1, "ll"], [11, 2, "s"], [12, 3, "l"], [15, 4, "l"], [12, 5, "ss"], [14, 6, "s"], [11, 7, "s"], [12, 8, "l"]]]
+        music_lists = []
+        music_lists += [[[0, 1, "ll"], [0, 2, "s"], [0, 3, "l"], [0, 4, "l"], [0, 5, "ss"], [0, 6, "s"], [0, 7, "l"], [0, 8, "l"]]]
+        music_lists += [[[0, 1, "ll"], [0, 2, "s"], [0, 3, "l"], [0, 4, "l"], [0, 5, "ss"], [0, 6, "s"], [0, 7, "s"], [0, 8, "l"]]]
 
-        # music = self.create_array(music_lists[self.choose])
-        # self.AI_create_result(music)
-        # self.choose = (self.choose + 1) % 2
+        self.AI_create_result(music_lists[self.choose])
+        self.choose = (self.choose + 1) % 2
 
-        self.ai_creater.sinEnd.connect(self.AI_create_result)
-        self.ai_creater.start()
+        # self.ai_creater.sinEnd.connect(self.AI_create_result)
+        # self.ai_creater.start()
     # end
 
     def AI_create_result(self, tmpc):
@@ -459,7 +460,7 @@ class Piano_Ui_Form(object):
         self.music = music
         self.graphicsview_result.setSceneRect(0, 0, self.instrument_icon_size[0] + self.spaceBetween +
                                               (self.section_size[0] + self.section_space) * len(music) + self.right_space,
-                                              self.instrument_y + (self.instrument_icon_size[1] + self.instrument_vspace) * 21 + self.down_space)
+                                              self.instrument_y + (self.instrument_icon_size[1] + self.instrument_vspace) * 1 + self.down_space)
 
         self.graphicsview_result.centerOn(360, 200)
 
@@ -499,7 +500,7 @@ class Piano_Ui_Form(object):
         result = []
         for i in range(max_len):
             lines = []
-            for j in range(21):
+            for j in range(1):
                 line = []
                 for k in range(4):
                     line += [[0, ""]]
@@ -552,7 +553,7 @@ class Piano_Ui_Form(object):
         text_item = QtWidgets.QGraphicsTextItem(f"{style}")
         text_item.setFont(QtGui.QFont("Arial", 15))
 
-        group = PianoGraphicsItemGroup()
+        group = GuitarGraphicsItemGroup()
         group.line = line
         group.section = section
         group.beat = beat
@@ -565,12 +566,8 @@ class Piano_Ui_Form(object):
 
         group.setPos(pos)
 
-        # group.action1.triggered.connect(self.rightMenuAdd)
+        group.action1.triggered.connect(self.rightMenuAdd)
         group.action2.triggered.connect(self.rightMenuDel)
-        group.action_ll.triggered.connect(self.addll)
-        group.action_l.triggered.connect(self.addl)
-        group.action_s.triggered.connect(self.adds)
-        group.action_ss.triggered.connect(self.addss)
 
         return group
     # end
@@ -646,7 +643,7 @@ class Piano_Ui_Form(object):
     # end
 
     def play_event(self):
-        audio = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(f"{self.audio_path}track_drum.WAV"))
+        audio = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(f"{self.audio_path}track_piano.WAV"))
         self.player.setMedia(audio)
         self.player.play()
     # end
@@ -658,18 +655,6 @@ class Piano_Ui_Form(object):
     def rightMenuDel(self):
         self.viewKeyEvent("D")
     # end
-
-    def addll(self):
-        self.rightMenuAdd("ll")
-
-    def addl(self):
-        self.rightMenuAdd("l")
-
-    def adds(self):
-        self.rightMenuAdd("s")
-
-    def addss(self):
-        self.rightMenuAdd("ss")
 
     def AI_user_send(self):
         user_text = self.textEdit_user.toPlainText()

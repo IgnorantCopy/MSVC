@@ -85,6 +85,38 @@ class PianoAICreator(QtCore.QThread, QtCore.QObject):
         return tmpc
 
 
+class GuitarAICreator(QtCore.QThread, QtCore.QObject):
+    sinEnd = QtCore.pyqtSignal(list)
+
+    def __init__(self, genre, instrument, len, speed, key, parent=None):
+        QtCore.QThread.__init__(self, parent)
+        QtCore.QObject.__init__(self, parent)
+        self.genre = genre
+        self.instrument = instrument
+        self.len = len
+        self.speed = speed
+        self.key = key
+        self.text_path = ""
+
+    def run(self):
+        song = arrange.Song(None, self.key, self.speed, 4, self.len)
+        arrange.compose("piano", self.genre, self.len)
+        arrange.arrange(song, "piano")
+        tmpc = self.get_tmps()
+        print(tmpc)
+        self.sinEnd.emit(tmpc)
+
+    def get_tmps(self):
+        tmpc = []
+        file = open(f"{self.text_path}piano_text.txt", "r")
+        text = file.read()
+        for line in text.split("\n"):
+            if line != "":
+                tmpc += [piano.text_to_coordinate(line)]
+        file.close()
+        return tmpc
+
+
 class DrumGraphicsPixmapItem(QtWidgets.QGraphicsPixmapItem):
     def __init__(self, pixmap):
         super().__init__(pixmap)
@@ -217,3 +249,58 @@ class PianoGraphicsItemGroup(QtWidgets.QGraphicsItemGroup):
         self.setSelected(True)
 
         self.menu.popup(QtGui.QCursor.pos())
+
+
+class GuitarGraphicsItemGroup(QtWidgets.QGraphicsItemGroup):
+    def __init__(self):
+        super().__init__()
+
+        self.section = 0
+        self.line = 0
+        self.beat = 0
+        self.style = ""
+
+        self.menu = QtWidgets.QMenu()
+
+        self.action1 = QtWidgets.QAction("增加")
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.action1.setFont(font)
+        self.menu.addAction(self.action1)
+
+        self.action2 = QtWidgets.QAction("删除")
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.action2.setFont(font)
+        self.menu.addAction(self.action2)
+
+
+# class AttributeUi(object):
+#     def setupUi(self, Dialog):
+#         Dialog.setObjectName("Dialog")
+#         Dialog.resize(213, 144)
+#         self.verticalLayout = QtWidgets.QVBoxLayout(Dialog)
+#         self.verticalLayout.setObjectName("verticalLayout")
+#         self.lineEdit = QtWidgets.QLineEdit(Dialog)
+#         font = QtGui.QFont()
+#         font.setFamily("Arial")
+#         font.setPointSize(24)
+#         self.lineEdit.setFont(font)
+#         self.lineEdit.setObjectName("lineEdit")
+#         self.verticalLayout.addWidget(self.lineEdit)
+#         self.pushButton = QtWidgets.QPushButton(Dialog)
+#         font = QtGui.QFont()
+#         font.setFamily("Arial")
+#         font.setPointSize(24)
+#         self.pushButton.setFont(font)
+#         self.pushButton.setObjectName("pushButton")
+#         self.verticalLayout.addWidget(self.pushButton)
+#
+#         self.retranslateUi(Dialog)
+#         QtCore.QMetaObject.connectSlotsByName(Dialog)

@@ -6,6 +6,8 @@ from src.display.y_part.Calc import Calc_Ui_Form
 from qt_material import apply_stylesheet
 from src.display.y_part.lyric_main import Lyrics
 from src.display.y_part.Ui_lyrics import Ui_Form
+from src.display.y_part.pianoUI_rc import Piano_Ui_Form
+from src.display.y_part.guitarUI_rc import Guitar_Ui_Form
 import sys
 
 
@@ -25,10 +27,15 @@ class Window(QTabWidget):
         self.drumUi.setupUi(self.drumWidget)
         self.addTab(self.drumWidget, "Drum")
 
-        self.CalcWidget = QWidget()
-        self.CalcUi = Calc_Ui_Form()
-        self.CalcUi.setupUi(self.CalcWidget)
-        self.addTab(self.CalcWidget, "Calc")
+        self.pianoWidget = MusicWidget()
+        self.pianoUi = Piano_Ui_Form()
+        self.pianoUi.setupUi(self.pianoWidget)
+        self.addTab(self.pianoWidget, "Piano")
+
+        self.guitarWidget = MusicWidget()
+        self.guitarUi = Guitar_Ui_Form()
+        self.guitarUi.setupUi(self.guitarWidget)
+        self.addTab(self.guitarWidget, "Guitar")
 
         self.lyricsWidget = Lyrics()
         self.lyricsUi = Ui_Form()

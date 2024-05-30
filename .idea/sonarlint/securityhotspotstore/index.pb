@@ -56,5 +56,21 @@ J
 src/display/y_part/Calc.py,b\1\b1bdf6048bba174071c5c3e7418d409bcd42618e
 H
 src/display/Ui_lyrics.py,e\0\e0b08eb6c3496c5310a7f6a3f896bc2402d05057
-I
-src/display/lyric_help.py,6\f\6f91dd9b3584dfcd9b53b323c3586cf4e8105df6
+P
+ src/display/y_part/pianoUI_rc.py,a\3\a32fc566a03da7134ddd92230495dce88ec19a6f
+F
+src/display/Ui_drum.py,0\c\0c8dc8597afced4f7faaf5c6ba25a596d32754cb
+H
+src/display/lyrics_ui.ui,d\f\df59bc4d7e1e094f15fa2cf6411eb1901e9babd7
+Q
+!src/display/y_part/guitarUI_rc.py,a\9\a9016826b7df988d29b67f72d8f7fe38dfbc3768
+M
+src/display/y_part/MyClass.py,2\a\2a6397f77895104903783e49b8ab80abcb42baa4
+K
+src/display/Ui_beginning.py,1\b\1b5cd5f990069abfd5daccc59b25ad40ee7df0dd
+L
+src/display/y_part/drumUI.ui,8\b\8b70210ddf76ceb2eb862089635c85873b81a903
+L
+src/display/y_part/lyrics.ui,2\f\2f81c0c89a8f44e67ce2d56b65dfa59528050918
+P
+ src/display/y_part/lyric_main.py,8\0\80688f83acba02d67dbbdfd8910fe0028e24221a

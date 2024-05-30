@@ -84,4 +84,4 @@ class Ui_MainWindow(object):
         self.delete_user.setText(_translate("MainWindow","删除用户"))
         self.change_name.setText(_translate("MainWindow","更改名字"))
         self.enter.setText(_translate("MainWindow", "进入"))
-import beginning_background_rc
+import src.display.beginning_background_rc

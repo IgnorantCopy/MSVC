@@ -3,7 +3,7 @@ import os
 
 __user_path = "../data/users/users.json"
 
-__default = {'users': ['musician1'], 'last_user': 'musician1'}
+__default = {'users': ['用户1'], 'last_user': '用户1'}
 
 
 def load_user():

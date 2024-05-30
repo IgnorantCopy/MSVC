@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'drumUI.ui'
+# Form implementation generated from reading ui file 'pianoUI.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -11,12 +11,12 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia
 from qt_material import apply_stylesheet
-from src.display.y_part.MyClass import MusicWidget, AIAnswer, AICreator, MyGraphicsView, DrumGraphicsPixmapItem
+from MyClass import MusicWidget, AIAnswer, AICreator, MyGraphicsView, PianoGraphicsPixmapItem, PianoGraphicsItemGroup
 from src.utils import common
 from src import drum
 
 
-class Drum_Ui_Form(object):
+class Piano_Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(1200, 800)
@@ -156,15 +156,35 @@ class Drum_Ui_Form(object):
         self.hbox_choose.addWidget(self.spinBox_section)
         spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.hbox_choose.addItem(spacerItem7)
+        self.label_mode = QtWidgets.QLabel(Form)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(24)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_mode.setFont(font)
+        self.label_mode.setObjectName("label_mode")
+        self.hbox_choose.addWidget(self.label_mode)
+        self.comboBox_mode = QtWidgets.QComboBox(Form)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(24)
+        self.comboBox_mode.setFont(font)
+        self.comboBox_mode.setObjectName("comboBox_mode")
+        self.hbox_choose.addWidget(self.comboBox_mode)
+        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.hbox_choose.addItem(spacerItem8)
         self.hbox_choose.setStretch(1, 5)
         self.hbox_choose.setStretch(2, 2)
-        self.hbox_choose.setStretch(3, 5)
+        self.hbox_choose.setStretch(3, 2)
         self.hbox_choose.setStretch(4, 2)
         self.hbox_choose.setStretch(5, 2)
         self.hbox_choose.setStretch(6, 3)
+        self.hbox_choose.setStretch(8, 2)
+        self.hbox_choose.setStretch(9, 5)
         self.verticalLayout_2.addLayout(self.hbox_choose)
-        spacerItem8 = QtWidgets.QSpacerItem(815, 13, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem8)
+        spacerItem9 = QtWidgets.QSpacerItem(815, 13, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_2.addItem(spacerItem9)
         self.pushButton_create = QtWidgets.QPushButton(Form)
         font = QtGui.QFont()
         font.setFamily("Arial")
@@ -211,8 +231,8 @@ class Drum_Ui_Form(object):
         self.pushButton_enter.setFont(font)
         self.pushButton_enter.setObjectName("pushButton_enter")
         self.verticalLayout.addWidget(self.pushButton_enter)
-        spacerItem9 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout.addItem(spacerItem9)
+        spacerItem10 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout.addItem(spacerItem10)
         self.verticalLayout.setStretch(0, 2)
         self.verticalLayout.setStretch(1, 2)
         self.verticalLayout.setStretch(2, 2)
@@ -306,7 +326,8 @@ class Drum_Ui_Form(object):
         self.label.setText(_translate("Form", "请设置以下的音乐元素后点击“开始”来生成音乐"))
         self.label_speed.setText(_translate("Form", "速度："))
         self.label_style.setText(_translate("Form", "风格："))
-        self.label_section.setText(_translate("Form", "节拍数："))
+        self.label_section.setText(_translate("Form", "长度："))
+        self.label_mode.setText(_translate("Form", "调式："))
         self.pushButton_create.setText(_translate("Form", "开始"))
         self.label_result.setText(_translate("Form", "结果："))
         self.pushButton_play.setText(_translate("Form", "播放"))
@@ -337,6 +358,13 @@ class Drum_Ui_Form(object):
         self.comboBox_style.addItem("爵士")
         self.comboBox_style.addItem("金属")
         self.comboBox_style.addItem("前卫")
+        self.comboBox_mode.addItem("A")
+        self.comboBox_mode.addItem("B")
+        self.comboBox_mode.addItem("C")
+        self.comboBox_mode.addItem("D")
+        self.comboBox_mode.addItem("E")
+        self.comboBox_mode.addItem("F")
+        self.comboBox_mode.addItem("G")
         # set GraphicsView
         self.graphics_set()
         # 连接到方法
@@ -345,10 +373,9 @@ class Drum_Ui_Form(object):
         self.pushButton_userdel.clicked.connect(self.textEdit_user.clear)
         self.pushButton_close.clicked.connect(QtWidgets.QApplication.quit)
         self.pushButton_play.clicked.connect(self.play_event)
-        self.pushButton_enter.clicked.connect(self.enter_event)
 
-        Form.Key_event.connect(self.createKeyEvent)
-        # end
+        Form.Key_event.connect(self.viewKeyEvent)
+    # end
 
     def style_set(self):
         # 设置字体
@@ -357,9 +384,9 @@ class Drum_Ui_Form(object):
                      self.pushButton_userdel, self.pushButton_play, self.pushButton_enter]:
             item.setStyleSheet(f"font-size: {font_size}px")
         for item in [self.label_style, self.label_speed, self.label_section, self.label_ATtitle, self.label,
-                     self.label_result]:
+                     self.label_result, self.label_mode]:
             item.setStyleSheet(f"font-size: {font_size}px")
-        for item in [self.spinBox_speed, self.spinBox_section, self.comboBox_style]:
+        for item in [self.spinBox_speed, self.spinBox_section, self.comboBox_style, self.comboBox_mode]:
             item.setStyleSheet(f"color: #1de9b6; font-size: {font_size}px")
         font_size = 22
         for item in [self.textEdit_user, self.textBrowser_AIanswer]:
@@ -368,6 +395,7 @@ class Drum_Ui_Form(object):
         self.pushButton_create.setStyleSheet(f"font-size: {font_size}px")
         # 设置大小
         self.pushButton_create.setMinimumHeight(70)
+    # end
 
     def graphics_set(self):
         self.scene = QtWidgets.QGraphicsScene(0, 0, 100000, 100000)
@@ -394,8 +422,9 @@ class Drum_Ui_Form(object):
         self.drum_speed = 90
         self.player = QtMultimedia.QMediaPlayer()
 
-        self.instrument_names = ['snare', 'tom1', 'tom2', 'tom3', 'hihi_close', 'hihi_open', 'ground', 'cymbal1',
-                                 'cymbal2', 'ding', 'dang', 'snare_side']
+        self.mode_names = ['snare', 'tom1', 'tom2', 'tom3', 'hihi_close', 'hihi_open', 'ground', 'cymbal1',
+                           'cymbal2', 'ding', 'dang', 'snare_side', 'snare', 'tom1', 'tom2', 'tom3', 'hihi_close',
+                           'hihi_open', 'ground', 'cymbal1', 'cymbal2', 'ding', 'dang', 'snare_side']
 
         self.choose = 0
         # 设置背景
@@ -404,6 +433,7 @@ class Drum_Ui_Form(object):
         self.music = []
         self.section_lens = []
         self.modify_dict = {}
+    # end
 
     def create_sender(self):
         self.pushButton_create.setEnabled(False)
@@ -411,144 +441,164 @@ class Drum_Ui_Form(object):
         self.section_lens = []
         self.drum_speed = self.spinBox_speed.value()
 
-        self.ai_creater.genre = f"请写一个{self.comboBox_style.currentText()}风格的鼓谱。"
-        self.ai_creater.instrument = "drum"
-        self.ai_creater.section = self.spinBox_section.value()
-        self.ai_creater.speed = self.spinBox_speed.value()
+        # self.ai_creater.genre = f"请写一个{self.comboBox_style.currentText()}风格的鼓谱。"
+        # self.ai_creater.instrument = "drum"
+        # self.ai_creater.section = self.spinBox_section.value()
+        # self.ai_creater.speed = self.spinBox_speed.value()
 
-        musiclists = [[{0: "11010", 1: "01010", 5: "11000"}, {0: "110", 2: "010", 3: "111"},
-                       {-1: "0010", 0: "1001", 1: "100"}, {-1: "00"}, {-1: "00000000"}],
-                      [{0: "11010", 1: "01010", 5: "11000"}, {0: "110", 2: "010", 3: "111"}]]
+        music_lists = []
+        music_lists += [[[10, 0, "ll"], [11, 1, "s"], [12, 2, "l"], [15, 3, "l"], [12, 4, "ss"], [11, 5, "s"], [12, 6, "l"], [15, 7, "l"]]]
+        music_lists += [[[10, 0, "ll"], [11, 1, "s"], [12, 2, "l"], [15, 3, "l"], [12, 4, "ss"], [14, 5, "s"], [11, 6, "s"], [12, 7, "l"]]]
 
-        # self.AI_create_result(musiclists[self.choose])
-        # self.choose = (self.choose + 1) % 2
+        music = self.create_array(music_lists[self.choose])
+        self.AI_create_result(music)
+        self.choose = (self.choose + 1) % 2
 
-        self.ai_creater.sinEnd.connect(self.AI_create_result)
-        self.ai_creater.start()
-
-    def set_block(self, ti, tj, tlen, tj_str):
-        """
-        设置每个小节的各个乐器的旋律的显示
-        :param ti: 表示第几个小节
-        :param tj: 表示第几行
-        :param tlen: 该小节的总长度，如："1001"对应4
-        :param tj_str: 表示旋律的字符串如："1001"
-        :return: 无
-        """
-        if tlen == 0:
-            tlen = 4
-        if tj_str == "":
-            for k in range(tlen):
-                tj_str += "0"
-        each_len = int(self.section_size[0] / tlen)
-        for m in range(tlen):
-            if tj_str[m] == "0":
-                timg_reader = QtGui.QImageReader(f"{self.image_path}{self.block_false_name}")
-            else:
-                timg_reader = QtGui.QImageReader(f"{self.image_path}{self.block_true_name}")
-            timg_reader.setScaledSize(QtCore.QSize(each_len - self.block_space, self.section_size[1]))
-            timg_reader = timg_reader.read()
-            titem = DrumGraphicsPixmapItem(QtGui.QPixmap(timg_reader))
-            self.scene.addItem(titem)
-            titem.setFlag(QtWidgets.QGraphicsItem.ItemIsSelectable)
-            titem.action1.triggered.connect(self.rightMenuAdd)
-            titem.action2.triggered.connect(self.rightMenuDel)
-            titem.instrument = tj
-            titem.section = ti
-            titem.beat = m
-            titem.setPos(self.instrument_icon_size[0] + self.spaceBetween + each_len * m + (
-                    self.section_size[0] + self.section_space) * ti,
-                         self.instrument_y + int((self.instrument_icon_size[1] - self.section_size[1]) / 2) +
-                         (self.instrument_icon_size[1] + self.instrument_vspace) * tj)
+        # self.ai_creater.sinEnd.connect(self.AI_create_result)
+        # self.ai_creater.start()
+    # end
 
     def AI_create_result(self, music):
         self.music = music
         self.graphicsview_result.setSceneRect(0, 0, self.instrument_icon_size[0] + self.spaceBetween +
                                               (self.section_size[0] + self.section_space) * len(music) + self.right_space,
-                                              self.instrument_y + (self.instrument_icon_size[1] + self.instrument_vspace) * 12 + self.down_space)
+                                              self.instrument_y + (self.instrument_icon_size[1] + self.instrument_vspace) * 24 + self.down_space)
 
         self.graphicsview_result.centerOn(360, 200)
 
         i = 0
-        for name in self.instrument_names:
+        for name in self.mode_names:
             img_reader = QtGui.QImageReader(f"{self.image_path}{name}.png")
             img_reader.setScaledSize(QtCore.QSize(self.instrument_icon_size[0], self.instrument_icon_size[1]))
             img_reader = img_reader.read()
-            instrument_item = DrumGraphicsPixmapItem(QtGui.QPixmap(img_reader))
+            instrument_item = QtWidgets.QGraphicsPixmapItem(QtGui.QPixmap(img_reader))
             self.scene.addItem(instrument_item)
             instrument_item.setPos(0, self.instrument_y + i * (self.instrument_icon_size[1] + self.instrument_vspace))
             i += 1
 
         i = 0
         for section in music:
-            max_len = 0
-            if -1 in section:
-                j_len = len(section[-1])
-                section.clear()
-                section[-1] = "0" * j_len
-                self.section_lens += [j_len]
-                for j in range(self.instrument_num):
-                    self.set_block(i, j, j_len, "")
-            else:
-                left_instructions = []
-                for j in range(self.instrument_num):
-                    if j in section:
-                        j_str = section[j]
-                        j_len = len(j_str)
-                        if j_len > max_len:
-                            max_len = j_len
-                        self.set_block(i, j, j_len, j_str)
-
-                    else:
-                        left_instructions += [j]
-
-                self.section_lens += [max_len]
-                for j in left_instructions:
-                    self.set_block(i, j, max_len, "")
-
+            j = 0
+            for line in section:
+                k = 0
+                for beat in line:
+                    self.set_block(i, j, k, beat)
+                    k += 1
+                j += 1
             i += 1
 
         self.pushButton_create.setEnabled(True)
+    # end
 
-    def create_rightmenu(self):
-        print("yes")
-        self.graphicsview_menu = QtWidgets.QMenu(Form)
-        self.action1 = QtWidgets.QAction(u"增加")
-        self.graphicsview_menu.addAction(self.action1)
+    def create_array(self, music):
+        max_len = 0
+        for each in music:
+            if each[1] > max_len:
+                max_len = each[1]
+        result = []
+        for i in range(max_len):
+            lines = []
+            for j in range(24):
+                line = []
+                for k in range(4):
+                    line += [[0, ""]]
+                lines += [line]
+            result += [lines]
+        for each in music:
+            x = each[1] // 4
+            y = each[0]
+            z = each[1] % 4
+            result[x][y][z][0] = 1
+            result[x][y][z][1] = each[2]
+        return result
+    # end
 
-        self.action1.triggered.connect(self.rightMenuAdd)
+    def set_block(self, ti, tj, tk, each):
+        """
+        设置每个小节的各个乐器的旋律的显示
+        :param ti: 表示第几个小节
+        :param tj: 表示第几行
+        :param tk: 表示第几拍
+        :param each: a list: [0, "ll"]
+        :return: 无
+        """
+        tlen = 4
+        if each[1] == "":
+            # each[1] = "none"
+            pass
 
-        if self.scene.selectedItems():
-            self.graphicsview_menu.popup(QtGui.QCursor.pos())
+        each_len = int(self.section_size[0] / tlen)
 
-    def createKeyEvent(self, key_name):
-        if key_name == "A" or key_name == "D":
-            file = ''
-            if key_name == "A":
+        pos = QtCore.QPointF(self.instrument_icon_size[0] + self.spaceBetween + each_len * tk + (
+                self.section_size[0] + self.section_space) * ti,
+                     self.instrument_y + int((self.instrument_icon_size[1] - self.section_size[1]) / 2) +
+                     (self.instrument_icon_size[1] + self.instrument_vspace) * tj)
+
+        size = QtCore.QSize(each_len - self.block_space, self.section_size[1])
+
+        self.create_group(each[0], tj, ti, tk, each[1], pos, size)
+    # end
+
+    def create_group(self, judge, line, section, beat, style, pos, size):
+        if judge == 0:
+            timg_reader = QtGui.QImageReader(f"{self.image_path}{self.block_false_name}")
+        else:
+            timg_reader = QtGui.QImageReader(f"{self.image_path}{self.block_true_name}")
+        timg_reader.setScaledSize(size)
+        timg_reader = timg_reader.read()
+
+        pix_item = QtWidgets.QGraphicsPixmapItem(QtGui.QPixmap(timg_reader))
+        text_item = QtWidgets.QGraphicsTextItem(f"{style}")
+        text_item.setFont(QtGui.QFont("Arial", 15))
+
+        group = PianoGraphicsItemGroup()
+        group.line = line
+        group.section = section
+        group.beat = beat
+        group.style = style
+        group.addToGroup(pix_item)
+        group.addToGroup(text_item)
+
+        self.scene.addItem(group)
+        group.setFlag(QtWidgets.QGraphicsItem.ItemIsSelectable)
+
+        group.setPos(pos)
+
+        # group.action1.triggered.connect(self.rightMenuAdd)
+        group.action2.triggered.connect(self.rightMenuDel)
+        group.action_ll.triggered.connect(self.addll)
+        group.action_l.triggered.connect(self.addl)
+        group.action_s.triggered.connect(self.adds)
+        group.action_ss.triggered.connect(self.addss)
+
+        return group
+    # end
+
+    def viewKeyEvent(self, key_name, style=""):
+        if key_name == "add" or key_name == "D":
+            if key_name == "add":
                 judge = 1
-                file = f"{self.image_path}{self.block_true_name}"
             elif key_name == "D":
                 judge = 0
-                file = f"{self.image_path}{self.block_false_name}"
             if self.scene.selectedItems():
                 for item in self.scene.selectedItems():
                     item_rect = item.boundingRect()
                     item_pos = item.pos()
-                    img_reader = QtGui.QImageReader(file)
-                    img_reader.setScaledSize(QtCore.QSize(int(item_rect.width()) - 1, self.section_size[1]))
-                    img_reader = img_reader.read()
-                    new_item = DrumGraphicsPixmapItem(QtGui.QPixmap(img_reader))
-                    new_item.instrument = item.instrument
-                    new_item.section = item.section
-                    new_item.beat = item.beat
+                    size = QtCore.QSize(int(item_rect.width()), self.section_size[1])
+
+                    if judge == 1:
+                        if style == "":
+                            f_style = item.style
+                        else:
+                            f_style = style
+                    else:
+                        f_style = ""
+
+                    group = self.create_group(judge, item.line, item.section, item.beat, f_style, item_pos, size)
+
                     self.scene.removeItem(item)
-                    self.scene.addItem(new_item)
-                    new_item.setFlag(QtWidgets.QGraphicsItem.ItemIsSelectable)
-                    new_item.setSelected(True)
-                    new_item.action1.triggered.connect(self.rightMenuAdd)
-                    new_item.action2.triggered.connect(self.rightMenuDel)
-                    new_item.setPos(item_pos)
-                    self.modify_dict[new_item.section] = self.modify_event(new_item.instrument, new_item.section, new_item.beat, judge)
+                    group.setSelected(True)
+                    print(f"{group.line} {group.section} {group.beat} {group.style}")
         elif key_name == "W" or key_name == "S":
             if key_name == "W" and self.cur_scale * self.change_scale < self.max_scale:
                 self.cur_scale *= self.change_scale
@@ -556,52 +606,69 @@ class Drum_Ui_Form(object):
             elif key_name == "S" and self.cur_scale / self.change_scale > self.min_scale:
                 self.cur_scale /= self.change_scale
                 self.graphicsview_result.scale(1 / self.change_scale, 1 / self.change_scale)
+    # end
 
     def modify_event(self, instrument, section, beat, judge):
-        if judge == 1:
-            j_str = "1"
-        else:
-            j_str = "0"
-        result = ""
-        if -1 in self.music[section] and judge == 1:
-            self.music[section].clear()
-            self.music[section][instrument] = "0" * self.section_lens[section]
-            temp = list(self.music[section][instrument])
-            temp[beat] = "1"
-            self.music[section][instrument] = "".join(temp)
-        elif instrument in self.music[section]:
-            temp = list(self.music[section][instrument])
-            temp[beat] = j_str
-            self.music[section][instrument] = "".join(temp)
-        elif not(instrument in self.music[section]) and judge == 1:
-            self.music[section][instrument] = "0" * self.section_lens[section]
-            temp = list(self.music[section][instrument])
-            temp[beat] = "1"
-            self.music[section][instrument] = "".join(temp)
-        for k, v in self.music[section].items():
-            result += f"{drum.get_index(k)}_{v} "
-        print(result)
-        return result
+        # if judge == 1:
+        #     j_str = "1"
+        # else:
+        #     j_str = "0"
+        # result = ""
+        # if -1 in self.music[section] and judge == 1:
+        #     self.music[section].clear()
+        #     self.music[section][instrument] = "0" * self.section_lens[section]
+        #     temp = list(self.music[section][instrument])
+        #     temp[beat] = "1"
+        #     self.music[section][instrument] = "".join(temp)
+        # elif instrument in self.music[section]:
+        #     temp = list(self.music[section][instrument])
+        #     temp[beat] = j_str
+        #     self.music[section][instrument] = "".join(temp)
+        # elif not(instrument in self.music[section]) and judge == 1:
+        #     self.music[section][instrument] = "0" * self.section_lens[section]
+        #     temp = list(self.music[section][instrument])
+        #     temp[beat] = "1"
+        #     self.music[section][instrument] = "".join(temp)
+        # for k, v in self.music[section].items():
+        #     result += f"{drum.get_index(k)}_{v} "
+        # print(result)
+        # return result
+        pass
+    # end
 
     def enter_event(self):
-        self.player.stop()
-        audio = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(""))
-        self.player.setMedia(audio)
-        text = drum.modify_text("../data/cache/text/drum_text.txt", self.modify_dict)
-
-        drum.text_to_drum(text, self.drum_speed)
-        self.modify_dict = {}
+        # text = drum.modify_text("../data/cache/text/drum_text.txt", self.modify_dict)
+        #
+        # drum.text_to_drum(text, self.drum_speed)
+        pass
+    # end
 
     def play_event(self):
-        audio = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile("../data/cache/audio/track_drum.WAV"))
-        self.player.setMedia(audio)
-        self.player.play()
+        # audio = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile("../data/cache/audio/track_drum.WAV"))
+        # self.player.setMedia(audio)
+        # self.player.play()
+        pass
+    # end
 
-    def rightMenuAdd(self):
-        self.createKeyEvent("A")
+    def rightMenuAdd(self, style=""):
+        self.viewKeyEvent("add", style)
+    # end
 
     def rightMenuDel(self):
-        self.createKeyEvent("D")
+        self.viewKeyEvent("D")
+    # end
+
+    def addll(self):
+        self.rightMenuAdd("ll")
+
+    def addl(self):
+        self.rightMenuAdd("l")
+
+    def adds(self):
+        self.rightMenuAdd("s")
+
+    def addss(self):
+        self.rightMenuAdd("ss")
 
     def AI_user_send(self):
         user_text = self.textEdit_user.toPlainText()
@@ -612,19 +679,14 @@ class Drum_Ui_Form(object):
             self.ai_answer.user_text = user_text
             self.ai_answer.sinEnd.connect(self.AI_answer)
             self.ai_answer.start()
+    # end
 
     def AI_answer(self, ai_text):
         final_text = "AI：" + ai_text
         final_text += "\n\n"
         self.textBrowser_AIanswer.append(final_text)
         self.pushButton_usersend.setEnabled(True)
-
-
-class DrumUI:
-    def __init__(self):
-        self.ui = Drum_Ui_Form()
-        self.widget = MusicWidget()
-        self.ui.setupUi(self.widget)
+    # end
 
 
 if __name__ == "__main__":
@@ -633,9 +695,8 @@ if __name__ == "__main__":
     QtGui.QGuiApplication.setHighDpiScaleFactorRoundingPolicy(QtCore.Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
     app = QtWidgets.QApplication(sys.argv)
     apply_stylesheet(app, theme="dark_teal.xml")  # 设置样式表
-    # app.setStyleSheet("") # 重设样式表
     Form = MusicWidget()
-    ui = Drum_Ui_Form()
+    ui = Piano_Ui_Form()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())

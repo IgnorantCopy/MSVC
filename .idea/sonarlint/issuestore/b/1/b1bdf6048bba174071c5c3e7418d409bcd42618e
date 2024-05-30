@@ -1,0 +1,19 @@
+
+npython:S116k"WRename this field "pushButton_Divi" to match the regular expression ^[_a-z][_a-z0-9]*$.(í…Ú¹
+rpython:S116L"[Rename this field "lineEdit_second_num" to match the regular expression ^[_a-z][_a-z0-9]*$.(¹¯ûÕ
+vpython:S116T"ZRename this field "horizontalLayout_3" to match the regular expression ^[_a-z][_a-z0-9]*$.(ğµ€‡øÿÿÿÿ
+npython:S1162"WRename this field "pushButton_menu" to match the regular expression ^[_a-z][_a-z0-9]*$.(¾‘¸’
+rpython:S116V"VRename this field "pushButton_Add" to match the regular expression ^[_a-z][_a-z0-9]*$.(ëŠÂıÿÿÿÿ
+opython:S116"XRename this field "horizontalLayout" to match the regular expression ^[_a-z][_a-z0-9]*$.(›‰½³
+rpython:S116"VRename this field "verticalLayout" to match the regular expression ^[_a-z][_a-z0-9]*$.(¢­šÚøÿÿÿÿ
+tpython:S116]"XRename this field "pushButton_Minus" to match the regular expression ^[_a-z][_a-z0-9]*$.(åöÛÓşÿÿÿÿ
+tpython:S116d"XRename this field "pushButton_Multi" to match the regular expression ^[_a-z][_a-z0-9]*$.(Ò÷’şÿÿÿÿ
+qpython:S116C"ZRename this field "horizontalLayout_2" to match the regular expression ^[_a-z][_a-z0-9]*$.(ğÀÀŞ
+qpython:S116'"ZRename this field "lineEdit_first_num" to match the regular expression ^[_a-z][_a-z0-9]*$.(¡«İÉ
+‚python:S101"fRename class "Calc_Ui_Form" to match the regular expression ^_?([A-Z_][a-zA-Z0-9]*|[a-z_][a-z0-9_]*)$.(×‘”€şÿÿÿÿ
+gpython:S117"PRename this parameter "Form" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ëö‘¹
+spython:S117/"\Rename this local variable "spacerItem1" to match the regular expression ^[_a-z][a-z0-9_]*$.(‹‡öÔ
+xpython:S1179"\Rename this local variable "spacerItem2" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ê•ù‘ûÿÿÿÿ
+bpython:S100"KRename method "setupUi" to match the regular expression ^[a-z_][a-z0-9_]*$.(Ëö‘¹
+mpython:S117"PRename this parameter "Form" to match the regular expression ^[_a-z][a-z0-9_]*$.(ı‰·úÿÿÿÿ
+npython:S100"QRename method "retranslateUi" to match the regular expression ^[a-z_][a-z0-9_]*$.(ı‰·úÿÿÿÿ

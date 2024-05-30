@@ -1,4 +1,6 @@
 
-Špython:S34571"EAdd replacement fields or use a normal string instead of an f-string.(¼—Ïã8û¤´Óú1J$9d3fcc76-2073-47c8-b8b2-c17770617691
-hpython:S1252"Remove this commented out code.(ªÖÈŒşÿÿÿÿ8ü¤´Óú1J$94c674d7-e7b6-4acd-8a87-b631a06a3187
-apython:S1254"Remove this commented out code.(§‹ÆüùÿÿÿÿJ$926e028a-4f96-495f-8308-4c1d44dd43ab
+tpython:S117"VRename this local variable "Score" to match the regular expression ^[_a-z][a-z0-9_]*$.(¤æÑƒ8äÊü1
+{python:S117)"XRename this local variable "tmpNote" to match the regular expression ^[_a-z][a-z0-9_]*$.(³å±«ÿÿÿÿÿ8äÊü1
+spython:S3776"TRefactor this function to reduce its Cognitive Complexity from 33 to the 15 allowed.(¢ªœø8äÊü1
+Bpython:S1256"Remove this commented out code.(Ì¨âúÿÿÿÿ8åÊü1
+Bpython:S125B"Remove this commented out code.(§‹Æüùÿÿÿÿ8åÊü1

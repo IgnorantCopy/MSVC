@@ -81,7 +81,7 @@ def text_to_coordinate(line):
 def coordinate_to_text(chord):
     line = ''
     line += str(chord[2])
-    line += ' ' + str(chord[1])
+    line += ' ' + str(chord[1]) + '\n'
     return line
 
 

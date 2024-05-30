@@ -1,10 +1,11 @@
 from PyQt5.QtWidgets import QApplication, QWidget, QTabWidget
 from PyQt5.QtGui import QIcon, QPixmap, QFont
 from PyQt5 import QtCore, QtGui
-from drumUI_rc import Drum_Ui_Form, DrumWidget
-from Calc import Calc_Ui_Form
-from frametest_rc import Frametest_Ui_Form
+from src.display.y_part.drumUI_rc import Drum_Ui_Form, MusicWidget
+from src.display.y_part.Calc import Calc_Ui_Form
 from qt_material import apply_stylesheet
+from src.display.y_part.lyric_main import Lyrics
+from src.display.y_part.Ui_lyrics import Ui_Form
 import sys
 
 
@@ -19,9 +20,9 @@ class Window(QTabWidget):
 
         self.setTabPosition(QTabWidget.TabPosition.North)
 
-        self.drumWidget = DrumWidget()
-        self.DrumUi = Drum_Ui_Form()
-        self.DrumUi.setupUi(self.drumWidget)
+        self.drumWidget = MusicWidget()
+        self.drumUi = Drum_Ui_Form()
+        self.drumUi.setupUi(self.drumWidget)
         self.addTab(self.drumWidget, "Drum")
 
         self.CalcWidget = QWidget()
@@ -29,10 +30,10 @@ class Window(QTabWidget):
         self.CalcUi.setupUi(self.CalcWidget)
         self.addTab(self.CalcWidget, "Calc")
 
-        self.FrametestWidget = QWidget()
-        self.FrametestUi = Frametest_Ui_Form()
-        self.FrametestUi.setupUi(self.FrametestWidget)
-        self.addTab(self.FrametestWidget, "Frametest")
+        self.lyricsWidget = Lyrics()
+        self.lyricsUi = Ui_Form()
+        self.lyricsUi.setupUi(self.lyricsWidget)
+        self.addTab(self.lyricsWidget, "Lyrics")
 
 
 if __name__ == "__main__":

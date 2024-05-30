@@ -36,3 +36,25 @@ E
 data/users/users.json,f\a\fad873ea5dfdceea4fbb1ecf0e567f7c3341cb4b
 O
 src/display/y_part/drumUI_rc.py,e\f\ef041fd3fec4f3e7b8bc34b7d1e669287ff237ed
+T
+$src/display/beginning_background.qrc,3\d\3d140106aa193161aed053a210fed7060a788ca8
+V
+&src/display/beginning_background_rc.py,f\d\fd0930bab42613f4909f6a2952472657569b5f34
+Q
+!src/display/beginning_fonts_rc.py,4\b\4be94752462e7eb303fa3113a0866c672e56ee64
+H
+src/display/drum_main.py,5\3\533cc0d1a4d87154a16abc5d3c33ead19d94d0b3
+C
+src/display/help.py,2\d\2d83f2506ebbec504134af7a845c5988b73bb064
+I
+src/display/lyric_main.py,4\3\437b74cb0c8dd8d164370a0237675bc50d025c42
+C
+src/display/menu.py,d\0\d089308ef02853c17ccc031714074c56d8ed766f
+P
+ src/display/y_part/QTabWidget.py,9\0\90bb255963a94aa820963b142006a02d44944bc4
+J
+src/display/y_part/Calc.py,b\1\b1bdf6048bba174071c5c3e7418d409bcd42618e
+H
+src/display/Ui_lyrics.py,e\0\e0b08eb6c3496c5310a7f6a3f896bc2402d05057
+I
+src/display/lyric_help.py,6\f\6f91dd9b3584dfcd9b53b323c3586cf4e8105df6

@@ -75,7 +75,7 @@ def graphics_set(self):
     self.max_scale = 2.5
     self.change_scale = 1.2
 
-    self.instrument_names = ['A', 'B', 'A', 'B', 'A', 'A', 'B', 'B', 'A', 'B', 'B', 'A']
+    self.mode_names = ['A', 'B', 'A', 'B', 'A', 'A', 'B', 'B', 'A', 'B', 'B', 'A']
 
     self.choose = 0
     # 设置背景
@@ -132,7 +132,7 @@ def AI_create_result(self, music):
     self.graphicsview_result.centerOn(360, 200)
 
     i = 0
-    for name in self.instrument_names:
+    for name in self.mode_names:
         img_reader = QtGui.QImageReader(f"{self.image_path}{name}")
         img_reader.setScaledSize(QtCore.QSize(self.instrument_icon_size[0], self.instrument_icon_size[1]))
         img_reader = img_reader.read()

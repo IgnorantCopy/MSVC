@@ -121,3 +121,65 @@ class PianoGraphicsPixmapItem(QtWidgets.QGraphicsPixmapItem):
         self.setSelected(True)
 
         self.menu.popup(QtGui.QCursor.pos())
+
+
+class PianoGraphicsItemGroup(QtWidgets.QGraphicsItemGroup):
+    def __init__(self):
+        super().__init__()
+
+        self.section = 0
+        self.line = 0
+        self.beat = 0
+        self.style = ""
+
+        self.menu = QtWidgets.QMenu()
+
+        self.action2 = QtWidgets.QAction("删除")
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.action2.setFont(font)
+        self.menu.addAction(self.action2)
+
+        self.action_ll = QtWidgets.QAction("ll")
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.action_ll.setFont(font)
+        self.menu.addAction(self.action_ll)
+
+        self.action_l = QtWidgets.QAction("l")
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.action_l.setFont(font)
+        self.menu.addAction(self.action_l)
+
+        self.action_s = QtWidgets.QAction("s")
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.action_s.setFont(font)
+        self.menu.addAction(self.action_s)
+
+        self.action_ss = QtWidgets.QAction("ss")
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.action_ss.setFont(font)
+        self.menu.addAction(self.action_ss)
+
+    def contextMenuEvent(self, event):
+        self.setSelected(True)
+
+        self.menu.popup(QtGui.QCursor.pos())

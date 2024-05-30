@@ -523,7 +523,6 @@ class Drum_Ui_Form(object):
 
     def createKeyEvent(self, key_name):
         if key_name == "A" or key_name == "D":
-            self.modify_dict = {}
             file = ''
             if key_name == "A":
                 judge = 1
@@ -591,6 +590,7 @@ class Drum_Ui_Form(object):
         text = drum.modify_text("../data/cache/text/drum_text.txt", self.modify_dict)
 
         drum.text_to_drum(text, self.drum_speed)
+        self.modify_dict = {}
 
     def play_event(self):
         audio = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile("../data/cache/audio/track_drum.WAV"))
@@ -618,6 +618,13 @@ class Drum_Ui_Form(object):
         final_text += "\n\n"
         self.textBrowser_AIanswer.append(final_text)
         self.pushButton_usersend.setEnabled(True)
+
+
+class DrumUI:
+    def __init__(self):
+        self.ui = Drum_Ui_Form()
+        self.widget = MusicWidget()
+        self.ui.setupUi(self.widget)
 
 
 if __name__ == "__main__":

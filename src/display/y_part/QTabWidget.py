@@ -19,8 +19,8 @@ class Window(QTabWidget):
         self.setTabPosition(QTabWidget.TabPosition.North)
 
         self.drumWidget = MusicWidget()
-        self.DrumUi = Drum_Ui_Form()
-        self.DrumUi.setupUi(self.drumWidget)
+        self.drumUi = Drum_Ui_Form()
+        self.drumUi.setupUi(self.drumWidget)
         self.addTab(self.drumWidget, "Drum")
 
         self.CalcWidget = QWidget()

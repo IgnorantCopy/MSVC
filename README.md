@@ -52,26 +52,34 @@
   在界面的侧边栏，我们单独开辟了一块AI问答窗口。文本框内输入问题，AI会根据问题进行回答。创作时，用户可以参考AI的回答，可以加深对于音乐的理解。
 
 ## 3.项目结构
- 
+
+![image.png](./src/display/image/1-1.png)
+
+![image.png](./src/display/image/1-2.png)
+
+![image.png](./src/display/image/1-3.png)
+
+![image.png](./src/display/image/1-4.png)
+
 ## 4.效果展示
 
 ```开始界面：```
-<initpage>![image.png](./src/display/image/A.png)
+<initpage>![image.png](./src/display/image/menu.png)
 
 ```鼓谱生成界面：```
-<drum>![image.png](./src/display/image/A.png)
+<drum>![image.png](./src/display/image/drum.png)
 
 ```吉他谱生成界面：```
-<guitar>![image.png](./src/display/image/A.png)
+<guitar>![image.png](./src/display/image/guitar.png)
 
 ```钢琴谱生成界面：```
-<piano>![image.png](./src/display/image/A.png)
+<piano>![image.png](./src/display/image/piano.png)
 
 ```歌词生成界面：```
-<lyrics>![image.png](./src/display/image/A.png)
+<lyrics>![image.png](./src/display/image/lyrics.png)
 
 ```AI问答界面：```
-<AIQA>![image.png](./src/display/image/A.png)
+<AIQA>![image.png](./src/display/image/AI.png)
 
 ## 5.关于我们
 
@@ -83,11 +91,6 @@
 
 #### 我们想说：
 
->```大家随便写点啥```
->
->```1```
->
->```1```
->
->```from zjj:```
-> 通用型人工智能虽然知识广博，但一旦涉及到更深层次的专业领域，就容易显得“呆呆的”。举例而言，对于我负责的钢琴部分，不仅需要大量的提示词来确保AI能够按照我们设定的格式生成钢琴谱，有时所谓的创作只呈现出简单的音阶，令人咋舌。组长马楷恒提出的“自由修改”部分，我刚开始认为只是锦上添花，后来发现这是非常有必要的——假如你真的想创作“音乐”的话。也就是说，比起AI独立生成，AI与人的协作也许是更好的选择；在“涌现”的AI让人们担忧未来的同时，我们理应对AI“祛魅”——归根结底，它只是个工具。
+>````
+>通用型人工智能虽然知识广博，但一旦涉及到更深层次的专业领域，就容易显得“呆呆的”。举例而言，对于我负责的钢琴部分，不仅需要大量的提示词来确保AI能够按照我们设定的格式生成钢琴谱，有时所谓的创作只呈现出简单的音阶，令人咋舌。组长马楷恒提出的“自由修改”部分，我刚开始认为只是锦上添花，后来发现这是非常有必要的——假如你真的想创作“音乐”的话。也就是说，比起AI独立生成，AI与人的协作也许是更好的选择；在“涌现”的AI让人们担忧未来的同时，我们理应对AI“祛魅”——归根结底，它只是个工具。
+>````

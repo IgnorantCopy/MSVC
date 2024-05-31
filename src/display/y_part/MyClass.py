@@ -113,7 +113,7 @@ class GuitarAICreator(QtCore.QThread, QtCore.QObject):
         text = file.read()
         for line in text.split("\n"):
             if line != "":
-                tmpc += [piano.text_to_coordinate(line)]
+                tmpc += [guitar.text_to_coordinate(line)]
         file.close()
         return tmpc
 
@@ -257,9 +257,7 @@ class GuitarGraphicsItemGroup(QtWidgets.QGraphicsItemGroup):
         super().__init__()
 
         self.section = 0
-        self.line = 0
-        self.beat = 0
-        self.style = ""
+        self.attribute = ""
 
         self.menu = QtWidgets.QMenu()
 
@@ -285,49 +283,3 @@ class GuitarGraphicsItemGroup(QtWidgets.QGraphicsItemGroup):
         self.setSelected(True)
 
         self.menu.popup(QtGui.QCursor.pos())
-
-
-class AttributeUi(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(213, 144)
-        self.verticalLayout = QtWidgets.QVBoxLayout(Dialog)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.lineEdit = QtWidgets.QLineEdit(Dialog)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(24)
-        self.lineEdit.setFont(font)
-        self.lineEdit.setObjectName("lineEdit")
-        self.verticalLayout.addWidget(self.lineEdit)
-        self.pushButton = QtWidgets.QPushButton(Dialog)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(24)
-        self.pushButton.setFont(font)
-        self.pushButton.setObjectName("pushButton")
-        self.verticalLayout.addWidget(self.pushButton)
-
-        self.extra_set(Dialog)
-
-        self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
-
-    def retranslateUi(self, Dialog):
-        _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.pushButton.setText(_translate("Dialog", "确认"))
-
-    def extra_set(self, Dialog):
-        self.style_set()
-        self.Dialog = Dialog
-
-        self.pushButton.clicked.connect(self.enterEvent)
-
-    def style_set(self):
-        font_size = 30
-        for item in [self.lineEdit, self.pushButton]:
-            item.setStyleSheet(f"color: #1de9b6; font-size: {font_size}px")
-
-    def enterEvent(self):
-        self.Dialog.close()

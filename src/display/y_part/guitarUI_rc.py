@@ -11,7 +11,8 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia
 from qt_material import apply_stylesheet
-from MyClass import MusicWidget, AIAnswer, GuitarAICreator, MyGraphicsView, GuitarGraphicsItemGroup, AttributeUi
+from src.display.y_part.MyClass import MusicWidget, AIAnswer, GuitarAICreator, MyGraphicsView, GuitarGraphicsItemGroup
+from src import guitar
 
 
 class Guritar_Ui_Form(object):
@@ -341,11 +342,13 @@ class Guritar_Ui_Form(object):
         ai_text = "AI：你好，有什么问题?\n\n"
         self.textBrowser_AIanswer.setPlainText(ai_text)
         self.ai_answer = AIAnswer("")
+        self.ai_answer.sinEnd.connect(self.AI_answer)
         self.ai_creater = GuitarAICreator("流行", "piano", 50, 90, 0)
         self.text_path = "../data/cache/text/"
         self.audio_path = "../data/cache/audio/"
         self.ai_creater.text_path = self.text_path
         self.image_path = "display/image/"
+        self.Form = Form
         # set textedit default text
         self.textEdit_user.setPlaceholderText("请输入你的问题：")
         # set spinbox
@@ -400,10 +403,8 @@ class Guritar_Ui_Form(object):
         self.graphicsview_result.setScene(self.scene)
         self.graphicsview_result.setSceneRect(0, 0, 1460, 680)
         # 设置一些参数
-        self.dialog = QtWidgets.QDialog()
-        self.attribute_ui = AttributeUi()
-        self.attribute_ui.setupUi(self.dialog)
-        self.section_size = (320, 25)
+        self.inputdialog = QtWidgets.QInputDialog()
+        self.section_size = (140, 25)
         self.instrument_icon_size = (35, 35)
         self.instrument_vspace = 20
         self.spaceBetween = 50
@@ -429,15 +430,12 @@ class Guritar_Ui_Form(object):
         self.graphicsview_result.setBackgroundBrush(QtCore.Qt.GlobalColor.black)
         # 字典
         self.music = []
-        self.section_lens = []
         self.modify_dict = {}
     # end
 
     def create_sender(self):
         self.pushButton_create.setEnabled(False)
         self.scene.clear()
-        self.section_lens = []
-        self.drum_speed = self.spinBox_speed.value()
 
         self.ai_creater.len = self.spinBox_section.value()
         self.ai_creater.genre = self.comboBox_style.currentText()
@@ -474,16 +472,8 @@ class Guritar_Ui_Form(object):
             instrument_item.setPos(0, self.instrument_y + i * (self.instrument_icon_size[1] + self.instrument_vspace))
             i += 1
 
-        i = 0
-        for section in music:
-            j = 0
-            for line in section:
-                k = 0
-                for beat in line:
-                    self.set_block(i, j, k, beat)
-                    k += 1
-                j += 1
-            i += 1
+        for each in music:
+            self.set_block(each[0], each[1])
 
         self.pushButton_create.setEnabled(True)
     # end
@@ -493,71 +483,44 @@ class Guritar_Ui_Form(object):
         for each in music:
             if each[1] - 1 > max_len:
                 max_len = each[1] - 1
-        if max_len % 4 == 0:
-            max_len = max_len // 4
-        else:
-            max_len = max_len // 4 + 1
         result = []
-        for i in range(max_len):
-            lines = []
-            for j in range(1):
-                line = []
-                for k in range(4):
-                    line += [[0, ""]]
-                lines += [line]
-            result += [lines]
         for each in music:
-            x = (each[1] - 1) // 4
-            y = each[0]
-            z = (each[1] - 1) % 4
-            result[x][y][z][0] = 1
-            result[x][y][z][1] = each[2]
+            result += [[each[1] - 1, each[2]]]
         return result
     # end
 
-    def set_block(self, ti, tj, tk, each):
+    def set_block(self, ti, each):
         """
         设置每个小节的各个乐器的旋律的显示
-        :param ti: 表示第几个小节
-        :param tj: 表示第几行
-        :param tk: 表示第几拍
-        :param each: a list: [0, "ll"]
+        :param ti: 表示第几小节
+        :param each: a str
         :return: 无
         """
-        tlen = 4
-        if each[1] == "":
-            # each[1] = "none"
-            pass
+        tlen = 1
 
         each_len = int(self.section_size[0] / tlen)
 
-        pos = QtCore.QPointF(self.instrument_icon_size[0] + self.spaceBetween + each_len * tk + (
+        pos = QtCore.QPointF(self.instrument_icon_size[0] + self.spaceBetween + (
                 self.section_size[0] + self.section_space) * ti,
-                     self.instrument_y + int((self.instrument_icon_size[1] - self.section_size[1]) / 2) +
-                     (self.instrument_icon_size[1] + self.instrument_vspace) * tj)
+                     self.instrument_y + int((self.instrument_icon_size[1] - self.section_size[1]) / 2))
 
         size = QtCore.QSize(each_len - self.block_space, self.section_size[1])
 
-        self.create_group(each[0], tj, ti, tk, each[1], pos, size)
+        self.create_group(ti, each, pos, size)
     # end
 
-    def create_group(self, judge, line, section, beat, style, pos, size):
-        if judge == 0:
-            timg_reader = QtGui.QImageReader(f"{self.image_path}{self.block_false_name}")
-        else:
-            timg_reader = QtGui.QImageReader(f"{self.image_path}{self.block_true_name}")
+    def create_group(self, section, attribute, pos, size):
+        timg_reader = QtGui.QImageReader(f"{self.image_path}{self.block_true_name}")
         timg_reader.setScaledSize(size)
         timg_reader = timg_reader.read()
 
         pix_item = QtWidgets.QGraphicsPixmapItem(QtGui.QPixmap(timg_reader))
-        text_item = QtWidgets.QGraphicsTextItem(f"{style}")
+        text_item = QtWidgets.QGraphicsTextItem(f"{attribute}")
         text_item.setFont(QtGui.QFont("Arial", 15))
 
         group = GuitarGraphicsItemGroup()
-        group.line = line
         group.section = section
-        group.beat = beat
-        group.style = style
+        group.attribute = attribute
         group.addToGroup(pix_item)
         group.addToGroup(text_item)
 
@@ -573,8 +536,8 @@ class Guritar_Ui_Form(object):
     # end
 
     def viewKeyEvent(self, key_name, style=""):
-        if key_name == "add" or key_name == "D":
-            if key_name == "add":
+        if key_name == "A" or key_name == "D":
+            if key_name == "A":
                 judge = 1
             elif key_name == "D":
                 judge = 0
@@ -585,18 +548,17 @@ class Guritar_Ui_Form(object):
                     size = QtCore.QSize(int(item_rect.width()), self.section_size[1])
 
                     if judge == 1:
-                        if style == "":
-                            f_style = item.style
-                        else:
-                            f_style = style
+                        f_style = style
                     else:
                         f_style = ""
 
-                    group = self.create_group(judge, item.line, item.section, item.beat, f_style, item_pos, size)
+                    group = self.create_group(item.section, f_style, item_pos, size)
 
                     self.scene.removeItem(item)
                     group.setSelected(True)
-                    print(f"{group.line} {group.section} {group.beat} {group.style}")
+                    tmp = [0, group.section + 1, group.attribute]
+                    self.modify_dict[group.section] = guitar.coordinate_to_text(tmp)
+                    print(self.modify_dict)
         elif key_name == "W" or key_name == "S":
             if key_name == "W" and self.cur_scale * self.change_scale < self.max_scale:
                 self.cur_scale *= self.change_scale
@@ -606,53 +568,40 @@ class Guritar_Ui_Form(object):
                 self.graphicsview_result.scale(1 / self.change_scale, 1 / self.change_scale)
     # end
 
-    def modify_event(self, instrument, section, beat, judge):
-        # if judge == 1:
-        #     j_str = "1"
-        # else:
-        #     j_str = "0"
-        # result = ""
-        # if -1 in self.music[section] and judge == 1:
-        #     self.music[section].clear()
-        #     self.music[section][instrument] = "0" * self.section_lens[section]
-        #     temp = list(self.music[section][instrument])
-        #     temp[beat] = "1"
-        #     self.music[section][instrument] = "".join(temp)
-        # elif instrument in self.music[section]:
-        #     temp = list(self.music[section][instrument])
-        #     temp[beat] = j_str
-        #     self.music[section][instrument] = "".join(temp)
-        # elif not(instrument in self.music[section]) and judge == 1:
-        #     self.music[section][instrument] = "0" * self.section_lens[section]
-        #     temp = list(self.music[section][instrument])
-        #     temp[beat] = "1"
-        #     self.music[section][instrument] = "".join(temp)
-        # for k, v in self.music[section].items():
-        #     result += f"{drum.get_index(k)}_{v} "
-        # print(result)
-        # return result
-        pass
+    def modify_text(self, modify_dict):
+        with open(f"{self.text_path}guitar_text.txt", "r", encoding="utf-8") as f:
+            old_text = f.read()
+        new_text = old_text.split('\n')
+        for k, v in modify_dict.items():
+            if 0 <= k < len(new_text):
+                new_text[k] = v
+        with open(f"{self.text_path}guitar_text.txt", "w", encoding="utf-8") as f:
+            for line in new_text:
+                if len(line) == 0:
+                    continue
+                elif line[-1] == "\n":
+                    f.write(line)
+                else:
+                    f.write(line + "\n")
     # end
 
     def enter_event(self):
-        # text = drum.modify_text("../data/cache/text/drum_text.txt", self.modify_dict)
-        #
-        # drum.text_to_drum(text, self.drum_speed)
+        self.modify_text(self.modify_dict)
+        self.modify_dict = {}
         self.player.stop()
         audio = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(""))
     # end
 
     def play_event(self):
-        audio = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(f"{self.audio_path}track_piano.WAV"))
+        audio = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(f"{self.audio_path}track_guitar.WAV"))
         self.player.setMedia(audio)
         self.player.play()
     # end
 
     def rightMenuAdd(self, style=""):
-        # self.viewKeyEvent("add", style)
-        self.dialog.show()
-        attribute = self.dialog.lineedit.text()
-        print(attribute)
+        text, ok = self.inputdialog.getText(self.Form, "请输入属性", "属性", QtWidgets.QLineEdit.Normal, "")
+        if ok and text != "":
+            self.viewKeyEvent("A", text)
     # end
 
     def rightMenuDel(self):
@@ -666,7 +615,6 @@ class Guritar_Ui_Form(object):
             self.textBrowser_AIanswer.append("你：" + user_text + "\n\n")
             self.textEdit_user.clear()
             self.ai_answer.user_text = user_text
-            self.ai_answer.sinEnd.connect(self.AI_answer)
             self.ai_answer.start()
     # end
 

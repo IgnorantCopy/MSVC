@@ -11,7 +11,7 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia
 from qt_material import apply_stylesheet
-from MyClass import MusicWidget, AIAnswer, AICreator, MyGraphicsView, DrumGraphicsPixmapItem
+from src.display.y_part.MyClass import MusicWidget, AIAnswer, AICreator, MyGraphicsView, DrumGraphicsPixmapItem
 from src.utils import common
 from src import drum
 
@@ -322,6 +322,7 @@ class Drum_Ui_Form(object):
         ai_text = "AI：你好，有什么问题?\n\n"
         self.textBrowser_AIanswer.setPlainText(ai_text)
         self.ai_answer = AIAnswer("")
+        self.ai_answer.sinEnd.connect(self.AI_answer)
         self.ai_creater = AICreator("流行", "drum", 50, 90)
         self.image_path = "display/image/"
         # set textedit default text
@@ -394,8 +395,8 @@ class Drum_Ui_Form(object):
         self.drum_speed = 90
         self.player = QtMultimedia.QMediaPlayer()
 
-        self.instrument_names = ['snare', 'tom1', 'tom2', 'tom3', 'hihi_close', 'hihi_open', 'ground', 'cymbal1',
-                                 'cymbal2', 'ding', 'dang', 'snare_side']
+        self.instrument_names = ['snare', 'snare_side', 'tom1', 'tom2', 'tom3', 'ground', 'hihi_close', 'hihi_open',
+                                 'ding', 'dang', 'cymbal1', 'cymbal2']
 
         self.choose = 0
         # 设置背景
@@ -610,7 +611,6 @@ class Drum_Ui_Form(object):
             self.textBrowser_AIanswer.append("你：" + user_text + "\n\n")
             self.textEdit_user.clear()
             self.ai_answer.user_text = user_text
-            self.ai_answer.sinEnd.connect(self.AI_answer)
             self.ai_answer.start()
 
     def AI_answer(self, ai_text):

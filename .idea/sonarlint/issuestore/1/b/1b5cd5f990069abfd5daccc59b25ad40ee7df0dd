@@ -1,0 +1,7 @@
+
+python:S1192!"LDefine a constant instead of duplicating this literal "HYPixel 9px" 5 times.(äİœ­úÿÿÿÿJ$3b6c223b-7fc3-40d0-abc7-4e44dfbf89fd
+©python:S101"gRename class "Ui_MainWindow" to match the regular expression ^_?([A-Z_][a-zA-Z0-9]*|[a-z_][a-z0-9_]*)$.( ÌñıùÿÿÿÿJ$75e4b111-59dd-462c-a61a-68dd570dbc66
+˜python:S117"VRename this parameter "MainWindow" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÂéÇ´ÿÿÿÿÿJ$a5eba232-25f7-4f25-baee-8864681c07c5
+python:S100"KRename method "setupUi" to match the regular expression ^[a-z_][a-z0-9_]*$.(ÂéÇ´ÿÿÿÿÿJ$fbc6d422-4622-4943-bdc5-f807969ac274
+˜python:S117N"VRename this parameter "MainWindow" to match the regular expression ^[_a-z][a-z0-9_]*$.(”«ÀşÿÿÿÿJ$b34af36f-23c2-4b6b-a9fc-59cd78cd6ca7
+“python:S100N"QRename method "retranslateUi" to match the regular expression ^[a-z_][a-z0-9_]*$.(”«ÀşÿÿÿÿJ$eb386f73-006b-45e6-a68a-7a939c793a2b

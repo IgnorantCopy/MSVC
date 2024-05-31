@@ -1,5 +1,5 @@
 import sys
-from Ui_lyrics import Ui_Form
+from src.display.y_part.Ui_lyrics import Ui_Form
 from PyQt5.QtWidgets import QWidget,QApplication
 
 class Lyrics(QWidget,Ui_Form):

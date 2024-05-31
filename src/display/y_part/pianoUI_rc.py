@@ -11,7 +11,7 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia
 from qt_material import apply_stylesheet
-from MyClass import MusicWidget, AIAnswer, MyGraphicsView, PianoGraphicsItemGroup, PianoAICreator
+from src.display.y_part.MyClass import MusicWidget, AIAnswer, MyGraphicsView, PianoGraphicsItemGroup, PianoAICreator
 
 
 class Piano_Ui_Form(object):
@@ -341,6 +341,7 @@ class Piano_Ui_Form(object):
         ai_text = "AI：你好，有什么问题?\n\n"
         self.textBrowser_AIanswer.setPlainText(ai_text)
         self.ai_answer = AIAnswer("")
+        self.ai_answer.sinEnd.connect(self.AI_answer)
         self.ai_creater = PianoAICreator("流行", "piano", 50, 90, 0)
         self.text_path = "../data/cache/text/"
         self.audio_path = "../data/cache/audio/"
@@ -679,7 +680,6 @@ class Piano_Ui_Form(object):
             self.textBrowser_AIanswer.append("你：" + user_text + "\n\n")
             self.textEdit_user.clear()
             self.ai_answer.user_text = user_text
-            self.ai_answer.sinEnd.connect(self.AI_answer)
             self.ai_answer.start()
     # end
 

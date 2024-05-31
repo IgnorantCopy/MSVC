@@ -74,3 +74,9 @@ L
 src/display/y_part/lyrics.ui,2\f\2f81c0c89a8f44e67ce2d56b65dfa59528050918
 P
  src/display/y_part/lyric_main.py,8\0\80688f83acba02d67dbbdfd8910fe0028e24221a
+<
+Ui_lyrics.py,d\d\dddc7c5d833e88edcf95a25b70eed6088d6169db
+O
+src/display/y_part/Ui_lyrics.py,1\1\117ccb3cc6c0d8bee8eb16563d328ff92d7b0552
+L
+src/display/y_part/lyrics.py,1\a\1aac5ee975e82a4a164ff0b14c61b65a57a77a31

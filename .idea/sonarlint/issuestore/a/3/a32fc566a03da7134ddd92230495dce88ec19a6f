@@ -1,60 +1,60 @@
 
-®python:S1845­"jRename method "AI_answer" to prevent any misunderstanding/clash with field "ai_answer" defined on line 343(ŞÊ‚üÿÿÿÿJ$6b0c3c2f-8cba-480c-ac8b-532447cc9fe8
-’python:S116•"TRename this field "spaceBetween" to match the regular expression ^[_a-z][_a-z0-9]*$.(‡ÇûÏJ$81dc2a5b-9c09-45bf-aca9-14d131614736
-python:S116"ZRename this field "horizontalLayout_3" to match the regular expression ^[_a-z][_a-z0-9]*$.(ğµ€‡øÿÿÿÿJ$0c76abc5-f550-455e-a0ae-2b5b110c07d5
-špython:S116Œ"\Rename this field "textBrowser_AIanswer" to match the regular expression ^[_a-z][_a-z0-9]*$.(¤µË»J$c509667f-6492-4214-b418-0c26ed2c64bc
-™python:S116©"[Rename this field "pushButton_usersend" to match the regular expression ^[_a-z][_a-z0-9]*$.(ó¿¸¬J$e3e734ee-c350-4b94-895e-e583dbe58ee6
-–python:S116ß"XRename this field "pushButton_enter" to match the regular expression ^[_a-z][_a-z0-9]*$.(éõJ$108dc480-d6e7-432d-a5d4-a5adb499e395
-špython:S116Ö"WRename this field "pushButton_play" to match the regular expression ^[_a-z][_a-z0-9]*$.(­İÀğşÿÿÿÿJ$a99d5684-1b8d-492b-8ec3-240484772e12
-›python:S116"XRename this field "verticalLayout_3" to match the regular expression ^[_a-z][_a-z0-9]*$.(å´øÎıÿÿÿÿJ$2b838500-9c9a-45a8-a83a-300acb9c26e1
-œpython:S116"ZRename this field "horizontalLayout_6" to match the regular expression ^[_a-z][_a-z0-9]*$.(ÎíªƒıÿÿÿÿJ$27a0c5fa-7ed0-4003-8430-9a0316ee5e1d
-—python:S116¦"TRename this field "spinBox_mode" to match the regular expression ^[_a-z][_a-z0-9]*$.(í¥’şÿÿÿÿJ$d41940c8-ec12-48b9-be78-beb36dbc4f8a
-“python:S116•"URename this field "textEdit_user" to match the regular expression ^[_a-z][_a-z0-9]*$.(ú³ÒJ$c4fae47e-69eb-45d7-a482-fa8493833a1e
-python:S116 "ZRename this field "pushButton_userdel" to match the regular expression ^[_a-z][_a-z0-9]*$.(¬¦×äüÿÿÿÿJ$2f5474ce-739e-45cb-aa66-022e66dbf4d8
-•python:S116”"WRename this field "spinBox_section" to match the regular expression ^[_a-z][_a-z0-9]*$.(Ü ğ¨J$e63b210a-ba86-4dc3-90e8-d76ca3229a23
-špython:S116"XRename this field "verticalLayout_2" to match the regular expression ^[_a-z][_a-z0-9]*$.(Àï‚ÍùÿÿÿÿJ$3ccad681-ee37-4e32-849a-7f00a30d9624
-˜python:S116É"ZRename this field "horizontalLayout_5" to match the regular expression ^[_a-z][_a-z0-9]*$.(­‘ÃğJ$83453a97-ac11-4f01-9e08-fcd0465fc518
-˜python:S116ƒ"URename this field "label_ATtitle" to match the regular expression ^[_a-z][_a-z0-9]*$.(­Öú„üÿÿÿÿJ$592de269-cf92-488a-aad5-74794288eeab
-“python:S116"VRename this field "comboBox_style" to match the regular expression ^[_a-z][_a-z0-9]*$.(‹µü¿J$5e3fca44-c1e4-4736-bf04-0a17492fde58
-—python:S116º"YRename this field "pushButton_create" to match the regular expression ^[_a-z][_a-z0-9]*$.(Òªß J$e5f93c58-3118-44c1-bd38-419a90bb1082
-”python:S1166"XRename this field "pushButton_close" to match the regular expression ^[_a-z][_a-z0-9]*$.(åÎ´J$f8c6c593-7929-4959-8fbd-3603a17d4759
-”python:S116-"WRename this field "pushButton_help" to match the regular expression ^[_a-z][_a-z0-9]*$.(–Ú´J$9bee3275-5b68-44ad-9d51-22b91e3530fb
-•python:S116_"XRename this field "horizontalLayout" to match the regular expression ^[_a-z][_a-z0-9]*$.(›‰½³J$19c9f5ca-1b1f-483e-97b7-1f53462277ed
-—python:S116t"ZRename this field "horizontalLayout_2" to match the regular expression ^[_a-z][_a-z0-9]*$.(ğÀÀŞJ$32b1d85e-758f-487c-889b-7bb2f0f9a907
-’python:S116j"URename this field "spinBox_speed" to match the regular expression ^[_a-z][_a-z0-9]*$.(˜°áJ$af57792e-a928-44ef-a99d-0753c9dc5ce1
-”python:S116Ë"VRename this field "verticalLayout" to match the regular expression ^[_a-z][_a-z0-9]*$.(íˆÁJ$6acb82d9-2bf2-46c7-97ba-3cd2b7bd26fb
-”python:S116$"WRename this field "pushButton_menu" to match the regular expression ^[_a-z][_a-z0-9]*$.(ãÕŞ J$0227587b-1fbf-40d1-a078-3d4128d13a58
-œpython:S116J"ZRename this field "horizontalLayout_4" to match the regular expression ^[_a-z][_a-z0-9]*$.(°ÎÇ´şÿÿÿÿJ$9bbdcc80-b80a-4d28-8a9d-1afd221754de
-©python:S101"gRename class "Piano_Ui_Form" to match the regular expression ^_?([A-Z_][a-zA-Z0-9]*|[a-z_][a-z0-9_]*)$.(Ê°‘¤úÿÿÿÿJ$25f6eb37-866f-453c-a747-66718644f95a
-python:S117"PRename this parameter "Form" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ëö‘¹J$3d7f18e3-678c-4cf4-a1ac-71a2d88c89ae
-python:S117""[Rename this local variable "spacerItem" to match the regular expression ^[_a-z][a-z0-9_]*$.(¾ışÿÿÿÿJ$63c170b6-c7c7-4fb6-9787-f29e0e108213
-™python:S117?"\Rename this local variable "spacerItem1" to match the regular expression ^[_a-z][a-z0-9_]*$.(‹‡öÔJ$aa1d9dd2-941c-4418-863b-968ba522b401
- python:S117è"]Rename this local variable "spacerItem10" to match the regular expression ^[_a-z][a-z0-9_]*$.(š¥ûûúÿÿÿÿJ$c06cfce4-d351-47ed-a363-30292f13c850
-python:S117L"\Rename this local variable "spacerItem2" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ê•ù‘ûÿÿÿÿJ$7b8ba3df-09d1-4b7a-9eb7-21b58f3682e5
-™python:S117W"\Rename this local variable "spacerItem3" to match the regular expression ^[_a-z][a-z0-9_]*$.(ë©ôJ$85355e29-2d02-4454-82d0-d4f122f56560
-python:S117]"\Rename this local variable "spacerItem4" to match the regular expression ^[_a-z][a-z0-9_]*$.( €Á‘ùÿÿÿÿJ$be3afd6a-8474-4c7c-8bde-388b007ad7d6
-˜python:S117r"\Rename this local variable "spacerItem5" to match the regular expression ^[_a-z][a-z0-9_]*$.(º°ªZJ$20834d8e-48c1-464d-b618-b12625c90006
-špython:S117‰"\Rename this local variable "spacerItem6" to match the regular expression ^[_a-z][a-z0-9_]*$.(ˆä¡J$8909666f-70ed-43ac-8146-272998b66033
-špython:S117›"\Rename this local variable "spacerItem7" to match the regular expression ^[_a-z][a-z0-9_]*$.(éŒ¡ˆJ$bd697344-5a3c-4be3-a075-c45abbef00c0
-Ÿpython:S117­"\Rename this local variable "spacerItem8" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ï³œùÿÿÿÿJ$30505ada-865a-41b8-ad64-439b1bfa15d7
-špython:S117¸"\Rename this local variable "spacerItem9" to match the regular expression ^[_a-z][a-z0-9_]*$.(ğãÊúJ$3809cd19-a03f-45c7-9566-949eb0782b90
-ˆpython:S100"KRename method "setupUi" to match the regular expression ^[a-z_][a-z0-9_]*$.(Ëö‘¹J$6b00a397-68ca-4769-8f40-956d28ab3711
-“python:S117¾"PRename this parameter "Form" to match the regular expression ^[_a-z][a-z0-9_]*$.(ı‰·úÿÿÿÿJ$c91c2e3e-8ae3-4a9f-9ed4-12b96cefee55
-”python:S100¾"QRename method "retranslateUi" to match the regular expression ^[a-z_][a-z0-9_]*$.(ı‰·úÿÿÿÿJ$b51ea4a1-bf96-433b-a5d2-615b60262ab0
-python:S117Ñ"PRename this parameter "Form" to match the regular expression ^[_a-z][a-z0-9_]*$.(êâ¦¯J$c6d23de0-2174-42fc-a534-e43d97430274
-]python:S125½"Remove this commented out code.(¸ç°ÚJ$d893ba7b-7705-4b67-9a00-de140938df82
-bpython:S125Á"Remove this commented out code.(†Ââ•üÿÿÿÿJ$2da05fa8-9928-4140-8f60-5ddcebe8d65a
-—python:S100É"TRename method "AI_create_result" to match the regular expression ^[a-z_][a-z0-9_]*$.(ùï®‹şÿÿÿÿJ$dfa063a9-5148-4597-ac8b-924bda45b73a
-opython:S1481ö"+Replace the unused loop index "j" with "_".(Ë¿»ùÿÿÿÿJ$6ce2d23c-83f2-4918-91c4-5eb505dda597
-opython:S1481ô"+Replace the unused loop index "i" with "_".(“ŠĞ±øÿÿÿÿJ$fd4b0b98-aebb-4e7e-811b-dc1ea4c6fc03
-opython:S1481ø"+Replace the unused loop index "k" with "_".(–’ÍşÿÿÿÿJ$37c5530e-a0b1-46f8-b796-b63ec3042acb
-]python:S125"Remove this commented out code.(²‰šJ$78cae988-125d-49d7-a21f-e6c9cba3ea53
-python:S100Â"PRename method "viewKeyEvent" to match the regular expression ^[a-z_][a-z0-9_]*$.(İ¿ü§J$fb9b1712-63c1-4a22-8351-bc911556b70c
-“python:S3776Â"TRefactor this function to reduce its Cognitive Complexity from 28 to the 15 allowed.(İ¿ü§J$2facfed7-2d59-4096-b0c6-d29154199588
-bpython:S125å"Remove this commented out code.(‚ÓÙúÿÿÿÿJ$af9e9467-684a-4c86-bb65-35160ada358a
-hpython:S1481…")Remove the unused local variable "audio".(ĞÓô’J$d6d9f411-c1d7-4a33-b09c-84198a386dc3
-]python:S125"Remove this commented out code.(ğ±ôöJ$3feaea84-ec06-4492-85c9-610e86987ab6
-“python:S100"PRename method "rightMenuAdd" to match the regular expression ^[a-z_][a-z0-9_]*$.(¾¹Ä€úÿÿÿÿJ$48e3693d-79f1-44ee-93e6-7d9b4e303218
-“python:S100’"PRename method "rightMenuDel" to match the regular expression ^[a-z_][a-z0-9_]*$.(…¸ûşüÿÿÿÿJ$908a6f9f-8178-4ee8-aedf-0f8076aa0c2a
-python:S100¢"PRename method "AI_user_send" to match the regular expression ^[a-z_][a-z0-9_]*$.(ğÎé«J$da462efd-17d8-4a3c-a34f-1325b1362c81
-python:S100­"MRename method "AI_answer" to match the regular expression ^[a-z_][a-z0-9_]*$.(ŞÊ‚üÿÿÿÿJ$edb46f20-cad0-4397-94eb-751b924081ea
+®python:S1845­"jRename method "AI_answer" to prevent any misunderstanding/clash with field "ai_answer" defined on line 343(ŞÊ‚üÿÿÿÿJ$1c04b787-ab4a-4ceb-a9fb-bb849156b411
+˜python:S116ƒ"URename this field "label_ATtitle" to match the regular expression ^[_a-z][_a-z0-9]*$.(­Öú„üÿÿÿÿJ$6997ecf2-5836-4cef-b909-e2591a7f7f93
+’python:S116j"URename this field "spinBox_speed" to match the regular expression ^[_a-z][_a-z0-9]*$.(˜°áJ$0b3e2735-8a5b-4721-bb5b-ffe1e49c4e3c
+˜python:S116É"ZRename this field "horizontalLayout_5" to match the regular expression ^[_a-z][_a-z0-9]*$.(­‘ÃğJ$a211839e-a9f9-4f0f-95c3-ceeb4648fd27
+”python:S116$"WRename this field "pushButton_menu" to match the regular expression ^[_a-z][_a-z0-9]*$.(ãÕŞ J$13af3262-552c-4bef-9edd-9aa8926d2fed
+python:S116"ZRename this field "horizontalLayout_3" to match the regular expression ^[_a-z][_a-z0-9]*$.(ğµ€‡øÿÿÿÿJ$d8788752-b45b-49d2-b503-8f2d7c042113
+™python:S116©"[Rename this field "pushButton_usersend" to match the regular expression ^[_a-z][_a-z0-9]*$.(ó¿¸¬J$2ac487f6-805a-4fdb-bc68-e6af512a3c34
+—python:S116t"ZRename this field "horizontalLayout_2" to match the regular expression ^[_a-z][_a-z0-9]*$.(ğÀÀŞJ$5d66bec7-94ab-433e-b56a-67ad014e4d4c
+’python:S116–"TRename this field "spaceBetween" to match the regular expression ^[_a-z][_a-z0-9]*$.(‡ÇûÏJ$58a8627f-c326-480d-b324-8c3cb3482409
+•python:S116_"XRename this field "horizontalLayout" to match the regular expression ^[_a-z][_a-z0-9]*$.(›‰½³J$a5439543-6834-476d-81d1-73a4f45c4469
+œpython:S116J"ZRename this field "horizontalLayout_4" to match the regular expression ^[_a-z][_a-z0-9]*$.(°ÎÇ´şÿÿÿÿJ$fe71823a-f87a-4fc9-9fda-14aa50e56507
+“python:S116"VRename this field "comboBox_style" to match the regular expression ^[_a-z][_a-z0-9]*$.(‹µü¿J$b41a10cb-b7a4-4e7b-af18-074d6049b6d1
+”python:S116Ë"VRename this field "verticalLayout" to match the regular expression ^[_a-z][_a-z0-9]*$.(íˆÁJ$1f70d9b3-ad00-4d65-9f7d-02f4b57f2507
+“python:S116•"URename this field "textEdit_user" to match the regular expression ^[_a-z][_a-z0-9]*$.(ú³ÒJ$829d8083-00ce-4447-897d-2ef44c607287
+›python:S116"XRename this field "verticalLayout_3" to match the regular expression ^[_a-z][_a-z0-9]*$.(å´øÎıÿÿÿÿJ$2439c63e-b8ad-44de-be93-1fc5023ed75b
+špython:S116Ö"WRename this field "pushButton_play" to match the regular expression ^[_a-z][_a-z0-9]*$.(­İÀğşÿÿÿÿJ$fecb952c-36e6-4987-a96e-eb1ebc002c0b
+œpython:S116"ZRename this field "horizontalLayout_6" to match the regular expression ^[_a-z][_a-z0-9]*$.(ÎíªƒıÿÿÿÿJ$54f6b6d6-eeba-49c8-b86f-359fd398e7e0
+python:S116 "ZRename this field "pushButton_userdel" to match the regular expression ^[_a-z][_a-z0-9]*$.(¬¦×äüÿÿÿÿJ$c34c3e5c-ee21-481c-a04c-2bcc96bd989f
+•python:S116”"WRename this field "spinBox_section" to match the regular expression ^[_a-z][_a-z0-9]*$.(Ü ğ¨J$eb0d3771-4234-4e0f-a7d3-c8009b86bd03
+–python:S116ß"XRename this field "pushButton_enter" to match the regular expression ^[_a-z][_a-z0-9]*$.(éõJ$9e9d347c-0a71-464d-9d7b-2cc8d28c5239
+”python:S1166"XRename this field "pushButton_close" to match the regular expression ^[_a-z][_a-z0-9]*$.(åÎ´J$a0fcccca-7dbf-41e5-8a89-aacd2cec895a
+—python:S116º"YRename this field "pushButton_create" to match the regular expression ^[_a-z][_a-z0-9]*$.(Òªß J$a86f9b2e-6093-4f95-98b0-f3658e63a7b6
+”python:S116-"WRename this field "pushButton_help" to match the regular expression ^[_a-z][_a-z0-9]*$.(–Ú´J$9bb97bbe-3f48-499e-86b3-9e294a36895e
+špython:S116"XRename this field "verticalLayout_2" to match the regular expression ^[_a-z][_a-z0-9]*$.(Àï‚ÍùÿÿÿÿJ$acbde0bf-fb0e-4702-a587-69dd53f79d46
+špython:S116Œ"\Rename this field "textBrowser_AIanswer" to match the regular expression ^[_a-z][_a-z0-9]*$.(¤µË»J$8d4259b8-60cb-4341-a5dd-3b94f6fa282d
+—python:S116¦"TRename this field "spinBox_mode" to match the regular expression ^[_a-z][_a-z0-9]*$.(í¥’şÿÿÿÿJ$3b7cc0ca-b056-4337-b193-35bce807e59b
+©python:S101"gRename class "Piano_Ui_Form" to match the regular expression ^_?([A-Z_][a-zA-Z0-9]*|[a-z_][a-z0-9_]*)$.(Ê°‘¤úÿÿÿÿJ$7338b952-07d2-4b39-a5fe-2d471ec3d3db
+python:S117"PRename this parameter "Form" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ëö‘¹J$51fc92c3-3be9-4303-894a-23392f656fe6
+python:S117""[Rename this local variable "spacerItem" to match the regular expression ^[_a-z][a-z0-9_]*$.(¾ışÿÿÿÿJ$85b700b8-715f-4f55-b628-28018e83d841
+™python:S117?"\Rename this local variable "spacerItem1" to match the regular expression ^[_a-z][a-z0-9_]*$.(‹‡öÔJ$855828fe-207c-499e-8215-5d69812c0108
+ python:S117è"]Rename this local variable "spacerItem10" to match the regular expression ^[_a-z][a-z0-9_]*$.(š¥ûûúÿÿÿÿJ$d788a4e1-9d63-4c8e-8a0b-bc8264c1003b
+python:S117L"\Rename this local variable "spacerItem2" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ê•ù‘ûÿÿÿÿJ$4eb3c7d2-a1ab-4b4d-b57a-d0e77f2bd9c1
+™python:S117W"\Rename this local variable "spacerItem3" to match the regular expression ^[_a-z][a-z0-9_]*$.(ë©ôJ$9f007d9e-387f-4acc-8106-32366dad7c70
+python:S117]"\Rename this local variable "spacerItem4" to match the regular expression ^[_a-z][a-z0-9_]*$.( €Á‘ùÿÿÿÿJ$dc5af319-f69f-4c34-8b1c-209f0e7cecb1
+˜python:S117r"\Rename this local variable "spacerItem5" to match the regular expression ^[_a-z][a-z0-9_]*$.(º°ªZJ$2448bbf0-4a91-41f5-8b90-eac5ee209818
+špython:S117‰"\Rename this local variable "spacerItem6" to match the regular expression ^[_a-z][a-z0-9_]*$.(ˆä¡J$938c9fe9-cc67-4d35-9c79-6af6035f3ba2
+špython:S117›"\Rename this local variable "spacerItem7" to match the regular expression ^[_a-z][a-z0-9_]*$.(éŒ¡ˆJ$713a915b-91cd-4179-b836-800be7f7e57c
+Ÿpython:S117­"\Rename this local variable "spacerItem8" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ï³œùÿÿÿÿJ$a506f4b3-be50-406f-91be-6287eda608a0
+špython:S117¸"\Rename this local variable "spacerItem9" to match the regular expression ^[_a-z][a-z0-9_]*$.(ğãÊúJ$83edc966-a2d1-4603-8c09-bf25e1a1b1e7
+ˆpython:S100"KRename method "setupUi" to match the regular expression ^[a-z_][a-z0-9_]*$.(Ëö‘¹J$f0b363f7-6a1c-4ff7-bea7-4cccd97991e5
+“python:S117¾"PRename this parameter "Form" to match the regular expression ^[_a-z][a-z0-9_]*$.(ı‰·úÿÿÿÿJ$7d44d128-58f5-4887-9419-ca0bc2832f36
+”python:S100¾"QRename method "retranslateUi" to match the regular expression ^[a-z_][a-z0-9_]*$.(ı‰·úÿÿÿÿJ$46b45218-cd53-4787-86d0-fbe7ecc96f0b
+python:S117Ñ"PRename this parameter "Form" to match the regular expression ^[_a-z][a-z0-9_]*$.(êâ¦¯J$3b8704c8-576e-4cfc-9986-2bd0f878bea8
+]python:S125¾"Remove this commented out code.(¸ç°ÚJ$27a72142-7cb4-4033-aa0d-e433b7b8fc77
+bpython:S125Â"Remove this commented out code.(†Ââ•üÿÿÿÿJ$0ac38239-70e8-44c5-a398-37c77f941671
+—python:S100Ê"TRename method "AI_create_result" to match the regular expression ^[a-z_][a-z0-9_]*$.(ùï®‹şÿÿÿÿJ$b5f8f3ac-6985-4be0-9399-f99880437cec
+opython:S1481ù"+Replace the unused loop index "k" with "_".(–’ÍşÿÿÿÿJ$6aaa9fd1-f908-4a61-ba4e-17059f9b89c4
+opython:S1481õ"+Replace the unused loop index "i" with "_".(“ŠĞ±øÿÿÿÿJ$ae401b7c-344e-4004-aed1-b5c5ad5a55a5
+opython:S1481÷"+Replace the unused loop index "j" with "_".(Ë¿»ùÿÿÿÿJ$14344eaa-fb69-41eb-9c2c-f07f4df67f39
+]python:S125‘"Remove this commented out code.(²‰šJ$d363cccd-b7d4-4e91-9787-c3f646259127
+python:S100Ã"PRename method "viewKeyEvent" to match the regular expression ^[a-z_][a-z0-9_]*$.(İ¿ü§J$db3032b1-722e-441e-a353-bc4874266777
+“python:S3776Ã"TRefactor this function to reduce its Cognitive Complexity from 28 to the 15 allowed.(İ¿ü§J$413c7bca-0aef-4bdd-a8fa-64d1805a2cbd
+bpython:S125æ"Remove this commented out code.(‚ÓÙúÿÿÿÿJ$9998ba28-0afb-4517-8303-f341e9441f4f
+hpython:S1481†")Remove the unused local variable "audio".(ĞÓô’J$7c18f033-8c17-4ac6-a7b2-73db69acf060
+]python:S125‚"Remove this commented out code.(ğ±ôöJ$e43ed643-8ed7-4f39-8615-a62aaf28dc52
+“python:S100"PRename method "rightMenuAdd" to match the regular expression ^[a-z_][a-z0-9_]*$.(¾¹Ä€úÿÿÿÿJ$652110dc-a8bd-4d36-89f7-48eddb50cc74
+“python:S100“"PRename method "rightMenuDel" to match the regular expression ^[a-z_][a-z0-9_]*$.(…¸ûşüÿÿÿÿJ$98efd286-ec12-4c74-87d8-e23e07280db0
+python:S100£"PRename method "AI_user_send" to match the regular expression ^[a-z_][a-z0-9_]*$.(ğÎé«J$f1fece4e-959f-450b-9aa9-eda4bfeaa27c
+python:S100­"MRename method "AI_answer" to match the regular expression ^[a-z_][a-z0-9_]*$.(ŞÊ‚üÿÿÿÿJ$cd9000c6-7a5e-4236-bd84-f99b4e9e8b59

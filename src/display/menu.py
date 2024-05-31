@@ -45,13 +45,19 @@ class MyBeginning(QMainWindow, Ui_MainWindow):
         self.enter.clicked.connect(self.Enter)
         self.delete_user.clicked.connect(self.remove_user_config)
         self.change_name.clicked.connect(self.modify_user_config)
-        self.window.lyricsWidget.pushButton_menu.clicked.connect(self.return_menu)
         self.window.drumUi.pushButton_menu.clicked.connect(self.return_menu)
-        self.window.lyricsWidget.pushButton_close.clicked.connect(self.close_menu)
         self.window.drumUi.pushButton_close.clicked.connect(self.close_menu)
-        self.window.lyricsWidget.pushButton_help.clicked.connect(self.open_lyric_help)
         self.window.drumUi.pushButton_help.clicked.connect(self.open_drum_help)
-        self.window.lyricsWidget.pushButton_2.clicked.connect(self.lyrics_start)
+        (self.window.lyricsUi.pushButton_2.clicked.connect(self.lyrics_start))
+        self.window.lyricsUi.pushButton_menu.clicked.connect(self.return_menu)
+        self.window.lyricsUi.pushButton_help.clicked.connect(self.open_lyric_help)
+        self.window.lyricsUi.pushButton_close.clicked.connect(self.close_menu)
+        self.window.pianoUi.pushButton_menu.clicked.connect(self.return_menu)
+        self.window.pianoUi.pushButton_close.clicked.connect(self.close_menu)
+        self.window.pianoUi.pushButton_help.clicked.connect(self.open_piano_help)
+        self.window.guitarUi.pushButton_menu.clicked.connect(self.return_menu)
+        self.window.guitarUi.pushButton_close.clicked.connect(self.close_menu)
+        self.window.guitarUi.pushButton_help.clicked.connect(self.open_guitar_help)
 
     def statusShowTime(self):
         self.Timer = QTimer()
@@ -89,9 +95,9 @@ class MyBeginning(QMainWindow, Ui_MainWindow):
         self.guitar_help_window.show()
 
     def lyrics_start(self):
-        content = self.window.lyricsWidget.textEdit.toPlainText()
+        content = self.window.lyricsUi.textEdit.toPlainText()
         lyrics = common.call_with_messages(common.prompt_lyrics, content)
-        self.window.lyricsWidget.textBrowser.setText(lyrics)
+        self.window.lyricsUi.textBrowser.setText(lyrics)
 
     def init_user(self):
         user_list = config.load_user()

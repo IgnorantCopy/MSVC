@@ -1,3 +1,2 @@
 
-tpython:S117 "VRename this local variable "Score" to match the regular expression ^[_a-z][a-z0-9_]*$.(дц╤Г8щн╪Б√1
-dpython:S34573"EAdd replacement fields or use a normal string instead of an f-string.(ъ▄╟б8ьн╪Б√1
+Ъpython:S117 "VRename this local variable "Score" to match the regular expression ^[_a-z][a-z0-9_]*$.(дц╤Г8щн╪Б√1J$bba47f52-7149-45f9-bb49-361102db7e07

@@ -47,7 +47,7 @@ def text_to_guitar(key, tempo, bar, llen):
         elif os.path.exists(f'../audio/guitar/{str(chord.type[0])}.wav'):
             y, sr = lr.load(f'../audio/guitar/{str(chord.type[0])}.wav')
         else:
-            y, sr = lr.load(f'../audio/guitar/none.wav')
+            y, sr = lr.load('../audio/guitar/none.wav')
 
         y1 = lr.effects.pitch_shift(y, sr=sr, n_steps = pitch)
 

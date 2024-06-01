@@ -3,7 +3,7 @@ import librosa as lr
 import soundfile as sf
 import os
 import re
-from utils import common
+from src.utils import common
 
 slc = am.silent(duration=3000)
 slc.export('../audio/guitar/none.wav', format='WAV')

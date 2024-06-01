@@ -230,15 +230,15 @@ class Piano_Ui_Form(object):
         self.pushButton_enter.setFont(font)
         self.pushButton_enter.setObjectName("pushButton_enter")
         self.verticalLayout.addWidget(self.pushButton_enter)
-        self.pushButton_mix = QtWidgets.QPushButton(Form)
+        self.pushButton_stop = QtWidgets.QPushButton(Form)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(24)
         font.setBold(True)
         font.setWeight(75)
-        self.pushButton_mix.setFont(font)
-        self.pushButton_mix.setObjectName("pushButton_mix")
-        self.verticalLayout.addWidget(self.pushButton_mix)
+        self.pushButton_stop.setFont(font)
+        self.pushButton_stop.setObjectName("pushButton_stop")
+        self.verticalLayout.addWidget(self.pushButton_stop)
         spacerItem10 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem10)
         self.verticalLayout.setStretch(0, 2)
@@ -341,7 +341,7 @@ class Piano_Ui_Form(object):
         self.label_result.setText(_translate("Form", "结果："))
         self.pushButton_play.setText(_translate("Form", "播放"))
         self.pushButton_enter.setText(_translate("Form", "确认"))
-        self.pushButton_mix.setText(_translate("Form", "结合"))
+        self.pushButton_stop.setText(_translate("Form", "暂停"))
         self.label_ATtitle.setText(_translate("Form", "AI问答："))
         self.pushButton_userdel.setText(_translate("Form", "删除"))
         self.pushButton_usersend.setText(_translate("Form", "发送"))
@@ -383,6 +383,7 @@ class Piano_Ui_Form(object):
         self.pushButton_close.clicked.connect(QtWidgets.QApplication.quit)
         self.pushButton_play.clicked.connect(self.play_event)
         self.pushButton_enter.clicked.connect(self.enter_event)
+        self.pushButton_stop.clicked.connect(self.player.stop)
 
         Form.Key_event.connect(self.viewKeyEvent)
     # end
@@ -391,7 +392,7 @@ class Piano_Ui_Form(object):
         # 设置字体
         font_size = 30
         for item in [self.pushButton_menu, self.pushButton_help, self.pushButton_close, self.pushButton_usersend,
-                     self.pushButton_userdel, self.pushButton_play, self.pushButton_enter, self.pushButton_mix]:
+                     self.pushButton_userdel, self.pushButton_play, self.pushButton_enter, self.pushButton_stop]:
             item.setStyleSheet(f"font-size: {font_size}px")
         for item in [self.label_style, self.label_speed, self.label_section, self.label_ATtitle, self.label,
                      self.label_result, self.label_mode]:
@@ -415,7 +416,7 @@ class Piano_Ui_Form(object):
         # 设置一些参数
         self.section_size = (140, 25)
         self.instrument_icon_size = (35, 35)
-        self.instrument_vspace = 20
+        self.instrument_vspace = 1
         self.spaceBetween = 50
         self.instrument_y = 50
         self.block_space = 1
@@ -457,8 +458,7 @@ class Piano_Ui_Form(object):
         # music_lists += [[[10, 1, "ll"], [11, 2, "s"], [12, 3, "l"], [15, 4, "l"], [12, 5, "ss"], [11, 6, "s"], [12, 7, "l"], [15, 8, "l"]]]
         # music_lists += [[[10, 1, "ll"], [11, 2, "s"], [12, 3, "l"], [15, 4, "l"], [12, 5, "ss"], [14, 6, "s"], [11, 7, "s"], [12, 8, "l"]]]
 
-        # music = self.create_array(music_lists[self.choose])
-        # self.AI_create_result(music)
+        # self.AI_create_result(music_lists[self.choose])
         # self.choose = (self.choose + 1) % 2
 
         self.ai_creater.sinEnd.connect(self.AI_create_result)
@@ -599,10 +599,7 @@ class Piano_Ui_Form(object):
                     size = QtCore.QSize(int(item_rect.width()), self.section_size[1])
 
                     if judge == 1:
-                        if style == "":
-                            f_style = item.style
-                        else:
-                            f_style = style
+                        f_style = style
                     else:
                         f_style = ""
 
@@ -610,8 +607,19 @@ class Piano_Ui_Form(object):
 
                     self.scene.removeItem(item)
                     group.setSelected(True)
-                    tmp = [group.line, group.section * 4 + group.beat + 1, group.style]
-                    self.modify_dict[group.section] = piano.coordinate_to_text(tmp)
+                    self.music[group.section][group.line][group.beat][0] = judge
+                    self.music[group.section][group.line][group.beat][1] = f_style
+                    x = group.section * 4 + group.beat
+                    modify_str = ""
+                    i = 0
+                    for a_item in self.music[group.section]:
+                        if a_item[group.beat][0] == 1:
+                            if modify_str != "":
+                                modify_str = modify_str[:len(modify_str) - 1] + " "
+                            tmp = [i, x + 1, a_item[group.beat][1]]
+                            modify_str += piano.coordinate_to_text(tmp)
+                        i += 1
+                    self.modify_dict[x] = modify_str
                     print(self.modify_dict)
         elif key_name == "W" or key_name == "S":
             if key_name == "W" and self.cur_scale * self.change_scale < self.max_scale:
@@ -622,39 +630,30 @@ class Piano_Ui_Form(object):
                 self.graphicsview_result.scale(1 / self.change_scale, 1 / self.change_scale)
     # end
 
-    def modify_event(self, instrument, section, beat, judge):
-        # if judge == 1:
-        #     j_str = "1"
-        # else:
-        #     j_str = "0"
-        # result = ""
-        # if -1 in self.music[section] and judge == 1:
-        #     self.music[section].clear()
-        #     self.music[section][instrument] = "0" * self.section_lens[section]
-        #     temp = list(self.music[section][instrument])
-        #     temp[beat] = "1"
-        #     self.music[section][instrument] = "".join(temp)
-        # elif instrument in self.music[section]:
-        #     temp = list(self.music[section][instrument])
-        #     temp[beat] = j_str
-        #     self.music[section][instrument] = "".join(temp)
-        # elif not(instrument in self.music[section]) and judge == 1:
-        #     self.music[section][instrument] = "0" * self.section_lens[section]
-        #     temp = list(self.music[section][instrument])
-        #     temp[beat] = "1"
-        #     self.music[section][instrument] = "".join(temp)
-        # for k, v in self.music[section].items():
-        #     result += f"{drum.get_index(k)}_{v} "
-        # print(result)
-        # return result
-        pass
+    def modify_event(self, modify_dict):
+        with open(f"{self.text_path}piano_text.txt", "r", encoding="utf-8") as f:
+            old_text = f.read()
+        new_text = old_text.split('\n')
+        for k, v in modify_dict.items():
+            if 0 <= k < len(new_text):
+                new_text[k] = v
+        with open(f"{self.text_path}piano_text.txt", "w", encoding="utf-8") as f:
+            for line in new_text:
+                if len(line) == 0:
+                    f.write(line + "\n")
+                elif line[-1] == "\n":
+                    f.write(line)
+                else:
+                    f.write(line + "\n")
     # end
 
     def enter_event(self):
         self.player.stop()
         audio = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(""))
         self.player.setMedia(audio)
+        self.modify_event(self.modify_dict)
         self.modify_dict = {}
+        arrange.arrange(self.ai_creater.song, "guitar")
     # end
 
     def play_event(self):

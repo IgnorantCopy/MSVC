@@ -230,15 +230,15 @@ class Guritar_Ui_Form(object):
         self.pushButton_enter.setFont(font)
         self.pushButton_enter.setObjectName("pushButton_enter")
         self.verticalLayout.addWidget(self.pushButton_enter)
-        self.pushButton_mix = QtWidgets.QPushButton(Form)
+        self.pushButton_stop = QtWidgets.QPushButton(Form)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(24)
         font.setBold(True)
         font.setWeight(75)
-        self.pushButton_mix.setFont(font)
-        self.pushButton_mix.setObjectName("pushButton_mix")
-        self.verticalLayout.addWidget(self.pushButton_mix)
+        self.pushButton_stop.setFont(font)
+        self.pushButton_stop.setObjectName("pushButton_stop")
+        self.verticalLayout.addWidget(self.pushButton_stop)
         spacerItem10 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem10)
         self.verticalLayout.setStretch(0, 2)
@@ -341,7 +341,7 @@ class Guritar_Ui_Form(object):
         self.label_result.setText(_translate("Form", "结果："))
         self.pushButton_play.setText(_translate("Form", "播放"))
         self.pushButton_enter.setText(_translate("Form", "确认"))
-        self.pushButton_mix.setText(_translate("Form", "结合"))
+        self.pushButton_stop.setText(_translate("Form", "暂停"))
         self.label_ATtitle.setText(_translate("Form", "AI问答："))
         self.pushButton_userdel.setText(_translate("Form", "删除"))
         self.pushButton_usersend.setText(_translate("Form", "发送"))
@@ -384,6 +384,7 @@ class Guritar_Ui_Form(object):
         self.pushButton_close.clicked.connect(QtWidgets.QApplication.quit)
         self.pushButton_play.clicked.connect(self.play_event)
         self.pushButton_enter.clicked.connect(self.enter_event)
+        self.pushButton_stop.clicked.connect(self.player.stop)
 
         Form.Key_event.connect(self.viewKeyEvent)
     # end
@@ -392,7 +393,7 @@ class Guritar_Ui_Form(object):
         # 设置字体
         font_size = 30
         for item in [self.pushButton_menu, self.pushButton_help, self.pushButton_close, self.pushButton_usersend,
-                     self.pushButton_userdel, self.pushButton_play, self.pushButton_enter, self.pushButton_mix]:
+                     self.pushButton_userdel, self.pushButton_play, self.pushButton_enter, self.pushButton_stop]:
             item.setStyleSheet(f"font-size: {font_size}px")
         for item in [self.label_style, self.label_speed, self.label_section, self.label_ATtitle, self.label,
                      self.label_result, self.label_mode]:

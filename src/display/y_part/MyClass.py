@@ -66,11 +66,11 @@ class PianoAICreator(QtCore.QThread, QtCore.QObject):
         self.speed = speed
         self.key = key
         self.text_path = ""
+        self.song = arrange.Song(None, self.key, self.speed, 4, self.len)
 
     def run(self):
-        song = arrange.Song(None, self.key, self.speed, 4, self.len)
         arrange.compose("piano", self.genre, self.len)
-        arrange.arrange(song, "piano")
+        arrange.arrange(self.song, "piano")
         tmpc = self.get_tmps()
         print(tmpc)
         self.sinEnd.emit(tmpc)

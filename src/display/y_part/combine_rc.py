@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from src.display.y_part.MyClass import AIAnswer
+from qt_material import apply_stylesheet
 
 
 class Ui_Form(object):
@@ -155,6 +156,8 @@ class Ui_Form(object):
         self.pushButton_usersend.clicked.connect(self.AI_user_send)
         self.pushButton_userdel.clicked.connect(self.textEdit_user.clear)
 
+        self.style_set()
+
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
@@ -167,6 +170,19 @@ class Ui_Form(object):
         self.label_ATtitle.setText(_translate("Form", "AI问答："))
         self.pushButton_userdel.setText(_translate("Form", "删除"))
         self.pushButton_usersend.setText(_translate("Form", "发送"))
+
+    def style_set(self):
+        # 设置字体
+        font_size = 30
+        for item in [self.pushButton_usersend, self.pushButton_userdel, self.pushButton, self.pushButton_2]:
+            item.setStyleSheet(f"font-size: {font_size}px")
+        for item in [self.checkBox, self.checkBox_2, self.checkBox_3]:
+            item.setStyleSheet(f"font-size: {font_size}px")
+        for item in [self.label, self.label_ATtitle]:
+            item.setStyleSheet(f"font-size: {font_size}px")
+        font_size = 22
+        for item in [self.textEdit_user, self.textBrowser_AIanswer]:
+            item.setStyleSheet(f"font-size: {font_size}px")
 
     def AI_user_send(self):
         user_text = self.textEdit_user.toPlainText()
@@ -186,7 +202,11 @@ class Ui_Form(object):
 
 if __name__ == "__main__":
     import sys
+    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)  # 使尺寸一致
+    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps)
+    QtGui.QGuiApplication.setHighDpiScaleFactorRoundingPolicy(QtCore.Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
     app = QtWidgets.QApplication(sys.argv)
+    apply_stylesheet(app, theme="dark_teal.xml")  # 设置样式表
     Form = QtWidgets.QWidget()
     ui = Ui_Form()
     ui.setupUi(Form)

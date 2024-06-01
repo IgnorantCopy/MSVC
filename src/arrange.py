@@ -9,7 +9,7 @@ class Song:
     def __init__(self, track, key, tempo, bar, len):
         self.key = key
         self.tempo = tempo
-        self.bar = bar
+        self.bar = 4
         self.len = len
         self.track = am.silent(duration = 60000 / tempo * len + 3000)
 

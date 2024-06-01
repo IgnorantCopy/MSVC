@@ -1,7 +1,7 @@
 from pydub import AudioSegment as am
 import librosa as lr
 import soundfile as sf
-import random
+from src.utils import common
 
 
 class Note:
@@ -11,13 +11,14 @@ class Note:
         self.duration = duration
 
 
-class Piano():
-    def __init__(self, track, key, tempo, bar, len):
+class Piano:
+    def __init__(self, key, tempo, bar, len):
         self.key = key
         self.tempo = tempo
         self.bar = bar
         self.len = len
-        self.track = am.silent(duration = 60000 / tempo * len + 3000)
+        self.track = am.silent(duration=60000 / tempo * len + 3000)
+
 
 def change():
     file = "../data/cache/text/piano_text.txt"
@@ -31,12 +32,12 @@ def change():
         num += 1
         lline = line[index+1:]
         iindex = lline.find(" ")
-        if(iindex == -1):
+        if iindex == -1:
             continue
         tmp = lline[:iindex]
-        if(tmp.isdigit() == False):
+        if not tmp.isdigit():
             continue
-        while(int(tmp) > num):
+        while int(tmp) > num:
             newf += "\n"
             num += 1
         newf += line
@@ -46,15 +47,18 @@ def change():
     f.write(newf)
     f.close()
 
+
 def text_to_piano(key, tempo, bar, llen):
+    file = common.read_text("../data/cache/text/piano_text.txt")
+    if file is None:
+        return 0
     deviation = 500
-    maxpos = 0
-    repete = 2
-    tempo *= repete
-    llen *= repete
-    file = open("../data/cache/text/piano_text.txt", "r")
-    piano = Piano(None, key, tempo, bar, llen)
-    Score = []
+    max_pos = 0
+    repeat = 2
+    tempo *= repeat
+    llen *= repeat
+    piano = Piano(key, tempo, bar, llen)
+    score = []
     for line in file:
         while line.find(" ") != -1:
             tmp = []
@@ -64,16 +68,16 @@ def text_to_piano(key, tempo, bar, llen):
                 tmp.append(line[:index])
                 line = line[index + 1:]
 
-            tmpNote = Note(str(tmp[0]), int(tmp[1]), tmp[2])
-            if int(tmp[1]) > maxpos:
-                maxpos = int(tmp[1])
-            Score.append(tmpNote)
+            tmp_note = Note(str(tmp[0]), int(tmp[1]), tmp[2])
+            if int(tmp[1]) > max_pos:
+                max_pos = int(tmp[1])
+            score.append(tmp_note)
     # Score[i] : 第 i 个音符
     # tmp[0] : 音调
     # tmp[1] : 位置
     # tmp[2] : 持续时间
-    for i in range(repete * 4):
-        for note in Score:
+    for i in range(repeat * 4):
+        for note in score:
 
             # 处理时长
             dur=note.duration
@@ -111,7 +115,7 @@ def text_to_piano(key, tempo, bar, llen):
             y1 = lr.effects.pitch_shift(y, sr=sr, n_steps=pitch)
 
             # 处理位置
-            position = (note.position - 1 + i * (maxpos + (maxpos&1))) * 60000 / piano.tempo + deviation
+            position = (note.position - 1 + i * (max_pos + (max_pos&1))) * 60000 / piano.tempo + deviation
             if position > len(piano.track) - 2900:
                 break
             # 保存音频
@@ -122,7 +126,8 @@ def text_to_piano(key, tempo, bar, llen):
             piano.track = piano.track.overlay(sound, position)
 
     piano.track.export('../data/cache/audio/track_piano.WAV', format='WAV')
-    print("Piano arrangement Done!")
+    return 1
+
 
 def text_to_coordinate(line):
     tmp = []
@@ -160,6 +165,7 @@ def coordinate_to_text(coordinate):
     tmp += str(coordinate[1]) + " "
     tmp += coordinate[2] + '\n'
     return tmp
+
 
 if __name__ == '__main__':
     text_to_piano(4, 90, 4, 32)

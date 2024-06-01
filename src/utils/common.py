@@ -1,5 +1,6 @@
 from pydub import AudioSegment as am
 import re
+import os
 from http import HTTPStatus
 import dashscope
 
@@ -266,9 +267,11 @@ def call_with_messages(prompt, question):
 
 
 def read_text(filename):
-    with open(filename, "r", encoding="utf-8") as f:
-        text = f.read()
-    return text
+    if os.path.exists(filename):
+        with open(filename, "r", encoding="utf-8") as f:
+            text = f.read()
+        return text
+    return None
 
 
 def llm_to_text(genre, instrument, max_len):

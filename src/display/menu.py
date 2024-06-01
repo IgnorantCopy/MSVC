@@ -13,8 +13,9 @@ from PyQt5.QtGui import QFont, QFontDatabase
 
 
 class MyBeginning(QMainWindow, Ui_MainWindow):
-    def __init__(self, parent=None):
+    def __init__(self, app, parent=None):
         super(MyBeginning, self).__init__(parent)
+        self.app = app
         self.setupUi(self)
         self.statusShowTime()
         self.window = Window()
@@ -70,7 +71,7 @@ class MyBeginning(QMainWindow, Ui_MainWindow):
         self.clock.setText(timeplay)
 
     def Enter(self):
-        apply_stylesheet(app, theme="dark_teal.xml")
+        apply_stylesheet(self.app, theme="dark_teal.xml")
         self.close()
         self.window.show()
 
@@ -128,6 +129,6 @@ class MyBeginning(QMainWindow, Ui_MainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    myWin = MyBeginning()
+    myWin = MyBeginning(app)
     myWin.show()
     sys.exit(app.exec_())

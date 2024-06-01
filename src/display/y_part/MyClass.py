@@ -98,11 +98,11 @@ class GuitarAICreator(QtCore.QThread, QtCore.QObject):
         self.speed = speed
         self.key = key
         self.text_path = ""
+        self.song = arrange.Song(None, self.key, self.speed, 1, self.len)
 
     def run(self):
-        song = arrange.Song(None, self.key, self.speed, 1, self.len)
         arrange.compose("guitar", self.genre, self.len)
-        arrange.arrange(song, "guitar")
+        arrange.arrange(self.song, "guitar")
         tmpc = self.get_tmps()
         print(tmpc)
         self.sinEnd.emit(tmpc)
@@ -261,7 +261,7 @@ class GuitarGraphicsItemGroup(QtWidgets.QGraphicsItemGroup):
 
         self.menu = QtWidgets.QMenu()
 
-        self.action1 = QtWidgets.QAction("增加")
+        self.action1 = QtWidgets.QAction("修改")
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(12)
@@ -269,15 +269,6 @@ class GuitarGraphicsItemGroup(QtWidgets.QGraphicsItemGroup):
         font.setWeight(75)
         self.action1.setFont(font)
         self.menu.addAction(self.action1)
-
-        self.action2 = QtWidgets.QAction("删除")
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(12)
-        font.setBold(True)
-        font.setWeight(75)
-        self.action2.setFont(font)
-        self.menu.addAction(self.action2)
 
     def contextMenuEvent(self, event):
         self.setSelected(True)

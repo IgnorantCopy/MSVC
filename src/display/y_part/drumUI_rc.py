@@ -211,12 +211,22 @@ class Drum_Ui_Form(object):
         self.pushButton_enter.setFont(font)
         self.pushButton_enter.setObjectName("pushButton_enter")
         self.verticalLayout.addWidget(self.pushButton_enter)
+        self.pushButton_mix = QtWidgets.QPushButton(Form)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(24)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_mix.setFont(font)
+        self.pushButton_mix.setObjectName("pushButton_mix")
+        self.verticalLayout.addWidget(self.pushButton_mix)
         spacerItem9 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem9)
         self.verticalLayout.setStretch(0, 2)
         self.verticalLayout.setStretch(1, 2)
         self.verticalLayout.setStretch(2, 2)
-        self.verticalLayout.setStretch(3, 3)
+        self.verticalLayout.setStretch(3, 2)
+        self.verticalLayout.setStretch(4, 3)
         self.horizontalLayout_5.addLayout(self.verticalLayout)
         self.graphicsview_result = MyGraphicsView(Form)
         self.graphicsview_result.setObjectName("graphicsview_result")
@@ -311,6 +321,7 @@ class Drum_Ui_Form(object):
         self.label_result.setText(_translate("Form", "结果："))
         self.pushButton_play.setText(_translate("Form", "播放"))
         self.pushButton_enter.setText(_translate("Form", "确认"))
+        self.pushButton_mix.setText(_translate("Form", "组合"))
         self.label_ATtitle.setText(_translate("Form", "AI问答："))
         self.pushButton_userdel.setText(_translate("Form", "删除"))
         self.pushButton_usersend.setText(_translate("Form", "发送"))
@@ -355,7 +366,7 @@ class Drum_Ui_Form(object):
         # 设置字体
         font_size = 30
         for item in [self.pushButton_menu, self.pushButton_help, self.pushButton_close, self.pushButton_usersend,
-                     self.pushButton_userdel, self.pushButton_play, self.pushButton_enter]:
+                     self.pushButton_userdel, self.pushButton_play, self.pushButton_enter, self.pushButton_mix]:
             item.setStyleSheet(f"font-size: {font_size}px")
         for item in [self.label_style, self.label_speed, self.label_section, self.label_ATtitle, self.label,
                      self.label_result]:

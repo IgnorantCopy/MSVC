@@ -12,6 +12,7 @@ import sys
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia
 from qt_material import apply_stylesheet
 from src.display.y_part.MyClass import MusicWidget, AIAnswer, MyGraphicsView, PianoGraphicsItemGroup, PianoAICreator
+from src import piano
 
 
 class Piano_Ui_Form(object):
@@ -229,12 +230,22 @@ class Piano_Ui_Form(object):
         self.pushButton_enter.setFont(font)
         self.pushButton_enter.setObjectName("pushButton_enter")
         self.verticalLayout.addWidget(self.pushButton_enter)
+        self.pushButton_mix = QtWidgets.QPushButton(Form)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(24)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_mix.setFont(font)
+        self.pushButton_mix.setObjectName("pushButton_mix")
+        self.verticalLayout.addWidget(self.pushButton_mix)
         spacerItem10 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem10)
         self.verticalLayout.setStretch(0, 2)
         self.verticalLayout.setStretch(1, 2)
         self.verticalLayout.setStretch(2, 2)
-        self.verticalLayout.setStretch(3, 3)
+        self.verticalLayout.setStretch(3, 2)
+        self.verticalLayout.setStretch(4, 3)
         self.horizontalLayout_5.addLayout(self.verticalLayout)
         self.graphicsview_result = MyGraphicsView(Form)
         self.graphicsview_result.setObjectName("graphicsview_result")
@@ -330,6 +341,7 @@ class Piano_Ui_Form(object):
         self.label_result.setText(_translate("Form", "结果："))
         self.pushButton_play.setText(_translate("Form", "播放"))
         self.pushButton_enter.setText(_translate("Form", "确认"))
+        self.pushButton_mix.setText(_translate("Form", "结合"))
         self.label_ATtitle.setText(_translate("Form", "AI问答："))
         self.pushButton_userdel.setText(_translate("Form", "删除"))
         self.pushButton_usersend.setText(_translate("Form", "发送"))
@@ -379,7 +391,7 @@ class Piano_Ui_Form(object):
         # 设置字体
         font_size = 30
         for item in [self.pushButton_menu, self.pushButton_help, self.pushButton_close, self.pushButton_usersend,
-                     self.pushButton_userdel, self.pushButton_play, self.pushButton_enter]:
+                     self.pushButton_userdel, self.pushButton_play, self.pushButton_enter, self.pushButton_mix]:
             item.setStyleSheet(f"font-size: {font_size}px")
         for item in [self.label_style, self.label_speed, self.label_section, self.label_ATtitle, self.label,
                      self.label_result, self.label_mode]:
@@ -429,15 +441,12 @@ class Piano_Ui_Form(object):
         self.graphicsview_result.setBackgroundBrush(QtCore.Qt.GlobalColor.black)
         # 字典
         self.music = []
-        self.section_lens = []
         self.modify_dict = {}
     # end
 
     def create_sender(self):
         self.pushButton_create.setEnabled(False)
         self.scene.clear()
-        self.section_lens = []
-        self.drum_speed = self.spinBox_speed.value()
 
         self.ai_creater.len = self.spinBox_section.value()
         self.ai_creater.genre = self.comboBox_style.currentText()
@@ -601,7 +610,9 @@ class Piano_Ui_Form(object):
 
                     self.scene.removeItem(item)
                     group.setSelected(True)
-                    print(f"{group.line} {group.section} {group.beat} {group.style}")
+                    tmp = [group.line, group.section * 4 + group.beat + 1, group.style]
+                    self.modify_dict[group.section] = piano.coordinate_to_text(tmp)
+                    print(self.modify_dict)
         elif key_name == "W" or key_name == "S":
             if key_name == "W" and self.cur_scale * self.change_scale < self.max_scale:
                 self.cur_scale *= self.change_scale
@@ -640,11 +651,10 @@ class Piano_Ui_Form(object):
     # end
 
     def enter_event(self):
-        # text = drum.modify_text("../data/cache/text/drum_text.txt", self.modify_dict)
-        #
-        # drum.text_to_drum(text, self.drum_speed)
         self.player.stop()
         audio = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(""))
+        self.player.setMedia(audio)
+        self.modify_dict = {}
     # end
 
     def play_event(self):

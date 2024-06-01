@@ -9,7 +9,7 @@ class Song:
     def __init__(self, key, tempo, bar, len):
         self.key = key
         self.tempo = tempo
-        self.bar = bar
+        self.bar = 4
         self.len = len
         self.track = am.silent(duration = 60000 / tempo * len + 3000)
 
@@ -65,7 +65,7 @@ if __name__ == "__main__":
     tempo = 110
     bar = 4
     len = 49
-    req_list = ["piano"]
+    req_list = ["guitar"]
     genre = "流行"
     song = Song(key, tempo, bar, len)
     # 每次用arrange函数都要重新生成一个Song对象————这是错误的！！！

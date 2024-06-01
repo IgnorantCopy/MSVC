@@ -4,6 +4,8 @@ import soundfile as sf
 import os
 from src.utils import common
 
+slc = am.silent(duration=3000)
+slc.export('../audio/guitar/none.wav', format='WAV')
 
 class Chord:
     def __init__(self, type, position):
@@ -25,6 +27,7 @@ def text_to_guitar(key, tempo, bar, llen):
     file = common.read_text("../data/cache/text/guitar_text.txt")
     if file is None:
         return 0
+    tempo /= 4
     deviation = 500
     guitar = Guitar(key, tempo, bar, llen)
     # print(len(guitar.track))
@@ -85,5 +88,5 @@ def coordinate_to_text(chord):
 
 
 if __name__ == '__main__':
-    common.llm_to_text("请写一首流行风格的曲子", "guitar", 48)
-    text_to_guitar(0, 90, 4, 48)
+    # common.llm_to_text("请写一首流行风格的曲子", "guitar", 48)
+    text_to_guitar(0, 90, 4, 13)

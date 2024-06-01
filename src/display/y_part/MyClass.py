@@ -3,6 +3,7 @@ from src.utils import common
 from src import drum
 from src import arrange
 from src import piano
+from src import guitar
 
 
 class MusicWidget(QtWidgets.QWidget):
@@ -99,20 +100,20 @@ class GuitarAICreator(QtCore.QThread, QtCore.QObject):
         self.text_path = ""
 
     def run(self):
-        song = arrange.Song(self.key, self.speed, 4, self.len)
-        arrange.compose("piano", self.genre, self.len)
-        arrange.arrange(song, "piano")
+        song = arrange.Song(self.key, self.speed, 1, self.len)
+        arrange.compose("guitar", self.genre, self.len)
+        arrange.arrange(song, "guitar")
         tmpc = self.get_tmps()
         print(tmpc)
         self.sinEnd.emit(tmpc)
 
     def get_tmps(self):
         tmpc = []
-        file = open(f"{self.text_path}piano_text.txt", "r")
+        file = open(f"{self.text_path}guitar_text.txt", "r")
         text = file.read()
         for line in text.split("\n"):
             if line != "":
-                tmpc += [piano.text_to_coordinate(line)]
+                tmpc += [guitar.text_to_coordinate(line)]
         file.close()
         return tmpc
 
@@ -256,9 +257,7 @@ class GuitarGraphicsItemGroup(QtWidgets.QGraphicsItemGroup):
         super().__init__()
 
         self.section = 0
-        self.line = 0
-        self.beat = 0
-        self.style = ""
+        self.attribute = ""
 
         self.menu = QtWidgets.QMenu()
 
@@ -280,27 +279,7 @@ class GuitarGraphicsItemGroup(QtWidgets.QGraphicsItemGroup):
         self.action2.setFont(font)
         self.menu.addAction(self.action2)
 
+    def contextMenuEvent(self, event):
+        self.setSelected(True)
 
-# class AttributeUi(object):
-#     def setupUi(self, Dialog):
-#         Dialog.setObjectName("Dialog")
-#         Dialog.resize(213, 144)
-#         self.verticalLayout = QtWidgets.QVBoxLayout(Dialog)
-#         self.verticalLayout.setObjectName("verticalLayout")
-#         self.lineEdit = QtWidgets.QLineEdit(Dialog)
-#         font = QtGui.QFont()
-#         font.setFamily("Arial")
-#         font.setPointSize(24)
-#         self.lineEdit.setFont(font)
-#         self.lineEdit.setObjectName("lineEdit")
-#         self.verticalLayout.addWidget(self.lineEdit)
-#         self.pushButton = QtWidgets.QPushButton(Dialog)
-#         font = QtGui.QFont()
-#         font.setFamily("Arial")
-#         font.setPointSize(24)
-#         self.pushButton.setFont(font)
-#         self.pushButton.setObjectName("pushButton")
-#         self.verticalLayout.addWidget(self.pushButton)
-#
-#         self.retranslateUi(Dialog)
-#         QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.menu.popup(QtGui.QCursor.pos())

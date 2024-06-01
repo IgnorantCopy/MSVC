@@ -11,7 +11,7 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia
 from qt_material import apply_stylesheet
-from src.display.y_part.MyClass import MusicWidget, AIAnswer, AICreator, MyGraphicsView, PianoGraphicsPixmapItem, PianoGraphicsItemGroup, PianoAICreator
+from src.display.y_part.MyClass import MusicWidget, AIAnswer, MyGraphicsView, PianoGraphicsItemGroup, PianoAICreator
 
 
 class Piano_Ui_Form(object):
@@ -370,6 +370,7 @@ class Piano_Ui_Form(object):
         self.pushButton_userdel.clicked.connect(self.textEdit_user.clear)
         self.pushButton_close.clicked.connect(QtWidgets.QApplication.quit)
         self.pushButton_play.clicked.connect(self.play_event)
+        self.pushButton_enter.clicked.connect(self.enter_event)
 
         Form.Key_event.connect(self.viewKeyEvent)
     # end
@@ -421,7 +422,7 @@ class Piano_Ui_Form(object):
 
         self.mode_names = ["1_0", "2_0", "3_0", "4_0", "5_0", "6_0", "7_0",
                            "1_1", "2_1", "3_1", "4_1", "5_1", "6_1", "7_1",
-                           "1_2", "2_2", "3_2", "4_2", "5_2", "6_2", "7_2",]
+                           "1_2", "2_2", "3_2", "4_2", "5_2", "6_2", "7_2"]
 
         self.choose = 0
         # 设置背景
@@ -647,7 +648,7 @@ class Piano_Ui_Form(object):
     # end
 
     def play_event(self):
-        audio = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(f"{self.audio_path}track_drum.WAV"))
+        audio = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(f"{self.audio_path}track_piano.WAV"))
         self.player.setMedia(audio)
         self.player.play()
     # end

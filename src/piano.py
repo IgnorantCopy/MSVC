@@ -21,11 +21,12 @@ class Piano:
 
 
 def change():
-    file = "../data/cache/text/piano_text.txt"
-    f = open(file, "r", encoding="utf-8")
+    file = common.read_text("../data/cache/text/piano_text.txt")
+    if file is None:
+        return 0
     newf = ""
     num = 0
-    for line in f:
+    for line in file.split("\n"):
         index = line.find(" ")
         if(index == -1):
             continue
@@ -59,7 +60,7 @@ def text_to_piano(key, tempo, bar, llen):
     llen *= repeat
     piano = Piano(key, tempo, bar, llen)
     score = []
-    for line in file:
+    for line in file.split("\n"):
         while line.find(" ") != -1:
             tmp = []
 

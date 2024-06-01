@@ -65,7 +65,7 @@ if __name__ == "__main__":
     tempo = 110
     bar = 4
     len = 49
-    req_list = ["guitar"]
+    req_list = ["guitar", "piano", "drum", "lyrics"]
     genre = "流行"
     song = Song(key, tempo, bar, len)
     # 每次用arrange函数都要重新生成一个Song对象————这是错误的！！！

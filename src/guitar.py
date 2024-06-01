@@ -2,7 +2,8 @@ from pydub import AudioSegment as am
 import librosa as lr
 import soundfile as sf
 import os
-from src.utils import common
+import re
+from utils import common
 
 slc = am.silent(duration=3000)
 slc.export('../audio/guitar/none.wav', format='WAV')
@@ -27,15 +28,16 @@ def text_to_guitar(key, tempo, bar, llen):
     file = common.read_text("../data/cache/text/guitar_text.txt")
     if file is None:
         return 0
-    tempo /= 4
     deviation = 500
     guitar = Guitar(key, tempo, bar, llen)
     # print(len(guitar.track))
     score = []
-    for line in file:
+    for line in file.split('\n'):
         tmp = []
         index = line.find(" ")
-        tmp.append(line[:index])
+        t1 = line[:index]
+        t1 = re.sub(r'\(.*\)', '', t1)
+        tmp.append(t1)
         tmp.append(line[index+1:])
         tmp_chord = Chord(tmp[0], int(tmp[1]))
         score.append(tmp_chord)

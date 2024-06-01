@@ -1,8 +1,9 @@
 from pydub import AudioSegment as am
 import librosa as lr
 import soundfile as sf
-import random
 import os
+import re
+from src.utils import common
 
 slc = am.silent(duration=3000)
 slc.export('../audio/guitar/none.wav', format='WAV')
@@ -15,31 +16,35 @@ class Chord:
 
 
 class Guitar:
-    def __init__(self, track, key, tempo, bar, len):
+    def __init__(self, key, tempo, bar, len):
         self.key = key
         self.tempo = tempo
         self.bar = bar
         self.len = len
-        self.track = am.silent(duration = 60000 / tempo * len + 3000)
-
-
+        self.track = am.silent(duration=60000 / tempo * len + 3000)
 
 
 def text_to_guitar(key, tempo, bar, llen):
+    file = common.read_text("../data/cache/text/guitar_text.txt")
+    if file is None:
+        return 0
     deviation = 500
-    file = open("../data/cache/text/guitar_text.txt", "r")
-    guitar = Guitar(None, key, tempo, bar, llen)
+    guitar = Guitar(key, tempo, bar, llen)
     # print(len(guitar.track))
-    Score = []
-    for line in file:
+    score = []
+    for line in file.split('\n'):
         tmp = []
         index = line.find(" ")
-        tmp.append(line[:index])
+        if index == -1:
+            continue
+        t1 = line[:index]
+        t1 = re.sub(r'\(.*\)', '', t1)
+        tmp.append(t1)
         tmp.append(line[index+1:])
         tmp_chord = Chord(tmp[0], int(tmp[1]))
-        Score.append(tmp_chord)
+        score.append(tmp_chord)
 
-    for chord in Score:
+    for chord in score:
         # print(chord.type, chord.position,'\n')
         pitch = key
 
@@ -50,7 +55,7 @@ def text_to_guitar(key, tempo, bar, llen):
         else:
             y, sr = lr.load('../audio/guitar/none.wav')
 
-        y1 = lr.effects.pitch_shift(y, sr=sr, n_steps = pitch)
+        y1 = lr.effects.pitch_shift(y, sr=sr, n_steps=pitch)
 
         position = (chord.position - 1) * 60000 / guitar.tempo * bar + deviation
         
@@ -62,7 +67,7 @@ def text_to_guitar(key, tempo, bar, llen):
         guitar.track = guitar.track.overlay(sound, position)
 
     guitar.track.export('../data/cache/audio/track_guitar.WAV', format='WAV')
-    print("Guitar arrangement Done!")
+    return 1
 
 
 def text_to_coordinate(line):

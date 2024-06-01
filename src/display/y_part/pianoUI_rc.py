@@ -12,7 +12,7 @@ import sys
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia
 from qt_material import apply_stylesheet
 from src.display.y_part.MyClass import MusicWidget, AIAnswer, MyGraphicsView, PianoGraphicsItemGroup, PianoAICreator
-from src import piano
+from src import piano, arrange
 
 
 class Piano_Ui_Form(object):
@@ -653,7 +653,7 @@ class Piano_Ui_Form(object):
         self.player.setMedia(audio)
         self.modify_event(self.modify_dict)
         self.modify_dict = {}
-        arrange.arrange(self.ai_creater.song, "guitar")
+        arrange.arrange(self.ai_creater.song, "piano")
     # end
 
     def play_event(self):

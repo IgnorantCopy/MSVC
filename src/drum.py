@@ -1,6 +1,5 @@
-from src.utils import common
-from src.utils import save
 from pydub import AudioSegment as am
+from src.utils import common
 
 # 军鼓
 snare = am.from_wav("../audio/drum/snare.WAV")
@@ -51,6 +50,7 @@ def get_note(note):
         return 1
     return -1
 
+
 def get_index(index):
     if index == 0:
         return 'A'
@@ -80,7 +80,10 @@ def get_index(index):
         return 'O'
 
 
-def text_to_drum(text, speed):
+def text_to_drum(speed):
+    text = common.read_text("../data/cache/text/drum_text.txt")
+    if text is None:
+        return 0
     lines = text.split('\n')
     rate = 120 / speed
     duration = 500 * rate
@@ -103,7 +106,7 @@ def text_to_drum(text, speed):
                 elif times[k] == '1':
                     song = song.overlay(drum_list[index], position=(i + k / len(times)) * duration + deviation)
     song.export('../data/cache/audio/track_drum.WAV', format='WAV')
-    print("Drum track generated.")
+    return 1
 
 
 def text_to_coordinate(text):
@@ -139,13 +142,3 @@ def modify_text(filename, text_dict):
             f.write(line + '\n')
             result += line + '\n'
     return result
-
-
-if __name__ == '__main__':
-    genre = "爵士"
-    path = common.llm_to_text("请写一个{}风格的鼓谱。".format(genre), "drum", 20)
-    text_dict = {0: "A_1111", 1: "A_1111", 2: "A_1111", 3: "A_1111"}
-    text = modify_text(path, text_dict)
-    print(text)
-    text_to_drum(text, 120)
-    print(text_to_array(text))

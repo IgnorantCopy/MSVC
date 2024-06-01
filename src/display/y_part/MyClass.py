@@ -48,10 +48,10 @@ class AICreator(QtCore.QThread, QtCore.QObject):
 
     def run(self):
         path = common.llm_to_text(self.genre, self.instrument, self.section)
+        drum.text_to_drum(self.speed)
         text = common.read_text(path)
-        drum.text_to_drum(text, self.speed)
-        musicLists = drum.text_to_array(text)
-        self.sinEnd.emit(musicLists)
+        music_lists = drum.text_to_array(text)
+        self.sinEnd.emit(music_lists)
 
 
 class PianoAICreator(QtCore.QThread, QtCore.QObject):
@@ -66,7 +66,7 @@ class PianoAICreator(QtCore.QThread, QtCore.QObject):
         self.speed = speed
         self.key = key
         self.text_path = ""
-        self.song = arrange.Song(None, self.key, self.speed, 4, self.len)
+        self.song = arrange.Song(self.key, self.speed, 4, self.len)
 
     def run(self):
         arrange.compose("piano", self.genre, self.len)
@@ -98,7 +98,7 @@ class GuitarAICreator(QtCore.QThread, QtCore.QObject):
         self.speed = speed
         self.key = key
         self.text_path = ""
-        self.song = arrange.Song(None, self.key, self.speed, 1, self.len)
+        self.song = arrange.Song(self.key, self.speed, 1, self.len)
 
     def run(self):
         arrange.compose("guitar", self.genre, self.len)

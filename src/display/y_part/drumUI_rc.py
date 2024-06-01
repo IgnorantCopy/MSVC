@@ -602,7 +602,7 @@ class Drum_Ui_Form(object):
         self.player.setMedia(audio)
         text = drum.modify_text("../data/cache/text/drum_text.txt", self.modify_dict)
 
-        drum.text_to_drum(text, self.drum_speed)
+        drum.text_to_drum(self.drum_speed)
         self.modify_dict = {}
 
     def play_event(self):

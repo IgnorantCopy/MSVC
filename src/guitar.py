@@ -3,8 +3,9 @@ import librosa as lr
 import soundfile as sf
 import random
 import os
-from src.utils import common
 
+slc = am.silent(duration=3000)
+slc.export('../audio/guitar/none.wav', format='WAV')
 
 class Chord:
     def __init__(self, type, position):
@@ -86,5 +87,5 @@ def coordinate_to_text(chord):
 
 
 if __name__ == '__main__':
-    common.llm_to_text("请写一首流行风格的曲子", "guitar", 48)
-    text_to_guitar(0, 90, 4, 48)
+    # common.llm_to_text("请写一首流行风格的曲子", "guitar", 48)
+    text_to_guitar(0, 90, 4, 13)

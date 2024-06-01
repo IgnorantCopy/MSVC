@@ -26,7 +26,7 @@ class Guitar:
 
 
 def text_to_guitar(key, tempo, bar, llen):
-    tempo /= 4
+    
     deviation = 500
     file = open("../data/cache/text/guitar_text.txt", "r")
     guitar = Guitar(None, key, tempo, bar, llen)

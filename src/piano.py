@@ -43,10 +43,8 @@ def change():
             num += 1
         newf += line
     
-    f.close()
-    f = open(file, "w", encoding="utf-8")
-    f.write(newf)
-    f.close()
+    with open("../data/cache/text/piano_text.txt", "w", encoding="utf-8") as f:
+        f.write(newf)
 
 
 def text_to_piano(key, tempo, bar, llen):

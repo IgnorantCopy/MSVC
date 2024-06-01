@@ -3,6 +3,9 @@ import librosa as lr
 import soundfile as sf
 import os
 import re
+import sys
+sys.path.append('D:\Desktop\projects\MSVC')
+print(sys.path)
 from src.utils import common
 
 slc = am.silent(duration=3000)
@@ -35,10 +38,13 @@ def text_to_guitar(key, tempo, bar, llen):
     for line in file.split('\n'):
         tmp = []
         index = line.find(" ")
+        if index == -1:
+            continue
         t1 = line[:index]
         t1 = re.sub(r'\(.*\)', '', t1)
         tmp.append(t1)
         tmp.append(line[index+1:])
+        # print(tmp[1])
         tmp_chord = Chord(tmp[0], int(tmp[1]))
         score.append(tmp_chord)
 

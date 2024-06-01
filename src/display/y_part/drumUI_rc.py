@@ -11,9 +11,9 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia
 from qt_material import apply_stylesheet
-from src.display.y_part.MyClass import MusicWidget, AIAnswer, AICreator, MyGraphicsView, DrumGraphicsPixmapItem
-from src.utils import common
-from src import drum
+from .MyClass import MusicWidget, AIAnswer, AICreator, MyGraphicsView, DrumGraphicsPixmapItem
+from ...utils import common
+from ... import drum
 
 
 class Drum_Ui_Form(object):

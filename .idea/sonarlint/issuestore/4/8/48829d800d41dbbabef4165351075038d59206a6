@@ -1,0 +1,28 @@
+
+ˆpython:S1845Ù"jRename method "AI_answer" to prevent any misunderstanding/clash with field "ai_answer" defined on line 181(ŞÊ‚üÿÿÿÿ
+ipython:S116-"RRename this field "checkBox_2" to match the regular expression ^[_a-z][_a-z0-9]*$.(¡ÇœŠ
+lpython:S116|"URename this field "textEdit_user" to match the regular expression ^[_a-z][_a-z0-9]*$.(ú³Ò
+tpython:S116h"XRename this field "verticalLayout_3" to match the regular expression ^[_a-z][_a-z0-9]*$.(å´øÎıÿÿÿÿ
+mpython:S116"VRename this field "verticalLayout" to match the regular expression ^[_a-z][_a-z0-9]*$.(íˆÁ
+lpython:S116$"PRename this field "checkBox" to match the regular expression ^[_a-z][_a-z0-9]*$.(‡şôüÿÿÿÿ
+npython:S116D"RRename this field "pushButton" to match the regular expression ^[_a-z][_a-z0-9]*$.(ÕÏ÷•ûÿÿÿÿ
+spython:S116s"\Rename this field "textBrowser_AIanswer" to match the regular expression ^[_a-z][_a-z0-9]*$.(¤µË»
+npython:S1166"RRename this field "checkBox_3" to match the regular expression ^[_a-z][_a-z0-9]*$.(Êµ£öÿÿÿÿÿ
+opython:S116""XRename this field "horizontalLayout" to match the regular expression ^[_a-z][_a-z0-9]*$.(›‰½³
+qpython:S116"ZRename this field "horizontalLayout_4" to match the regular expression ^[_a-z][_a-z0-9]*$.(åÑŸš
+qpython:S116B"ZRename this field "horizontalLayout_2" to match the regular expression ^[_a-z][_a-z0-9]*$.(ğÀÀŞ
+wpython:S116…"ZRename this field "horizontalLayout_3" to match the regular expression ^[_a-z][_a-z0-9]*$.(ğµ€‡øÿÿÿÿ
+spython:S116V"WRename this field "pushButton_stop" to match the regular expression ^[_a-z][_a-z0-9]*$.(ş Ûæıÿÿÿÿ
+qpython:S116j"URename this field "label_ATtitle" to match the regular expression ^[_a-z][_a-z0-9]*$.(­Öú„üÿÿÿÿ
+spython:S116"[Rename this field "pushButton_usersend" to match the regular expression ^[_a-z][_a-z0-9]*$.(ó¿¸¬
+kpython:S116M"TRename this field "pushButton_2" to match the regular expression ^[_a-z][_a-z0-9]*$.(à­Ş¯
+wpython:S116‡"ZRename this field "pushButton_userdel" to match the regular expression ^[_a-z][_a-z0-9]*$.(¬¦×äüÿÿÿÿ
+…python:S101"iRename class "Combine_Ui_Form" to match the regular expression ^_?([A-Z_][a-zA-Z0-9]*|[a-z_][a-z0-9_]*)$.(ß›¥úÿÿÿÿ
+gpython:S117"PRename this parameter "Form" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ëö‘¹
+rpython:S117@"[Rename this local variable "spacerItem" to match the regular expression ^[_a-z][a-z0-9_]*$.(ıé–ì
+xpython:S117`"\Rename this local variable "spacerItem1" to match the regular expression ^[_a-z][a-z0-9_]*$.(“©êøûÿÿÿÿ
+bpython:S100"KRename method "setupUi" to match the regular expression ^[a-z_][a-z0-9_]*$.(Ëö‘¹
+mpython:S117¥"PRename this parameter "Form" to match the regular expression ^[_a-z][a-z0-9_]*$.(ı‰·úÿÿÿÿ
+npython:S100¥"QRename method "retranslateUi" to match the regular expression ^[a-z_][a-z0-9_]*$.(ı‰·úÿÿÿÿ
+hpython:S100Ğ"PRename method "AI_user_send" to match the regular expression ^[a-z_][a-z0-9_]*$.(ğÎé«
+jpython:S100Ù"MRename method "AI_answer" to match the regular expression ^[a-z_][a-z0-9_]*$.(ŞÊ‚üÿÿÿÿ

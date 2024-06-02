@@ -1,0 +1,55 @@
+
+ˆpython:S1845ú"jRename method "AI_answer" to prevent any misunderstanding/clash with field "ai_answer" defined on line 355(ŞÊ‚üÿÿÿÿ
+qpython:S116»"YRename this field "pushButton_create" to match the regular expression ^[_a-z][_a-z0-9]*$.(Òªß 
+qpython:S116u"ZRename this field "horizontalLayout_2" to match the regular expression ^[_a-z][_a-z0-9]*$.(ğÀÀŞ
+tpython:S116é"WRename this field "pushButton_stop" to match the regular expression ^[_a-z][_a-z0-9]*$.(ş Ûæıÿÿÿÿ
+rpython:S116Ê"ZRename this field "horizontalLayout_5" to match the regular expression ^[_a-z][_a-z0-9]*$.(­‘Ãğ
+spython:S116´"[Rename this field "pushButton_usersend" to match the regular expression ^[_a-z][_a-z0-9]*$.(ó¿¸¬
+npython:S116%"WRename this field "pushButton_menu" to match the regular expression ^[_a-z][_a-z0-9]*$.(ãÕŞ 
+npython:S1167"XRename this field "pushButton_close" to match the regular expression ^[_a-z][_a-z0-9]*$.(åÎ´
+tpython:S116×"WRename this field "pushButton_play" to match the regular expression ^[_a-z][_a-z0-9]*$.(­İÀğşÿÿÿÿ
+wpython:S116«"ZRename this field "pushButton_userdel" to match the regular expression ^[_a-z][_a-z0-9]*$.(¬¦×äüÿÿÿÿ
+tpython:S116"XRename this field "verticalLayout_2" to match the regular expression ^[_a-z][_a-z0-9]*$.(Àï‚Íùÿÿÿÿ
+qpython:S116§"TRename this field "spinBox_mode" to match the regular expression ^[_a-z][_a-z0-9]*$.(í¥’şÿÿÿÿ
+lpython:S116¦"TRename this field "spaceBetween" to match the regular expression ^[_a-z][_a-z0-9]*$.(‡ÇûÏ
+opython:S116`"XRename this field "horizontalLayout" to match the regular expression ^[_a-z][_a-z0-9]*$.(›‰½³
+wpython:S116©"ZRename this field "horizontalLayout_3" to match the regular expression ^[_a-z][_a-z0-9]*$.(ğµ€‡øÿÿÿÿ
+rpython:S116"URename this field "label_ATtitle" to match the regular expression ^[_a-z][_a-z0-9]*$.(­Öú„üÿÿÿÿ
+opython:S116•"WRename this field "spinBox_section" to match the regular expression ^[_a-z][_a-z0-9]*$.(Ü ğ¨
+npython:S116."WRename this field "pushButton_help" to match the regular expression ^[_a-z][_a-z0-9]*$.(–Ú´
+dpython:S116ê"LRename this field "Form" to match the regular expression ^[_a-z][_a-z0-9]*$.(…á”í
+tpython:S116—"\Rename this field "textBrowser_AIanswer" to match the regular expression ^[_a-z][_a-z0-9]*$.(¤µË»
+vpython:S116"ZRename this field "horizontalLayout_6" to match the regular expression ^[_a-z][_a-z0-9]*$.(Îíªƒıÿÿÿÿ
+npython:S116Ì"VRename this field "verticalLayout" to match the regular expression ^[_a-z][_a-z0-9]*$.(íˆÁ
+npython:S116€"VRename this field "comboBox_style" to match the regular expression ^[_a-z][_a-z0-9]*$.(‹µü¿
+lpython:S116k"URename this field "spinBox_speed" to match the regular expression ^[_a-z][_a-z0-9]*$.(˜°á
+vpython:S116K"ZRename this field "horizontalLayout_4" to match the regular expression ^[_a-z][_a-z0-9]*$.(°ÎÇ´şÿÿÿÿ
+mpython:S116 "URename this field "textEdit_user" to match the regular expression ^[_a-z][_a-z0-9]*$.(ú³Ò
+ppython:S116à"XRename this field "pushButton_enter" to match the regular expression ^[_a-z][_a-z0-9]*$.(éõ
+upython:S116Œ"XRename this field "verticalLayout_3" to match the regular expression ^[_a-z][_a-z0-9]*$.(å´øÎıÿÿÿÿ
+python:S101"hRename class "Guitar_Ui_Form" to match the regular expression ^_?([A-Z_][a-zA-Z0-9]*|[a-z_][a-z0-9_]*)$.(˜ŞÎù
+gpython:S117"PRename this parameter "Form" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ëö‘¹
+wpython:S117#"[Rename this local variable "spacerItem" to match the regular expression ^[_a-z][a-z0-9_]*$.(¾ışÿÿÿÿ
+spython:S117@"\Rename this local variable "spacerItem1" to match the regular expression ^[_a-z][a-z0-9_]*$.(‹‡öÔ
+zpython:S117ò"]Rename this local variable "spacerItem10" to match the regular expression ^[_a-z][a-z0-9_]*$.(š¥ûûúÿÿÿÿ
+xpython:S117M"\Rename this local variable "spacerItem2" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ê•ù‘ûÿÿÿÿ
+spython:S117X"\Rename this local variable "spacerItem3" to match the regular expression ^[_a-z][a-z0-9_]*$.(ë©ô
+xpython:S117^"\Rename this local variable "spacerItem4" to match the regular expression ^[_a-z][a-z0-9_]*$.( €Á‘ùÿÿÿÿ
+rpython:S117s"\Rename this local variable "spacerItem5" to match the regular expression ^[_a-z][a-z0-9_]*$.(º°ªZ
+tpython:S117Š"\Rename this local variable "spacerItem6" to match the regular expression ^[_a-z][a-z0-9_]*$.(ˆä¡
+tpython:S117œ"\Rename this local variable "spacerItem7" to match the regular expression ^[_a-z][a-z0-9_]*$.(éŒ¡ˆ
+ypython:S117®"\Rename this local variable "spacerItem8" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ï³œùÿÿÿÿ
+tpython:S117¹"\Rename this local variable "spacerItem9" to match the regular expression ^[_a-z][a-z0-9_]*$.(ğãÊú
+bpython:S100"KRename method "setupUi" to match the regular expression ^[a-z_][a-z0-9_]*$.(Ëö‘¹
+mpython:S117É"PRename this parameter "Form" to match the regular expression ^[_a-z][a-z0-9_]*$.(ı‰·úÿÿÿÿ
+npython:S100É"QRename method "retranslateUi" to match the regular expression ^[a-z_][a-z0-9_]*$.(ı‰·úÿÿÿÿ
+hpython:S117İ"PRename this parameter "Form" to match the regular expression ^[_a-z][a-z0-9_]*$.(êâ¦¯
+Mpython:S1481É"/Remove the unused local variable "music_lists".(°¸Êíùÿÿÿÿ
+<python:S125Í"Remove this commented out code.(Ôë”ãûÿÿÿÿ
+qpython:S100Ô"TRename method "AI_create_result" to match the regular expression ^[a-z_][a-z0-9_]*$.(ùï®‹şÿÿÿÿ
+hpython:S100¥"PRename method "viewKeyEvent" to match the regular expression ^[a-z_][a-z0-9_]*$.(İ¿ü§
+mpython:S3776¥"TRefactor this function to reduce its Cognitive Complexity from 22 to the 15 allowed.(İ¿ü§
+mpython:S100æ"PRename method "rightMenuAdd" to match the regular expression ^[a-z_][a-z0-9_]*$.(¾¹Ä€úÿÿÿÿ
+mpython:S100ì"PRename method "rightMenuDel" to match the regular expression ^[a-z_][a-z0-9_]*$.(…¸ûşüÿÿÿÿ
+hpython:S100ğ"PRename method "AI_user_send" to match the regular expression ^[a-z_][a-z0-9_]*$.(ğÎé«
+jpython:S100ú"MRename method "AI_answer" to match the regular expression ^[a-z_][a-z0-9_]*$.(ŞÊ‚üÿÿÿÿ

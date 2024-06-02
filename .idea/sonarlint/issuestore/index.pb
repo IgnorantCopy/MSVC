@@ -64,3 +64,11 @@ O
 src/display/y_part/Ui_lyrics.py,1\1\117ccb3cc6c0d8bee8eb16563d328ff92d7b0552
 P
  src/display/y_part/combine_rc.py,b\4\b45f8ba0aea285702e31ed6d29dfeabe89b2570e
+I
+src/display/combine_rc.py,4\8\48829d800d41dbbabef4165351075038d59206a6
+H
+src/display/drumUI_rc.py,6\e\6e32ed6ea0774bc4782a9ecd52fc7be197d343c5
+J
+src/display/guitarUI_rc.py,7\3\7379e7f0e5c9fa7deec0c8b1adf756bc95b203bf
+I
+src/display/QTabWidget.py,3\2\324d2d0a13918770e7efdc99f075da15e70c2d2d

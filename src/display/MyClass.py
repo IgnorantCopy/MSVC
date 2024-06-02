@@ -65,7 +65,7 @@ class PianoAICreator(QtCore.QThread, QtCore.QObject):
         self.len = len
         self.speed = speed
         self.key = key
-        self.text_path = ""
+        self.text_path = "../data/cache/text/"
         self.song = arrange.Song(self.key, self.speed, 4, self.len)
 
     def run(self):
@@ -97,7 +97,7 @@ class GuitarAICreator(QtCore.QThread, QtCore.QObject):
         self.len = len
         self.speed = speed
         self.key = key
-        self.text_path = ""
+        self.text_path = "../data/cache/text/"
         self.song = arrange.Song(self.key, self.speed, 1, self.len)
 
     def run(self):

@@ -56,8 +56,24 @@ def arrange(song, req):
         song.track = song.track.overlay(track_drums)
     else:
         return 0
-    song.track.export("../data/cache/audio/arranged.WAV", format="WAV")
     return 1
+
+
+def combine(req_list):
+    song_list = []
+    duration = 0
+    for req in req_list:
+        if req == "piano" or req == "guitar" or req == "drum":
+            temp = am.from_wav(f"../data/cache/audio/track_{req}.WAV")
+            song_list.append(temp)
+            duration = max(duration, temp.duration_seconds)
+        else:
+            continue
+    track = am.silent(duration=duration * 1000)
+    for song in song_list:
+        track = track.overlay(song)
+    track.export("../data/cache/audio/arranged.WAV", format="WAV")
+    print("Success!")
 
 
 if __name__ == "__main__":
@@ -66,9 +82,10 @@ if __name__ == "__main__":
     bar = 4
     len = 49
     req_list = ["guitar", "piano", "drum", "lyrics"]
-    genre = "流行"
-    song = Song(key, tempo, bar, len)
-    # 每次用arrange函数都要重新生成一个Song对象————这是错误的！！！
-    for req in req_list:
-        compose(req, genre, len)
-        arrange(song, req)
+    combine(req_list)
+    # genre = "流行"
+    # song = Song(key, tempo, bar, len)
+    # # 每次用arrange函数都要重新生成一个Song对象————这是错误的！！！
+    # for req in req_list:
+    #     compose(req, genre, len)
+    #     arrange(song, req)

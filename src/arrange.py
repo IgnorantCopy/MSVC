@@ -1,17 +1,17 @@
 from pydub import AudioSegment as am
-from src.utils import common
+from src.utils import common, save
 from src import piano
 from src import guitar
 from src import drum
-
+from src import main
 
 class Song:
-    def __init__(self, key, tempo, bar, len):
+    def __init__(self, key, tempo, bar, length):
         self.key = key
         self.tempo = tempo
         self.bar = 4
-        self.len = len
-        self.track = am.silent(duration = 60000 / tempo * len + 3000)
+        self.length = length
+        self.track = am.silent(duration = 60000 / tempo * length + 3000)
 
 
 def check_guitar():
@@ -32,22 +32,22 @@ def check_guitar():
     return True
 
 
-def compose(req, question, len):
-    file = common.llm_to_text(question, req, len)
+def compose(req, question, length):
+    file = common.llm_to_text(question, req, length)
     if req == "guitar":
         while not check_guitar():
             print("Error")
-            file = common.llm_to_text(question, req, len)
+            file = common.llm_to_text(question, req, length)
     if req == "piano":
         piano.change()
     return file
 
 
 def arrange(song, req):
-    if req == "piano" and piano.text_to_piano(song.key, song.tempo, song.bar, song.len) == 1:
+    if req == "piano" and piano.text_to_piano(song.key, song.tempo, song.bar, song.length) == 1:
         track_piano = am.from_wav("../data/cache/audio/track_piano.WAV")
         song.track = song.track.overlay(track_piano)
-    elif req == "guitar" and guitar.text_to_guitar(song.key, song.tempo, song.bar, song.len) == 1:
+    elif req == "guitar" and guitar.text_to_guitar(song.key, song.tempo, song.bar, song.length) == 1:
         track_guitar = am.from_wav("../data/cache/audio/track_guitar.wav")
         song.track = song.track.overlay(track_guitar)
     elif req == "drum" and drum.text_to_drum(song.tempo) == 1:
@@ -59,7 +59,7 @@ def arrange(song, req):
     return 1
 
 
-def combine(req_list):
+def combine(req_list, filename):
     song_list = []
     duration = 0
     for req in req_list:
@@ -73,6 +73,8 @@ def combine(req_list):
     for song in song_list:
         track = track.overlay(song)
     track.export("../data/cache/audio/arranged.WAV", format="WAV")
+    instrument = req_list[0] if len(req_list) == 1 else ''
+    save.save_music(main.user, track, filename, instrument)
     print("Success!")
 
 
@@ -80,12 +82,12 @@ if __name__ == "__main__":
     key = 3
     tempo = 110
     bar = 4
-    len = 49
+    length = 49
     req_list = ["guitar", "piano", "drum", "lyrics"]
     combine(req_list)
     # genre = "流行"
-    # song = Song(key, tempo, bar, len)
+    # song = Song(key, tempo, bar, length)
     # # 每次用arrange函数都要重新生成一个Song对象————这是错误的！！！
     # for req in req_list:
-    #     compose(req, genre, len)
+    #     compose(req, genre, length)
     #     arrange(song, req)

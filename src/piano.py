@@ -4,6 +4,7 @@ import soundfile as sf
 from src.utils import common
 
 
+
 class Note:
     def __init__(self, pitch, position, duration):
         self.pitch = pitch
@@ -71,6 +72,7 @@ def text_to_piano(key, tempo, bar, llen):
                 line = line[index + 1:]
 
             tmp_note = Note(str(tmp[0]), int(tmp[1]), tmp[2])
+            print(tmp_note.pitch, tmp_note.position, tmp_note.duration)
             if int(tmp[1]) > max_pos:
                 max_pos = int(tmp[1])
             score.append(tmp_note)

@@ -646,7 +646,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     apply_stylesheet(app, theme="dark_teal.xml")  # 设置样式表
     Form = MusicWidget()
-    ui = Guritar_Ui_Form()
+    ui = Guitar_Ui_Form()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())

@@ -3,7 +3,6 @@ import librosa as lr
 import soundfile as sf
 import os
 import re
-from src.utils import common
 
 slc = am.silent(duration=3000)
 slc.export('../audio/guitar/none.wav', format='WAV')
@@ -41,6 +40,7 @@ def text_to_guitar(key, tempo, bar, llen):
         t1 = re.sub(r'\(.*\)', '', t1)
         tmp.append(t1)
         tmp.append(line[index+1:])
+        # print(tmp[1])
         tmp_chord = Chord(tmp[0], int(tmp[1]))
         score.append(tmp_chord)
 

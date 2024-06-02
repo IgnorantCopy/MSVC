@@ -176,6 +176,24 @@ class Ui_Form(object):
 
         self.AIanswer = MyClass.AIAnswer("")
         self.AIanswer.sinEnd.connect(self.display)
+        self.extra_set(Form)
+
+    def style_set(self):
+        font_size = 30
+        for item in [self.pushButton_menu, self.pushButton_help, self.pushButton_close, self.pushButton_usersend,
+                        self.pushButton_userdel,self.pushButton,self.pushButton_2]:
+            item.setStyleSheet(f"font-size: {font_size}px")
+        for item in [self.label_ATtitle, self.label]:
+            item.setStyleSheet(f"font-size: {font_size}px")
+        font_size = 22
+        for item in [self.textEdit_user, self.textBrowser_AIanswer]:
+            item.setStyleSheet(f"font-size: {font_size}px")
+
+    def extra_set(self, Form):
+        self.style_set()
+        ai_text = "AI：你好，有什么问题?\n\n"
+        self.textBrowser_AIanswer.setPlainText(ai_text)
+        self.textEdit_user.setPlaceholderText("请输入你的问题：")
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate

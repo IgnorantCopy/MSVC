@@ -1,7 +1,11 @@
 from pydub import AudioSegment as am
 import librosa as lr
 import soundfile as sf
+import sys
+sys.path.append('D:\Desktop\projects\MSVC')
+print(sys.path)
 from src.utils import common
+
 
 
 class Note:
@@ -41,6 +45,7 @@ def change():
         while int(tmp) > num:
             newf += "\n"
             num += 1
+        line += "\n"
         newf += line
     
     with open("../data/cache/text/piano_text.txt", "w", encoding="utf-8") as f:
@@ -64,10 +69,13 @@ def text_to_piano(key, tempo, bar, llen):
 
             for i in range(3):
                 index = line.find(" ")
+                if index == -1:
+                    index = len(line)
                 tmp.append(line[:index])
                 line = line[index + 1:]
 
             tmp_note = Note(str(tmp[0]), int(tmp[1]), tmp[2])
+            print(tmp_note.pitch, tmp_note.position, tmp_note.duration)
             if int(tmp[1]) > max_pos:
                 max_pos = int(tmp[1])
             score.append(tmp_note)

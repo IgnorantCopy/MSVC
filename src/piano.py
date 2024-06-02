@@ -47,7 +47,7 @@ def change():
             num += 1
         line += "\n"
         newf += line
-    
+
     with open("../data/cache/text/piano_text.txt", "w", encoding="utf-8") as f:
         f.write(newf)
 
@@ -162,11 +162,11 @@ def text_to_coordinate(line):
 
 def coordinate_to_text(coordinate):
     tmp = ""
-    p1 = coordinate[0] % 8 + 1
+    p1 = coordinate[0] % 7 + 1
     tmp += str(p1)
-    if coordinate[0] // 8 == 0:
+    if coordinate[0] // 7 == 0:
         tmp += "b"
-    elif coordinate[0] // 8 == 2:
+    elif coordinate[0] // 7 == 2:
         tmp += "i"
     tmp += " "
     tmp += str(coordinate[1]) + " "

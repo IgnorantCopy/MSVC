@@ -1,6 +1,6 @@
 
-¦python:S1845I"aRename method "Enter" to prevent any misunderstanding/clash with field "enter" defined on line 46(‹…Χ8¦άφό1J$5fd148f5-3441-4fd1-85f8-24c1d1316301
- python:S117"WRename this local variable "fontDb" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ξ½¨νψÿÿÿÿ8§άφό1J$f7c9f47e-791c-4514-bde1-596a5e07c90d
-¦python:S117"]Rename this local variable "fontFamilies" to match the regular expression ^[_a-z][a-z0-9_]*$.(¨γÿϋÿÿÿÿ8§άφό1J$6ea09752-cc47-4bec-8326-899cd7287bfb
-›python:S117"WRename this local variable "fontID" to match the regular expression ^[_a-z][a-z0-9_]*$.(…·€8§άφό1J$ecf9f2f6-eaec-485d-8b4a-e345114fc6af
-zpython:S1481"0Remove the unused local variable "fontFamilies".(¨γÿϋÿÿÿÿ8§άφό1J$985fa375-4835-4ad3-8f35-8c3f335f180e
+€python:S1845I"aRename method "Enter" to prevent any misunderstanding/clash with field "enter" defined on line 46(‹…Χ8Ι§Ι ύ1
+ python:S117"WRename this local variable "fontDb" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ξ½¨νψÿÿÿÿ8§άφό1J$f4c8814d-6c36-410b-a927-1a64cfeb96b4
+¦python:S117"]Rename this local variable "fontFamilies" to match the regular expression ^[_a-z][a-z0-9_]*$.(¨γÿϋÿÿÿÿ8§άφό1J$9407b2f4-7237-4848-bf68-6065d6216df6
+›python:S117"WRename this local variable "fontID" to match the regular expression ^[_a-z][a-z0-9_]*$.(…·€8§άφό1J$ea7f2ab5-37ed-42a8-a618-bc80bf4810ff
+zpython:S1481"0Remove the unused local variable "fontFamilies".(¨γÿϋÿÿÿÿ8§άφό1J$d32d7e9b-e2d0-475e-9e87-18cecd9255b6

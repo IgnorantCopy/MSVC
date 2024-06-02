@@ -275,7 +275,7 @@ def read_text(filename):
 
 
 def llm_to_text(genre, instrument, max_len):
-    question = '请给我一段{}风格的{}谱，最多{}行。'.format(genre, instrument, max_len)
+    question = f'请给我一段{genre}风格的{instrument}谱，最多{max_len}行。'
     prompt = ''
     rules = {
         'guitar': r'^[CDEFGAB]',
@@ -309,7 +309,7 @@ def llm_to_text(genre, instrument, max_len):
             count += 1
             if count >= max_len:
                 break
-    filename = '../data/cache/text/{}_text.txt'.format(instrument)
+    filename = f'../data/cache/text/{instrument}_text.txt'
     with open(filename, 'w', encoding='utf-8') as f:
         for line in result:
             f.write(line + '\n')

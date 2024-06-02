@@ -77,7 +77,7 @@ class MyBeginning(QMainWindow, Ui_MainWindow):
 
     def return_menu(self):
         self.window.close()
-        app.setStyleSheet("")
+        self.app.setStyleSheet("")
         self.show()
 
     def close_menu(self):

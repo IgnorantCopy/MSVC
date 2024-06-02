@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QComboBox, QVBoxLayout, QInputDialog, QWidget
+from PyQt5.QtWidgets import QApplication
 from src.display import menu
 
 if __name__ == '__main__':

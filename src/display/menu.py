@@ -1,13 +1,12 @@
 import sys
 from src.display.Ui_beginning import Ui_MainWindow
-from src.display.y_part.QTabWidget import Window
+from src.display.QTabWidget import Window
 from src.display import help
 from src.utils import config
 from src.utils import common
-import src.display.beginning_fonts_rc
 from PyQt5 import QtCore, QtGui
 from qt_material import apply_stylesheet
-from PyQt5.QtWidgets import QApplication, QMainWindow, QComboBox, QVBoxLayout, QInputDialog, QWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QComboBox, QVBoxLayout, QInputDialog
 from PyQt5.QtCore import QTimer, QDateTime
 from PyQt5.QtGui import QFont, QFontDatabase
 

@@ -1,12 +1,12 @@
 from PyQt5.QtWidgets import QApplication, QTabWidget
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5 import QtCore, QtGui
-from src.display.y_part.drumUI_rc import Drum_Ui_Form, MusicWidget
+from src.display.drumUI_rc import Drum_Ui_Form, MusicWidget
 from qt_material import apply_stylesheet
-from src.display.y_part.lyric_main import Lyrics
-from src.display.y_part.Ui_lyrics import Ui_Form
-from src.display.y_part.pianoUI_rc import Piano_Ui_Form
-from src.display.y_part.guitarUI_rc import Guitar_Ui_Form
+from src.display.lyric_main import Lyrics
+from src.display.Ui_lyrics import Ui_Form
+from src.display.pianoUI_rc import Piano_Ui_Form
+from src.display.guitarUI_rc import Guitar_Ui_Form
 import sys
 
 

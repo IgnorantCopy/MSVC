@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from src.display.y_part import MyClass
+from src.display import MyClass
 
 
 class Ui_Form(object):

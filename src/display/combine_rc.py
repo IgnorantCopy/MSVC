@@ -160,7 +160,7 @@ class Combine_Ui_Form(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-        self.extra_set()
+        self.extra_set(Form)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -176,11 +176,14 @@ class Combine_Ui_Form(object):
         self.pushButton_userdel.setText(_translate("Form", "删除"))
         self.pushButton_usersend.setText(_translate("Form", "发送"))
 
-    def extra_set(self):
+    def extra_set(self, Form):
+        self.Form = Form
         self.audio_path = "../data/cache/audio/"
         self.ai_answer = AIAnswer("")
         self.player = QtMultimedia.QMediaPlayer()
         self.instrument_dict = {0: "guitar", 1: "piano", 2: "drum"}
+        self.inputdialog = QtWidgets.QInputDialog()
+        self.filename = "arrange"
 
         self.pushButton_usersend.clicked.connect(self.AI_user_send)
         self.pushButton_userdel.clicked.connect(self.textEdit_user.clear)
@@ -224,15 +227,18 @@ class Combine_Ui_Form(object):
         self.player.stop()
         audio = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(""))
         self.player.setMedia(audio)
-        req_list = []
-        if self.checkBox.isChecked():
-            req_list.append(self.instrument_dict[2])
-        if self.checkBox_2.isChecked():
-            req_list.append(self.instrument_dict[1])
-        if self.checkBox_3.isChecked():
-            req_list.append(self.instrument_dict[0])
-        if len(req_list) > 0:
-            arrange.combine(req_list)
+        text, ok = self.inputdialog.getText(self.Form, "请输入文件名", "文件名", QtWidgets.QLineEdit.Normal, "")
+        if ok and text != "":
+            self.filename = text
+            req_list = []
+            if self.checkBox.isChecked():
+                req_list.append(self.instrument_dict[2])
+            if self.checkBox_2.isChecked():
+                req_list.append(self.instrument_dict[1])
+            if self.checkBox_3.isChecked():
+                req_list.append(self.instrument_dict[0])
+            if len(req_list) > 0:
+                arrange.combine(req_list, self.filename)
 
     def play_event(self):
         audio = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(f"{self.audio_path}arranged.WAV"))

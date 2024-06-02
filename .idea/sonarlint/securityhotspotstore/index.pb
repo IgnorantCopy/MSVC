@@ -28,8 +28,6 @@ L
 src/drum.py,d\0\d0f34b68bb94766fdcd444db2ae69c78d278a25b
 H
 example/ComeTogether.txt,2\1\21f4575094e5ab76729ca18dfad950a69c089a5b
-=
-src/lyrics.py,3\a\3ae0b5bd8bc9922a3dffc6cae085a48af4bd16d8
 C
 src/utils/config.py,0\6\06c67e74ff306d89486c0cb0d4ed9d540c735658
 E
@@ -48,8 +46,6 @@ C
 src/display/menu.py,d\0\d089308ef02853c17ccc031714074c56d8ed766f
 P
  src/display/y_part/QTabWidget.py,9\0\90bb255963a94aa820963b142006a02d44944bc4
-J
-src/display/y_part/Calc.py,b\1\b1bdf6048bba174071c5c3e7418d409bcd42618e
 P
  src/display/y_part/pianoUI_rc.py,a\3\a32fc566a03da7134ddd92230495dce88ec19a6f
 Q
@@ -66,3 +62,5 @@ P
  src/display/y_part/lyric_main.py,8\0\80688f83acba02d67dbbdfd8910fe0028e24221a
 O
 src/display/y_part/Ui_lyrics.py,1\1\117ccb3cc6c0d8bee8eb16563d328ff92d7b0552
+P
+ src/display/y_part/combine_rc.py,b\4\b45f8ba0aea285702e31ed6d29dfeabe89b2570e

@@ -11,9 +11,9 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia
 from qt_material import apply_stylesheet
-from src.display.y_part.MyClass import MusicWidget, AIAnswer, AICreator, MyGraphicsView, DrumGraphicsPixmapItem
-from src.utils import common
-from src import drum
+from .MyClass import MusicWidget, AIAnswer, AICreator, MyGraphicsView, DrumGraphicsPixmapItem
+from ...utils import common
+from ... import drum
 
 
 class Drum_Ui_Form(object):
@@ -211,12 +211,22 @@ class Drum_Ui_Form(object):
         self.pushButton_enter.setFont(font)
         self.pushButton_enter.setObjectName("pushButton_enter")
         self.verticalLayout.addWidget(self.pushButton_enter)
+        self.pushButton_stop = QtWidgets.QPushButton(Form)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(24)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_stop.setFont(font)
+        self.pushButton_stop.setObjectName("pushButton_stop")
+        self.verticalLayout.addWidget(self.pushButton_stop)
         spacerItem9 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem9)
         self.verticalLayout.setStretch(0, 2)
         self.verticalLayout.setStretch(1, 2)
         self.verticalLayout.setStretch(2, 2)
-        self.verticalLayout.setStretch(3, 3)
+        self.verticalLayout.setStretch(3, 2)
+        self.verticalLayout.setStretch(4, 3)
         self.horizontalLayout_5.addLayout(self.verticalLayout)
         self.graphicsview_result = MyGraphicsView(Form)
         self.graphicsview_result.setObjectName("graphicsview_result")
@@ -311,6 +321,7 @@ class Drum_Ui_Form(object):
         self.label_result.setText(_translate("Form", "结果："))
         self.pushButton_play.setText(_translate("Form", "播放"))
         self.pushButton_enter.setText(_translate("Form", "确认"))
+        self.pushButton_stop.setText(_translate("Form", "暂停"))
         self.label_ATtitle.setText(_translate("Form", "AI问答："))
         self.pushButton_userdel.setText(_translate("Form", "删除"))
         self.pushButton_usersend.setText(_translate("Form", "发送"))
@@ -347,6 +358,7 @@ class Drum_Ui_Form(object):
         self.pushButton_close.clicked.connect(QtWidgets.QApplication.quit)
         self.pushButton_play.clicked.connect(self.play_event)
         self.pushButton_enter.clicked.connect(self.enter_event)
+        self.pushButton_stop.clicked.connect(self.player.stop)
 
         Form.Key_event.connect(self.createKeyEvent)
         # end
@@ -355,7 +367,7 @@ class Drum_Ui_Form(object):
         # 设置字体
         font_size = 30
         for item in [self.pushButton_menu, self.pushButton_help, self.pushButton_close, self.pushButton_usersend,
-                     self.pushButton_userdel, self.pushButton_play, self.pushButton_enter]:
+                     self.pushButton_userdel, self.pushButton_play, self.pushButton_enter, self.pushButton_stop]:
             item.setStyleSheet(f"font-size: {font_size}px")
         for item in [self.label_style, self.label_speed, self.label_section, self.label_ATtitle, self.label,
                      self.label_result]:
@@ -590,7 +602,7 @@ class Drum_Ui_Form(object):
         self.player.setMedia(audio)
         text = drum.modify_text("../data/cache/text/drum_text.txt", self.modify_dict)
 
-        drum.text_to_drum(text, self.drum_speed)
+        drum.text_to_drum(self.drum_speed)
         self.modify_dict = {}
 
     def play_event(self):

@@ -10,6 +10,20 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from src.display.y_part import MyClass
+from src.utils import common
+
+
+class Lyrics_Creator(QtCore.QThread, QtCore.QObject):
+    sinEnd = QtCore.pyqtSignal(str)
+
+    def __init__(self, user_text, parent=None):
+        QtCore.QObject.__init__(self, parent)
+        QtCore.QThread.__init__(self, parent)
+        self.user_text = user_text
+
+    def run(self):
+        ai_text = common.call_with_messages(common.prompt_lyrics, self.user_text)
+        self.sinEnd.emit(ai_text)
 
 
 class Ui_Form(object):
@@ -173,9 +187,32 @@ class Ui_Form(object):
 
         self.pushButton_usersend.clicked.connect(self.userSend)
         self.pushButton_userdel.clicked.connect(self.textEdit_user.clear)
+        self.pushButton_2.clicked.connect(self.lyrics_start)
+        self.pushButton.clicked.connect(self.save_lyrics)
 
         self.AIanswer = MyClass.AIAnswer("")
         self.AIanswer.sinEnd.connect(self.display)
+        self.extra_set(Form)
+        self.lyrics_creator = Lyrics_Creator("")
+        self.lyrics_creator.sinEnd.connect(self.return_event)
+
+    def style_set(self):
+        font_size = 30
+        for item in [self.pushButton_menu, self.pushButton_help, self.pushButton_close, self.pushButton_usersend,
+                        self.pushButton_userdel,self.pushButton,self.pushButton_2]:
+            item.setStyleSheet(f"font-size: {font_size}px")
+        for item in [self.label_ATtitle, self.label]:
+            item.setStyleSheet(f"font-size: {font_size}px")
+        font_size = 22
+        for item in [self.textEdit_user, self.textBrowser_AIanswer, self.textEdit, self.textBrowser]:
+            item.setStyleSheet(f"font-size: {font_size}px")
+
+
+    def extra_set(self, Form):
+        self.style_set()
+        ai_text = "AI：你好，有什么问题?\n\n"
+        self.textBrowser_AIanswer.setPlainText(ai_text)
+        self.textEdit_user.setPlaceholderText("请输入你的问题：")
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -204,4 +241,18 @@ class Ui_Form(object):
         final_text += "\n\n"
         self.textBrowser_AIanswer.append(final_text)
         self.pushButton_usersend.setEnabled(True)
+
+    def lyrics_start(self):
+        self.pushButton_2.setEnabled(False)
+        content = self.textEdit.toPlainText()
+        self.lyrics_creator.user_text = content
+        self.lyrics_creator.start()
+        self.textEdit.clear()
+
+    def return_event(self, ai_text):
+        self.textBrowser.setText(ai_text)
+        self.pushButton_2.setEnabled(True)
+
+    def save_lyrics(self):
+        text = self.textEdit.toPlainText()
 

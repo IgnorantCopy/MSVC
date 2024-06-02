@@ -29,7 +29,8 @@ def remove_user(username):
     if username in user_list:
         user_list.remove(username)
         with open(__user_path, 'w', encoding='utf-8') as f:
-            json.dump({"users": user_list, "last_user": "musician1"}, f)
+            last_user = "用户1" if len(user_list) == 0 else user_list[0]
+            json.dump({"users": user_list, "last_user": last_user}, f)
 
 
 def modify_user(old_name, new_name):

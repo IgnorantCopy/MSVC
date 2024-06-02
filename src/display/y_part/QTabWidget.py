@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QTabWidget
+from PyQt5.QtWidgets import QApplication, QTabWidget, QWidget
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5 import QtCore, QtGui
 from src.display.y_part.drumUI_rc import Drum_Ui_Form, MusicWidget
@@ -7,6 +7,7 @@ from src.display.y_part.lyric_main import Lyrics
 from src.display.y_part.Ui_lyrics import Ui_Form
 from src.display.y_part.pianoUI_rc import Piano_Ui_Form
 from src.display.y_part.guitarUI_rc import Guitar_Ui_Form
+from src.display.y_part.combine_rc import Combine_Ui_Form
 import sys
 
 
@@ -40,6 +41,11 @@ class Window(QTabWidget):
         self.lyricsUi = Ui_Form()
         self.lyricsUi.setupUi(self.lyricsWidget)
         self.addTab(self.lyricsWidget, "Lyrics")
+
+        self.combineWidget = QWidget()
+        self.combineUi = Combine_Ui_Form()
+        self.combineUi.setupUi(self.combineWidget)
+        self.addTab(self.combineWidget, "Combine")
 
 
 if __name__ == "__main__":

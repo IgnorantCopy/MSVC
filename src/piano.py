@@ -4,6 +4,7 @@ import soundfile as sf
 from src.utils import common
 
 
+
 class Note:
     def __init__(self, pitch, position, duration):
         self.pitch = pitch
@@ -21,11 +22,12 @@ class Piano:
 
 
 def change():
-    file = "../data/cache/text/piano_text.txt"
-    f = open(file, "r", encoding="utf-8")
+    file = common.read_text("../data/cache/text/piano_text.txt")
+    if file is None:
+        return 0
     newf = ""
     num = 0
-    for line in f:
+    for line in file.split("\n"):
         index = line.find(" ")
         if(index == -1):
             continue
@@ -40,12 +42,11 @@ def change():
         while int(tmp) > num:
             newf += "\n"
             num += 1
+        line += "\n"
         newf += line
-    
-    f.close()
-    f = open(file, "w", encoding="utf-8")
-    f.write(newf)
-    f.close()
+
+    with open("../data/cache/text/piano_text.txt", "w", encoding="utf-8") as f:
+        f.write(newf)
 
 
 def text_to_piano(key, tempo, bar, llen):
@@ -59,16 +60,19 @@ def text_to_piano(key, tempo, bar, llen):
     llen *= repeat
     piano = Piano(key, tempo, bar, llen)
     score = []
-    for line in file:
+    for line in file.split("\n"):
         while line.find(" ") != -1:
             tmp = []
 
             for i in range(3):
                 index = line.find(" ")
+                if index == -1:
+                    index = len(line)
                 tmp.append(line[:index])
                 line = line[index + 1:]
 
             tmp_note = Note(str(tmp[0]), int(tmp[1]), tmp[2])
+            print(tmp_note.pitch, tmp_note.position, tmp_note.duration)
             if int(tmp[1]) > max_pos:
                 max_pos = int(tmp[1])
             score.append(tmp_note)
@@ -155,11 +159,11 @@ def text_to_coordinate(line):
 
 def coordinate_to_text(coordinate):
     tmp = ""
-    p1 = coordinate[0] % 8 + 1
+    p1 = coordinate[0] % 7 + 1
     tmp += str(p1)
-    if coordinate[0] // 8 == 0:
+    if coordinate[0] // 7 == 0:
         tmp += "b"
-    elif coordinate[0] // 8 == 2:
+    elif coordinate[0] // 7 == 2:
         tmp += "i"
     tmp += " "
     tmp += str(coordinate[1]) + " "

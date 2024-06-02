@@ -5,6 +5,7 @@ from src.display import help
 from src.utils import config
 from src.utils import common
 import src.display.beginning_fonts_rc
+from src import main
 from PyQt5 import QtCore, QtGui
 from qt_material import apply_stylesheet
 from PyQt5.QtWidgets import QApplication, QMainWindow, QComboBox, QVBoxLayout, QInputDialog, QWidget
@@ -49,7 +50,6 @@ class MyBeginning(QMainWindow, Ui_MainWindow):
         self.window.drumUi.pushButton_menu.clicked.connect(self.return_menu)
         self.window.drumUi.pushButton_close.clicked.connect(self.close_menu)
         self.window.drumUi.pushButton_help.clicked.connect(self.open_drum_help)
-        (self.window.lyricsUi.pushButton_2.clicked.connect(self.lyrics_start))
         self.window.lyricsUi.pushButton_menu.clicked.connect(self.return_menu)
         self.window.lyricsUi.pushButton_help.clicked.connect(self.open_lyric_help)
         self.window.lyricsUi.pushButton_close.clicked.connect(self.close_menu)
@@ -95,15 +95,12 @@ class MyBeginning(QMainWindow, Ui_MainWindow):
     def open_guitar_help(self):
         self.guitar_help_window.show()
 
-    def lyrics_start(self):
-        content = self.window.lyricsUi.textEdit.toPlainText()
-        lyrics = common.call_with_messages(common.prompt_lyrics, content)
-        self.window.lyricsUi.textBrowser.setText(lyrics)
-
     def init_user(self):
         user_list = config.load_user()
         for user in user_list:
             self.combo.addItem(user)
+        main.user = config.get_record()
+        self.combo.setCurrentText(main.user)
 
     def add_user_config(self):
         text, ok = QInputDialog.getText(self, '添加用户', '请输入用户名:')
@@ -111,12 +108,16 @@ class MyBeginning(QMainWindow, Ui_MainWindow):
             self.combo.clear()
             config.add_user(text)
             self.init_user()
+            main.user = text
+            self.combo.setCurrentText(main.user)
 
     def remove_user_config(self):
         text = self.combo.currentText()
         config.remove_user(text)
+        main.user = config.load_user()[0]
         self.combo.clear()
         self.init_user()
+        self.combo.setCurrentText(main.user)
 
     def modify_user_config(self):
         old_text = self.combo.currentText()
@@ -124,7 +125,9 @@ class MyBeginning(QMainWindow, Ui_MainWindow):
         if ok and new_text:
             self.combo.clear()
             config.modify_user(old_text, new_text)
+            main.user = new_text
             self.init_user()
+            self.combo.setCurrentText(main.user)
 
 
 if __name__ == "__main__":

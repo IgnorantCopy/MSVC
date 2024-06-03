@@ -1,3 +1,5 @@
+import os
+
 from pydub import AudioSegment as am
 from src.utils import common
 
@@ -105,7 +107,8 @@ def text_to_drum(speed):
                     continue
                 elif times[k] == '1':
                     song = song.overlay(drum_list[index], position=(i + k / len(times)) * duration + deviation)
-    song.export('../data/cache/audio/track_drum.WAV', format='WAV')
+    if os.path.isfile("../data/cache/drum/track_drum.WAV"):
+        song.export('../data/cache/audio/track_drum.WAV', format='wav')
     return 1
 
 

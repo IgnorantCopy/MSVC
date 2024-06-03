@@ -354,9 +354,9 @@ class Piano_Ui_Form(object):
         self.textBrowser_AIanswer.setPlainText(ai_text)
         self.ai_answer = AIAnswer("")
         self.ai_answer.sinEnd.connect(self.AI_answer)
-        self.ai_creater = PianoAICreator("流行", "piano", 50, 90, 0)
+        self.ai_creater = PianoAICreator("爵士", "piano", 31, 90, 0)
         self.text_path = "../data/cache/text/"
-        self.audio_path = "../data/cache/audio/"
+        self.audio_path = "../data/cache/audio/"    
         self.ai_creater.text_path = self.text_path
         self.image_path = "display/image/"
         # set textedit default text
@@ -448,11 +448,14 @@ class Piano_Ui_Form(object):
     def create_sender(self):
         self.pushButton_create.setEnabled(False)
         self.scene.clear()
-
+        speed = self.spinBox_speed.value()
+        llen = self.spinBox_section.value()
+        key = self.spinBox_mode.value()
         self.ai_creater.len = self.spinBox_section.value()
         self.ai_creater.genre = self.comboBox_style.currentText()
         self.ai_creater.key = self.spinBox_mode.value()
         self.ai_creater.speed = self.spinBox_speed.value()
+        self.ai_creater.song = arrange.Song(key, speed, 4, llen)
 
         # music_lists = []
         # music_lists += [[[10, 1, "ll"], [11, 2, "s"], [12, 3, "l"], [15, 4, "l"], [12, 5, "ss"], [11, 6, "s"], [12, 7, "l"], [15, 8, "l"]]]
@@ -520,6 +523,8 @@ class Piano_Ui_Form(object):
             x = (each[1] - 1) // 4
             y = each[0]
             z = (each[1] - 1) % 4
+            if x > len(result) - 1:
+                continue
             result[x][y][z][0] = 1
             result[x][y][z][1] = each[2]
         return result

@@ -1,6 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication
 from PyQt5 import QtCore, QtGui
+sys.path.append('d:\Desktop\projects\MSVC')
 from src.display import menu
 from src.utils import config
 

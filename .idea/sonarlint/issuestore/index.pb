@@ -32,8 +32,6 @@ C
 src/utils/config.py,0\6\06c67e74ff306d89486c0cb0d4ed9d540c735658
 E
 data/users/users.json,f\a\fad873ea5dfdceea4fbb1ecf0e567f7c3341cb4b
-O
-src/display/y_part/drumUI_rc.py,e\f\ef041fd3fec4f3e7b8bc34b7d1e669287ff237ed
 T
 $src/display/beginning_background.qrc,3\d\3d140106aa193161aed053a210fed7060a788ca8
 V
@@ -44,26 +42,8 @@ C
 src/display/help.py,2\d\2d83f2506ebbec504134af7a845c5988b73bb064
 C
 src/display/menu.py,d\0\d089308ef02853c17ccc031714074c56d8ed766f
-P
- src/display/y_part/QTabWidget.py,9\0\90bb255963a94aa820963b142006a02d44944bc4
-P
- src/display/y_part/pianoUI_rc.py,a\3\a32fc566a03da7134ddd92230495dce88ec19a6f
-Q
-!src/display/y_part/guitarUI_rc.py,a\9\a9016826b7df988d29b67f72d8f7fe38dfbc3768
-M
-src/display/y_part/MyClass.py,2\a\2a6397f77895104903783e49b8ab80abcb42baa4
 K
 src/display/Ui_beginning.py,1\b\1b5cd5f990069abfd5daccc59b25ad40ee7df0dd
-L
-src/display/y_part/drumUI.ui,8\b\8b70210ddf76ceb2eb862089635c85873b81a903
-L
-src/display/y_part/lyrics.ui,2\f\2f81c0c89a8f44e67ce2d56b65dfa59528050918
-P
- src/display/y_part/lyric_main.py,8\0\80688f83acba02d67dbbdfd8910fe0028e24221a
-O
-src/display/y_part/Ui_lyrics.py,1\1\117ccb3cc6c0d8bee8eb16563d328ff92d7b0552
-P
- src/display/y_part/combine_rc.py,b\4\b45f8ba0aea285702e31ed6d29dfeabe89b2570e
 I
 src/display/combine_rc.py,4\8\48829d800d41dbbabef4165351075038d59206a6
 H
@@ -72,3 +52,15 @@ J
 src/display/guitarUI_rc.py,7\3\7379e7f0e5c9fa7deec0c8b1adf756bc95b203bf
 I
 src/display/QTabWidget.py,3\2\324d2d0a13918770e7efdc99f075da15e70c2d2d
+H
+src/display/Ui_lyrics.py,e\0\e0b08eb6c3496c5310a7f6a3f896bc2402d05057
+T
+$data/users/用户1/lyrics/友情.txt,d\6\d63a8c991453221448d878b060967dba7e7ea1c2
+I
+src/display/lyric_main.py,4\3\437b74cb0c8dd8d164370a0237675bc50d025c42
+F
+src/display/MyClass.py,c\c\cc71cb0379b60202006c8bac35768eef5dada8c7
+I
+src/display/pianoUI_rc.py,6\a\6af8b953b203f4c035218370df51f1dc86b035e5
+Q
+!src/display/tempCodeRunnerFile.py,f\c\fcb9cf84adf7703fd2a75b50c7a0f40a6f7a85de

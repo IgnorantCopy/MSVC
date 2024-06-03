@@ -8,6 +8,7 @@ from src.utils import common
 slc = am.silent(duration=3000)
 slc.export('../audio/guitar/none.wav', format='WAV')
 
+
 class Chord:
     def __init__(self, type, position):
         self.type = type
@@ -40,7 +41,7 @@ def text_to_guitar(key, tempo, bar, llen):
         t1 = line[:index]
         t1 = re.sub(r'\(.*\)', '', t1)
         tmp.append(t1)
-        tmp.append(line[index+1:])
+        tmp.append(line[index + 1:])
         # print(tmp[1])
         tmp_chord = Chord(tmp[0], int(tmp[1]))
         score.append(tmp_chord)
@@ -59,10 +60,10 @@ def text_to_guitar(key, tempo, bar, llen):
         y1 = lr.effects.pitch_shift(y, sr=sr, n_steps=pitch)
 
         position = (chord.position - 1) * 60000 / guitar.tempo * bar + deviation
-        
+
         if position > len(guitar.track) - 2900:
             break
-        
+
         sf.write('../data/cache/audio/t.WAV', y1, sr)
         sound = am.from_wav('../data/cache/audio/t.WAV')
         guitar.track = guitar.track.overlay(sound, position)
@@ -75,9 +76,10 @@ def text_to_coordinate(line):
     tmp = []
     index = line.find(" ")
     tmp.append(0)
-    tmp.append(int(line[index+1:]))
+    tmp.append(int(line[index + 1:]))
     tmp.append(line[:index])
     return tmp
+
 
 # 这里的line代表的是文本中的一行
 # tmp[0]代表纵轴（只有0！！！）
@@ -90,8 +92,3 @@ def coordinate_to_text(chord):
     line += str(chord[2])
     line += ' ' + str(chord[1]) + '\n'
     return line
-
-
-if __name__ == '__main__':
-    # common.llm_to_text("请写一首流行风格的曲子", "guitar", 48)
-    text_to_guitar(0, 90, 4, 13)

@@ -75,19 +75,3 @@ def combine(req_list, filename):
     track.export("../data/cache/audio/arranged.WAV", format="WAV")
     instrument = req_list[0] if len(req_list) == 1 else ''
     save.save_music(main.user, track, filename, instrument)
-    print("Success!")
-
-
-if __name__ == "__main__":
-    key = 3
-    tempo = 110
-    bar = 4
-    length = 49
-    req_list = ["guitar", "piano", "drum", "lyrics"]
-    combine(req_list)
-    # genre = "流行"
-    # song = Song(key, tempo, bar, length)
-    # # 每次用arrange函数都要重新生成一个Song对象————这是错误的！！！
-    # for req in req_list:
-    #     compose(req, genre, length)
-    #     arrange(song, req)

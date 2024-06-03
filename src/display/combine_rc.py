@@ -185,6 +185,10 @@ class Combine_Ui_Form(object):
         self.inputdialog = QtWidgets.QInputDialog()
         self.filename = "arrange"
 
+        ai_text = "AI：你好，有什么问题?\n\n"
+        self.textBrowser_AIanswer.setPlainText(ai_text)
+        self.textEdit_user.setPlaceholderText("请输入你的问题：")
+
         self.pushButton_usersend.clicked.connect(self.AI_user_send)
         self.pushButton_userdel.clicked.connect(self.textEdit_user.clear)
         self.pushButton.clicked.connect(self.create_event)

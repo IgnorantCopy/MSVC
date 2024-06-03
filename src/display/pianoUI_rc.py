@@ -620,7 +620,6 @@ class Piano_Ui_Form(object):
                             modify_str += piano.coordinate_to_text(tmp)
                         i += 1
                     self.modify_dict[x] = modify_str
-                    print(self.modify_dict)
         elif key_name == "W" or key_name == "S":
             if key_name == "W" and self.cur_scale * self.change_scale < self.max_scale:
                 self.cur_scale *= self.change_scale

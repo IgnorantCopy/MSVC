@@ -29,7 +29,11 @@ def remove_user(username):
     if username in user_list:
         user_list.remove(username)
         with open(__user_path, 'w', encoding='utf-8') as f:
-            last_user = "用户1" if len(user_list) == 0 else user_list[0]
+            if len(user_list) == 0:
+                last_user = "用户1"
+                user_list.append(last_user)
+            else:
+                last_user = user_list[0]
             json.dump({"users": user_list, "last_user": last_user}, f)
 
 
@@ -44,21 +48,9 @@ def modify_user(old_name, new_name):
 
 
 def get_record():
+    if not os.path.exists(__user_path):
+        with open(__user_path, 'w', encoding='utf-8') as f:
+            json.dump(__default, f)
     with open(__user_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
         return data.get('last_user')
-
-
-if __name__ == '__main__':
-    print(load_user())
-    add_user("musician2")
-    print(load_user())
-    add_user("musician3")
-    print(load_user())
-    add_user("musician4")
-    print(load_user())
-    remove_user("musician4")
-    print(load_user())
-    modify_user("musician3", "musician4")
-    print(load_user())
-    print(get_record())

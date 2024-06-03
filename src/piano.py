@@ -4,7 +4,6 @@ import soundfile as sf
 from src.utils import common
 
 
-
 class Note:
     def __init__(self, pitch, position, duration):
         self.pitch = pitch
@@ -29,10 +28,10 @@ def change():
     num = 0
     for line in file.split("\n"):
         index = line.find(" ")
-        if(index == -1):
+        if (index == -1):
             continue
         num += 1
-        lline = line[index+1:]
+        lline = line[index + 1:]
         iindex = lline.find(" ")
         if iindex == -1:
             continue
@@ -72,7 +71,6 @@ def text_to_piano(key, tempo, bar, llen):
                 line = line[index + 1:]
 
             tmp_note = Note(str(tmp[0]), int(tmp[1]), tmp[2])
-            print(tmp_note.pitch, tmp_note.position, tmp_note.duration)
             if int(tmp[1]) > max_pos:
                 max_pos = int(tmp[1])
             score.append(tmp_note)
@@ -84,7 +82,7 @@ def text_to_piano(key, tempo, bar, llen):
         for note in score:
 
             # 处理时长
-            dur=note.duration
+            dur = note.duration
             # y, sr = lr.load(f'../audio/piano/do.WAV')
             pitch = 0
 
@@ -119,7 +117,7 @@ def text_to_piano(key, tempo, bar, llen):
             y1 = lr.effects.pitch_shift(y, sr=sr, n_steps=pitch)
 
             # 处理位置
-            position = (note.position - 1 + i * (max_pos + (max_pos&1))) * 60000 / piano.tempo + deviation
+            position = (note.position - 1 + i * (max_pos + (max_pos & 1))) * 60000 / piano.tempo + deviation
             if position > len(piano.track) - 2900:
                 break
             # 保存音频
@@ -169,7 +167,3 @@ def coordinate_to_text(coordinate):
     tmp += str(coordinate[1]) + " "
     tmp += coordinate[2] + '\n'
     return tmp
-
-
-if __name__ == '__main__':
-    text_to_piano(4, 90, 4, 32)

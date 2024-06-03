@@ -72,7 +72,6 @@ class PianoAICreator(QtCore.QThread, QtCore.QObject):
         arrange.compose("piano", self.genre, self.len)
         arrange.arrange(self.song, "piano")
         tmpc = self.get_tmps()
-        print(tmpc)
         self.sinEnd.emit(tmpc)
 
     def get_tmps(self):
@@ -104,7 +103,6 @@ class GuitarAICreator(QtCore.QThread, QtCore.QObject):
         arrange.compose("guitar", self.genre, self.len)
         arrange.arrange(self.song, "guitar")
         tmpc = self.get_tmps()
-        print(tmpc)
         self.sinEnd.emit(tmpc)
 
     def get_tmps(self):

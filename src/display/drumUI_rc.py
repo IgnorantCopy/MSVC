@@ -523,7 +523,6 @@ class Drum_Ui_Form(object):
         self.pushButton_create.setEnabled(True)
 
     def create_rightmenu(self):
-        print("yes")
         self.graphicsview_menu = QtWidgets.QMenu(Form)
         self.action1 = QtWidgets.QAction(u"增加")
         self.graphicsview_menu.addAction(self.action1)
@@ -592,7 +591,6 @@ class Drum_Ui_Form(object):
             self.music[section][instrument] = "".join(temp)
         for k, v in self.music[section].items():
             result += f"{drum.get_index(k)}_{v} "
-        print(result)
         return result
 
     def enter_event(self):

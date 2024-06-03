@@ -417,9 +417,9 @@ class Guitar_Ui_Form(object):
         # 设置一些参数
         self.inputdialog = QtWidgets.QInputDialog()
         self.section_size = (140, 25)
-        self.instrument_icon_size = (35, 35)
+        self.instrument_icon_size = (50, 50)
         self.instrument_vspace = 20
-        self.spaceBetween = 50
+        self.spaceBetween = 15
         self.instrument_y = 50
         self.block_space = 1
         self.section_space = 5
@@ -435,7 +435,7 @@ class Guitar_Ui_Form(object):
         self.drum_speed = 90
         self.player = QtMultimedia.QMediaPlayer()
 
-        self.mode_names = ["1_0"]
+        self.mode_names = ["guitar_icon"]
 
         self.choose = 0
         # 设置背景
@@ -569,7 +569,6 @@ class Guitar_Ui_Form(object):
                     group.setSelected(True)
                     tmp = [0, group.section + 1, group.attribute]
                     self.modify_dict[group.section] = guitar.coordinate_to_text(tmp)
-                    print(self.modify_dict)
         elif key_name == "W" or key_name == "S":
             if key_name == "W" and self.cur_scale * self.change_scale < self.max_scale:
                 self.cur_scale *= self.change_scale

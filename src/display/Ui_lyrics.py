@@ -10,8 +10,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from src.display import MyClass
-from src.utils import common
-
+from src.utils import common, save
+from src import main
 
 class Lyrics_Creator(QtCore.QThread, QtCore.QObject):
     sinEnd = QtCore.pyqtSignal(str)
@@ -210,6 +210,8 @@ class Ui_Form(object):
 
     def extra_set(self, Form):
         self.style_set()
+        self.Form = Form
+        self.inputdialog = QtWidgets.QInputDialog()
         ai_text = "AI：你好，有什么问题?\n\n"
         self.textBrowser_AIanswer.setPlainText(ai_text)
         self.textEdit_user.setPlaceholderText("请输入你的问题：")
@@ -254,5 +256,9 @@ class Ui_Form(object):
         self.pushButton_2.setEnabled(True)
 
     def save_lyrics(self):
-        text = self.textEdit.toPlainText()
+        text = self.textBrowser.toPlainText()
+        filename, ok = self.inputdialog.getText(self.Form, "保存歌词", "请输入歌名：")
+        if ok and filename != "":
+            save.save_lyrics(main.user, text, filename)
+
 

@@ -340,7 +340,7 @@ class Drum_Ui_Form(object):
         # set spinbox
         self.spinBox_speed.setMinimum(50)
         self.spinBox_speed.setMaximum(240)
-        self.spinBox_section.setMinimum(20)
+        self.spinBox_section.setMinimum(17)
         self.spinBox_section.setMaximum(80)
         # set comboBox's items
         self.comboBox_style.addItem("流行")

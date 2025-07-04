@@ -78,7 +78,7 @@ def text_to_piano(key, tempo, bar, llen):
     # tmp[0] : 音调
     # tmp[1] : 位置
     # tmp[2] : 持续时间
-    for i in range(repeat * 4):
+    for i in range(repeat):
         for note in score:
 
             # 处理时长

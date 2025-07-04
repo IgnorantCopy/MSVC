@@ -453,10 +453,11 @@ class Guitar_Ui_Form(object):
         self.ai_creater.genre = self.comboBox_style.currentText()
         self.ai_creater.key = self.spinBox_mode.value()
         self.ai_creater.speed = self.spinBox_speed.value()
+        self.ai_creater.song = arrange.Song(self.ai_creater.key, self.ai_creater.speed, 4, self.ai_creater.len)
 
-        music_lists = []
-        music_lists += [[[0, 1, "ll"], [0, 2, "s"], [0, 3, "l"], [0, 4, "l"], [0, 5, "ss"], [0, 6, "s"], [0, 7, "l"], [0, 8, "l"]]]
-        music_lists += [[[0, 1, "ll"], [0, 2, "s"], [0, 3, "l"], [0, 4, "l"], [0, 5, "ss"], [0, 6, "s"], [0, 7, "s"], [0, 8, "l"]]]
+        # music_lists = []
+        # music_lists += [[[0, 1, "ll"], [0, 2, "s"], [0, 3, "l"], [0, 4, "l"], [0, 5, "ss"], [0, 6, "s"], [0, 7, "l"], [0, 8, "l"]]]
+        # music_lists += [[[0, 1, "ll"], [0, 2, "s"], [0, 3, "l"], [0, 4, "l"], [0, 5, "ss"], [0, 6, "s"], [0, 7, "s"], [0, 8, "l"]]]
 
         # self.AI_create_result(music_lists[self.choose])
         # self.choose = (self.choose + 1) % 2

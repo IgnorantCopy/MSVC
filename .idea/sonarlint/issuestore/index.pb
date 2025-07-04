@@ -62,5 +62,3 @@ F
 src/display/MyClass.py,c\c\cc71cb0379b60202006c8bac35768eef5dada8c7
 I
 src/display/pianoUI_rc.py,6\a\6af8b953b203f4c035218370df51f1dc86b035e5
-Q
-!src/display/tempCodeRunnerFile.py,f\c\fcb9cf84adf7703fd2a75b50c7a0f40a6f7a85de
